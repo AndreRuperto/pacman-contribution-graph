@@ -1,0 +1,17 @@
+{
+    "name": "pacman-contribution-graph",
+    "version": "1.0.0",
+    "type": "module",
+    "scripts": {
+        "build": "webpack --config webpack.prod.js",
+        "dev": "webpack --progress --config webpack.dev.js",
+        "prepublishOnly": "npm run build",
+        "build-action": "pnpm run --prefix ./github-action build",
+        "generate:svg": "tsc scripts/generate-svg.ts && node dist/scripts/generate-svg.js"
+    },
+    "devDependencies": {
+        "@types/node": "^22.14.0",
+        "tsx": "^4.6.2",
+        "typescript": "^5.3.3"
+    }
+}

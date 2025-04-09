@@ -1,0 +1,23 @@
+# Node.js
+node_modules/
+dist/
+.env
+
+# TypeScript
+*.tsbuildinfo
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+
+# GitHub Actions cache
+.github/*.log
