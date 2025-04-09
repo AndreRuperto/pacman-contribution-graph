@@ -1,4 +1,4 @@
-import type { Config, StoreType } from './types';
+import type { Config, StoreType } from './types.js';
 
 export const Store: StoreType = {
 	frameCount: 0,
@@ -17,7 +17,7 @@ export const Store: StoreType = {
 	grid: [],
 	monthLabels: [],
 	pacmanMouthOpen: true,
-	gameInterval: 0,
+	gameInterval: undefined as unknown as ReturnType<typeof setInterval>,
 	gameHistory: [],
 	config: undefined as unknown as Config
 };

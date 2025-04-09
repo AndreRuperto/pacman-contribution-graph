@@ -21,3 +21,9 @@ Thumbs.db
 
 # GitHub Actions cache
 .github/*.log
+
+dist/
+*.js
+*.js.map
+
+.gitignore

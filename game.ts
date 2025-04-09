@@ -1,8 +1,8 @@
-import { SVG } from './svg';
+import { SVG } from './svg.js';
 import { StoreType } from './types';
-import { DELTA_TIME, GHOST_NAMES, GRID_HEIGHT, GRID_WIDTH, MONTHS, PACMAN_DEATH_DURATION } from './constants';
-import { GhostsMovement } from './movement/ghosts-movement';
-import { PacmanMovement } from './movement/pacman-movement';
+import { DELTA_TIME, GHOST_NAMES, GRID_HEIGHT, GRID_WIDTH, MONTHS, PACMAN_DEATH_DURATION } from './constants.js';
+import { GhostsMovement } from './movement/ghosts-movement.js';
+import { PacmanMovement } from './movement/pacman-movement.js';
 
 const initializeGrid = (store: StoreType) => {
   store.pacman.points = 0;
@@ -96,7 +96,7 @@ const updateGame = async (store: StoreType) => {
     store.gameHistory.push({
       pacman: { ...store.pacman },
       ghosts: store.ghosts.map((ghost) => ({ ...ghost })),
-      grid: store.grid.map((row) => [...row.map((col) => col.intensity)])
+      grid: store.grid.map((row) => row.map((col) => ({ ...col })))
     });
     return;
   }
@@ -145,7 +145,7 @@ const updateGame = async (store: StoreType) => {
   store.gameHistory.push({
     pacman: { ...store.pacman },
     ghosts: store.ghosts.map((ghost) => ({ ...ghost })),
-    grid: store.grid.map((row) => [...row.map((col) => col.intensity)])
+    grid: store.grid.map((row) => row.map((col) => ({ ...col })))
   });
 };
 

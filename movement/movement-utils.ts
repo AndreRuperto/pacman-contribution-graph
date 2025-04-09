@@ -1,4 +1,4 @@
-import { GRID_HEIGHT, GRID_WIDTH, WALLS } from '../constants';
+import { GRID_HEIGHT, GRID_WIDTH, WALLS } from '../constants.js';
 
 // Check for walls and grid edges
 const getValidMoves = (x: number, y: number): [number, number][] => {

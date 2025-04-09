@@ -1,8 +1,8 @@
-import { Game } from './game';
-import { Grid } from './grid';
-import { Store } from './store';
-import { Config, StoreType } from './types';
-import { Utils } from './utils';
+import { Game } from './game.js';
+import { Grid } from './grid.js';
+import { Store } from './store.js';
+import { Config, StoreType } from './types.js';
+import { Utils } from './utils.js';
 
 export class PacmanRenderer {
 	store: StoreType;

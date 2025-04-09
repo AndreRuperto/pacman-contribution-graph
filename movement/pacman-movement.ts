@@ -1,6 +1,6 @@
-import { GRID_HEIGHT, GRID_WIDTH, PACMAN_POWERUP_DURATION } from '../constants';
-import { Point2d, StoreType } from '../types';
-import { MovementUtils } from './movement-utils';
+import { GRID_HEIGHT, GRID_WIDTH, PACMAN_POWERUP_DURATION } from '../constants.js';
+import { Point2d, StoreType } from '../types.js';
+import { MovementUtils } from './movement-utils.js';
 
 const RECENT_POSITIONS_LIMIT = 5;
 

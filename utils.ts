@@ -1,5 +1,5 @@
-import { GAME_THEMES } from './constants';
-import type { Contribution, GameTheme, StoreType } from './types';
+import { GAME_THEMES, GRID_HEIGHT, GRID_WIDTH } from './constants.js';
+import type { Contribution, GameTheme, StoreType } from './types.js';
 
 const getGitlabContribution = async (store: StoreType): Promise<Contribution[]> => {
 	// const response = await fetch(`https://gitlab.com/users/${username}/calendar.json`);
@@ -14,37 +14,56 @@ const getGitlabContribution = async (store: StoreType): Promise<Contribution[]> 
 };
 
 const getGithubContribution = async (store: StoreType): Promise<Contribution[]> => {
-	const commits = [];
-	let isComplete: boolean = false;
+	const commits: any[] = [];
+	let isComplete = false;
 	let page = 1;
-	// TODO: Consider using GraphQL endpoint when user has an access token?
+
 	do {
 		try {
 			const headers: HeadersInit = {};
 			if (store.config.githubSettings?.accessToken) {
 				headers['Authorization'] = 'Bearer ' + store.config.githubSettings.accessToken;
 			}
+
+			console.log(`🔎 Buscando commits da página ${page}...`);
+
 			const response = await fetch(
-				`https://api.github.com/search/commits?q=author:${store.config.username}&sort=author-date&order=desc&page=${page}&per_page=1000`,
-				{
-					headers
-				}
+				`https://api.github.com/search/commits?q=author:${store.config.username}&sort=author-date&order=desc&page=${page}&per_page=100`,
+				{ headers }
 			);
-			const contributionsList = await response.json();
-			isComplete = contributionsList.items.length === 0;
-			commits.push(...contributionsList.items);
+
+			const data: { items?: any[] } = await response.json();
+			console.log(`📦 Resultado da página ${page}: ${data.items?.length ?? 0} commits`);
+
+			isComplete = !data.items || data.items.length === 0;
+			commits.push(...(data.items ?? []));
 			page++;
 		} catch (ex) {
+			console.error('❌ Erro ao buscar commits do GitHub:', ex);
 			isComplete = true;
 		}
 	} while (!isComplete);
+
+	console.log(`✅ Total de commits encontrados: ${commits.length}`);
+
 	return Array.from(
 		commits
 			.reduce((map: any, item: any) => {
-				const dateString = item.commit.committer.date.split('T')[0];
-				const date = new Date(dateString);
-				const count = (map.get(dateString) || { count: 0 }).count + 1;
-				return map.set(dateString, { date, count });
+				const authorDateStr = item.commit.author?.date?.split('T')[0];
+				const committerDateStr = item.commit.committer?.date?.split('T')[0];
+		
+				// 👀 Log detalhado pra análise
+				console.log(`🔍 Commit encontrado:`);
+				console.log(`📅 Author date: ${item.commit.author?.date}`);
+				console.log(`📅 Committer date: ${item.commit.committer?.date}`);
+				console.log(`🔤 Mensagem: ${item.commit.message}`);
+				console.log(`📁 Repositório: ${item.repository?.full_name}`);
+				console.log(`---`);
+		
+				const keyDate = committerDateStr || authorDateStr;
+				const count = (map.get(keyDate) || { count: 0 }).count + 1;
+		
+				return map.set(keyDate, { date: new Date(keyDate), count });
 			}, new Map())
 			.values()
 	);
@@ -72,10 +91,89 @@ const hexToHexAlpha = (hex: string, alpha: number): string => {
 	return `#${hex}${alphaHex}`;
 };
 
+const buildGrid = (store: StoreType) => {
+	const grid = Array.from({ length: GRID_WIDTH }, () =>
+		Array.from({ length: GRID_HEIGHT }, () => ({
+			intensity: 0,
+			commitsCount: 0
+		}))
+	);
+
+	const truncateDate = (d: Date) => new Date(d.getFullYear(), d.getMonth(), d.getDate());
+	const now = truncateDate(new Date()); // hoje
+	const endDate = now; // ✅ Final até HOJE (não até sábado!)
+
+	// 🔁 1 ano atrás (364 dias) e volta até o domingo anterior
+	const startDate = new Date(endDate);
+	startDate.setDate(startDate.getDate() - 364);
+	startDate.setDate(startDate.getDate() - startDate.getDay()); // força domingo
+
+	console.log(`📅 Data inicial (ajustada para domingo): ${startDate.toISOString().split('T')[0]}`);
+	console.log(`📅 Data final (hoje): ${endDate.toISOString().split('T')[0]}`);
+
+	store.contributions.forEach((contribution) => {
+		const date = truncateDate(new Date(contribution.date));
+
+		if (date < startDate || date > endDate) return;
+
+		const day = date.getUTCDay(); // 0 = domingo ... 6 = sábado
+		const week = getWeekOffset(startDate, date);
+
+		if (week >= GRID_WIDTH || day >= GRID_HEIGHT) {
+			console.warn(
+				`⚠️ Contribuição ignorada (fora dos limites): ${date.toISOString().split('T')[0]} | Week: ${week} | Day: ${day}`
+			);
+			return;
+		}
+
+		const intensity = Math.min(1, contribution.count / 4);
+		if (intensity === 1) {
+			console.log(
+				`🎯 Alta intensidade: ${date.toISOString().split('T')[0]} | Count: ${contribution.count} | Week: ${week} | Day: ${day}`
+			);
+		}
+		console.log(
+			`🟥 Intensidade: ${date.toISOString().split('T')[0]} | Count: ${contribution.count} | Week: ${week} | Day: ${day}`
+		);
+
+		grid[week][day] = {
+			intensity,
+			commitsCount: contribution.count
+		};
+	});
+
+	store.grid = grid;
+};
+
+const getWeekOffset = (start: Date, date: Date): number => {
+	const diff = date.getTime() - start.getTime();
+	const oneWeek = 1000 * 60 * 60 * 24 * 7;
+	return Math.floor(diff / oneWeek);
+};
+
+const buildMonthLabels = (store: StoreType) => {
+	const labels = Array(GRID_WIDTH).fill('');
+	const firstDayOfYear = new Date(new Date().getFullYear(), 0, 1);
+
+	for (let week = 0; week < GRID_WIDTH; week++) {
+		const date = new Date(firstDayOfYear);
+		date.setDate(date.getDate() + week * 7);
+		const month = date.toLocaleString('default', { month: 'short' });
+
+		if (week === 0 || labels[week - 1] !== month) {
+			labels[week] = month;
+		}
+	}
+
+	store.monthLabels = labels;
+};
+
 export const Utils = {
 	getGitlabContribution,
 	getGithubContribution,
 	getCurrentTheme,
 	hexToRGBA,
-	hexToHexAlpha
+	hexToHexAlpha,
+	buildGrid,
+	buildMonthLabels
 };

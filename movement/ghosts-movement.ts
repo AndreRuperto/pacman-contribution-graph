@@ -1,6 +1,6 @@
-import { GRID_HEIGHT, GRID_WIDTH } from '../constants';
-import { Ghost, Point2d, StoreType } from '../types';
-import { MovementUtils } from './movement-utils';
+import { GRID_HEIGHT, GRID_WIDTH } from '../constants.js';
+import { Ghost, Point2d, StoreType } from '../types.js';
+import { MovementUtils } from './movement-utils.js';
 
 const moveGhosts = (store: StoreType) => {
 	store.ghosts.forEach((ghost) => {

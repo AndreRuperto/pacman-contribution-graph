@@ -2,7 +2,7 @@ import { GameTheme, GhostName, ThemeKeys } from './types';
 
 export const CELL_SIZE = 20;
 export const GAP_SIZE = 2;
-export const GRID_WIDTH = 52;
+export const GRID_WIDTH = 53;
 export const GRID_HEIGHT = 7;
 export const PACMAN_COLOR = 'yellow';
 export const PACMAN_COLOR_POWERUP = 'red';

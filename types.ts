@@ -41,7 +41,7 @@ export interface StoreType {
 	gameHistory: {
 		pacman: Pacman;
 		ghosts: Ghost[];
-		grid: number[][];
+		grid: { intensity: number; commitsCount: number }[][];
 	}[];
 	config: Config;
 }

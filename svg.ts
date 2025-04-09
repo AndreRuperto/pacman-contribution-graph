@@ -9,9 +9,10 @@ import {
 	PACMAN_COLOR_DEAD,
 	PACMAN_COLOR_POWERUP,
 	WALLS
-} from './constants';
-import { AnimationData, StoreType } from './types';
-import { Utils } from './utils';
+} from './constants.js';
+import { AnimationData, StoreType } from './types.js';
+import { Utils } from './utils.js';
+import { logToFile } from './logger.js';
 
 const generateAnimatedSVG = (store: StoreType) => {
 	const svgWidth = GRID_WIDTH * (CELL_SIZE + GAP_SIZE);
@@ -147,8 +148,9 @@ const generatePacManColors = (store: StoreType): string[] => {
 };
 
 const generateCellColorValues = (store: StoreType, x: number, y: number): string[] => {
-	return store.gameHistory.map((state) => {
-		const intensity = state.grid[x][y];
+	const values = store.gameHistory.map((state) => {
+		const cell = state.grid[x][y]; // cell agora é { intensity, commitsCount }
+    	const intensity = cell.intensity;
 		if (intensity > 0) {
 			const adjustedIntensity = intensity < 0.2 ? 0.3 : intensity;
 			return Utils.hexToHexAlpha(Utils.getCurrentTheme(store).contributionBoxColor, adjustedIntensity);
@@ -156,6 +158,13 @@ const generateCellColorValues = (store: StoreType, x: number, y: number): string
 			return Utils.getCurrentTheme(store).emptyContributionBoxColor;
 		}
 	});
+
+	logToFile(`[${x},${y}] intensities: ${store.gameHistory.map((s) => {
+		const cell = s.grid[x][y];
+		return `(${cell.intensity}, ${cell.commitsCount})`;
+	  }).join(', ')}`);
+			
+	return values;
 };
 
 const generateGhostPositions = (store: StoreType, ghostIndex: number): string[] => {
