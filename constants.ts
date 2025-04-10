@@ -16,30 +16,26 @@ export const GAME_THEMES: { [key in ThemeKeys]: GameTheme } = {
 	github: {
 		textColor: '#586069',
 		gridBackground: '#ffffff',
-		contributionBoxColor: '#9be9a8',
-		emptyContributionBoxColor: '#ebedf0',
-		wallColor: '#000000'
+		wallColor: '#000000',
+		intensityColors: ['#151B23', '#033A16', '#196C2E', '#2EA043', '#56D364']
 	},
 	'github-dark': {
 		textColor: '#8b949e',
 		gridBackground: '#0d1117',
-		contributionBoxColor: '#26a641',
-		emptyContributionBoxColor: '#161b22',
-		wallColor: '#FFFFFF'
+		wallColor: '#FFFFFF',
+		intensityColors: ['#151B23', '#033A16', '#196C2E', '#2EA043', '#56D364']
 	},
 	gitlab: {
 		textColor: '#626167',
 		gridBackground: '#ffffff',
-		contributionBoxColor: '#7992f5',
-		emptyContributionBoxColor: '#ececef',
-		wallColor: '#000000'
+		wallColor: '#000000',
+		intensityColors: ['#151B23', '#033A16', '#196C2E', '#2EA043', '#56D364']
 	},
 	'gitlab-dark': {
 		textColor: '#999999',
 		gridBackground: '#1f1f1f',
-		contributionBoxColor: '#2e7db1',
-		emptyContributionBoxColor: '#2d2d2d',
-		wallColor: '#FFFFFF'
+		wallColor: '#FFFFFF',
+		intensityColors: ['#151B23', '#033A16', '#196C2E', '#2EA043', '#56D364']
 	}
 };
 export const GHOSTS: { [key in GhostName | 'scared']: { imgDate: string } } = {

@@ -1,46 +1,15 @@
 import { SVG } from './svg.js';
 import { StoreType } from './types';
-import { DELTA_TIME, GHOST_NAMES, GRID_HEIGHT, GRID_WIDTH, MONTHS, PACMAN_DEATH_DURATION } from './constants.js';
+import {
+  DELTA_TIME,
+  GHOST_NAMES,
+  GRID_HEIGHT,
+  GRID_WIDTH,
+  PACMAN_DEATH_DURATION
+} from './constants.js';
 import { GhostsMovement } from './movement/ghosts-movement.js';
 import { PacmanMovement } from './movement/pacman-movement.js';
-
-const initializeGrid = (store: StoreType) => {
-  store.pacman.points = 0;
-  store.pacman.totalPoints = 0;
-  store.grid = Array.from({ length: GRID_WIDTH }, () => Array.from({ length: GRID_HEIGHT }, () => ({ commitsCount: 0, intensity: 0 })));
-  store.monthLabels = Array(GRID_WIDTH).fill('');
-  let maxCommits = 1;
-
-  const now = new Date();
-  const startOfCurrentWeek = new Date(now);
-  startOfCurrentWeek.setDate(now.getDate() - now.getDay());
-
-  store.contributions.forEach((contribution) => {
-    const contributionDate = new Date(contribution.date);
-    const dayOfWeek = contributionDate.getDay();
-    const weeksAgo = Math.floor((+startOfCurrentWeek - +contributionDate) / (1000 * 60 * 60 * 24 * 7));
-
-    if (weeksAgo >= 0 && weeksAgo < GRID_WIDTH && dayOfWeek >= 0 && dayOfWeek < GRID_HEIGHT) {
-      store.grid[GRID_WIDTH - 1 - weeksAgo][dayOfWeek] = { commitsCount: contribution.count, intensity: 0 };
-      if (contribution.count > maxCommits) maxCommits = contribution.count;
-    }
-  });
-
-  for (let x = 0; x < GRID_WIDTH; x++) {
-    for (let y = 0; y < GRID_HEIGHT; y++) {
-      if (store.grid[x][y].commitsCount > 0) {
-        store.grid[x][y].intensity = store.grid[x][y].commitsCount / maxCommits;
-      }
-    }
-  }
-
-  for (let x = 0; x < GRID_WIDTH; x++) {
-    const weeksAgo = GRID_WIDTH - 1 - x;
-    const columnDate = new Date(startOfCurrentWeek);
-    columnDate.setDate(columnDate.getDate() - weeksAgo * 7);
-    store.monthLabels[x] = MONTHS[columnDate.getMonth()];
-  }
-};
+import { createGridFromData } from './utils.js';
 
 const placePacman = (store: StoreType) => {
   store.pacman = {
@@ -71,7 +40,8 @@ const startGame = async (store: StoreType) => {
   store.frameCount = 0;
   store.ghosts.forEach((ghost) => (ghost.scared = false));
 
-  initializeGrid(store);
+  // ✅ Gera grid com intensidades a partir das contribuições
+  store.grid = createGridFromData(store.contributions);
 
   const remainingCells = () => store.grid.some((row) => row.some((cell) => cell.intensity > 0));
   if (remainingCells()) {

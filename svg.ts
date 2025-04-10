@@ -39,7 +39,7 @@ const generateAnimatedSVG = (store: StoreType) => {
 			const cellX = x * (CELL_SIZE + GAP_SIZE);
 			const cellY = y * (CELL_SIZE + GAP_SIZE) + 15;
 			const cellColorAnimation = generateChangingValuesAnimation(store, generateCellColorValues(store, x, y));
-			svg += `<rect id="c-${x}-${y}" x="${cellX}" y="${cellY}" width="${CELL_SIZE}" height="${CELL_SIZE}" rx="5" fill="${Utils.getCurrentTheme(store).emptyContributionBoxColor}">
+			svg += `<rect id="c-${x}-${y}" x="${cellX}" y="${cellY}" width="${CELL_SIZE}" height="${CELL_SIZE}" rx="5" fill="${Utils.getCurrentTheme(store).intensityColors[0]}">
                 <animate attributeName="fill" dur="${store.gameHistory.length * DELTA_TIME}ms" repeatCount="indefinite" 
                     values="${cellColorAnimation.values}" 
                     keyTimes="${cellColorAnimation.keyTimes}"/>
@@ -148,22 +148,30 @@ const generatePacManColors = (store: StoreType): string[] => {
 };
 
 const generateCellColorValues = (store: StoreType, x: number, y: number): string[] => {
+	const theme = Utils.getCurrentTheme(store);
+	const emptyColor = theme.intensityColors[0];
+
 	const values = store.gameHistory.map((state) => {
-		const cell = state.grid[x][y]; // cell agora é { intensity, commitsCount }
-    	const intensity = cell.intensity;
-		if (intensity > 0) {
-			const adjustedIntensity = intensity < 0.2 ? 0.3 : intensity;
-			return Utils.hexToHexAlpha(Utils.getCurrentTheme(store).contributionBoxColor, adjustedIntensity);
-		} else {
-			return Utils.getCurrentTheme(store).emptyContributionBoxColor;
+		const cell = state.grid[x][y];
+		const intensity = cell.intensity;
+
+		if (intensity === 0) {
+			return emptyColor;
 		}
+
+		const index = Math.min(
+			theme.intensityColors.length - 1,
+			Math.floor(intensity * theme.intensityColors.length)
+		);
+
+		return theme.intensityColors[index];
 	});
 
 	logToFile(`[${x},${y}] intensities: ${store.gameHistory.map((s) => {
 		const cell = s.grid[x][y];
 		return `(${cell.intensity}, ${cell.commitsCount})`;
-	  }).join(', ')}`);
-			
+	}).join(', ')}`);
+
 	return values;
 };
 

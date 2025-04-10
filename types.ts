@@ -64,13 +64,12 @@ export interface Config {
 
 export type ThemeKeys = 'github' | 'github-dark' | 'gitlab' | 'gitlab-dark';
 
-export interface GameTheme {
+export type GameTheme = {
 	textColor: string;
 	gridBackground: string;
-	contributionBoxColor: string;
-	emptyContributionBoxColor: string;
 	wallColor: string;
-}
+	intensityColors: string[]; // <- NOVO
+};
 
 export interface AnimationData {
 	keyTimes: string;

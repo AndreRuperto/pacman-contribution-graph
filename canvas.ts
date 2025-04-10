@@ -26,16 +26,15 @@ const drawGrid = (store: StoreType) => {
 	ctx.fillStyle = Utils.getCurrentTheme(store).gridBackground;
 	ctx.fillRect(0, 0, store.config.canvas.width, store.config.canvas.height);
 
+	const theme = Utils.getCurrentTheme(store);
+	const palette = theme.intensityColors;
+
 	for (let x = 0; x < GRID_WIDTH; x++) {
 		for (let y = 0; y < GRID_HEIGHT; y++) {
-			const intensity = store.grid[x][y].intensity;
-			if (intensity > 0) {
-				const adjustedIntensity = intensity < 0.2 ? 0.3 : intensity;
-				const color = Utils.hexToRGBA(Utils.getCurrentTheme(store).contributionBoxColor, adjustedIntensity);
-				ctx.fillStyle = color;
-			} else {
-				ctx.fillStyle = Utils.getCurrentTheme(store).emptyContributionBoxColor;
-			}
+			const count = store.grid[x][y].commitsCount;
+			let level = 0;
+			if (count > 0) level = count >= 15 ? 4 : count >= 10 ? 3 : count >= 5 ? 2 : 1;
+			ctx.fillStyle = palette[level];
 			ctx.beginPath();
 			store.config.canvas
 				.getContext('2d')!
@@ -47,7 +46,6 @@ const drawGrid = (store: StoreType) => {
 	ctx.fillStyle = Utils.getCurrentTheme(store).wallColor;
 	for (let x = 0; x <= GRID_WIDTH; x++) {
 		for (let y = 0; y <= GRID_HEIGHT; y++) {
-			// Draw horizontal walls
 			if (WALLS.horizontal[x][y].active) {
 				ctx.fillRect(
 					x * (CELL_SIZE + GAP_SIZE) - GAP_SIZE,
@@ -55,12 +53,7 @@ const drawGrid = (store: StoreType) => {
 					CELL_SIZE + GAP_SIZE,
 					GAP_SIZE
 				);
-				// // TODO: For debug only
-				// ctx.fillStyle = '#000';
-				// ctx.fillText(WALLS.horizontal[x][y].id, x * (GAP_SIZE + CELL_SIZE), y * (GAP_SIZE + CELL_SIZE));
 			}
-
-			// Draw vertical walls
 			if (WALLS.vertical[x][y].active) {
 				ctx.fillRect(
 					x * (CELL_SIZE + GAP_SIZE) - GAP_SIZE,
@@ -68,19 +61,15 @@ const drawGrid = (store: StoreType) => {
 					GAP_SIZE,
 					CELL_SIZE + GAP_SIZE
 				);
-				// // TODO: For debug only
-				// ctx.fillStyle = '#000';
-				// ctx.fillText(WALLS.vertical[x][y].id, x * (GAP_SIZE + CELL_SIZE), (y + 1) * (GAP_SIZE + CELL_SIZE));
 			}
 		}
 	}
 
-	ctx.fillStyle = Utils.getCurrentTheme(store).textColor;
+	ctx.fillStyle = theme.textColor;
 	ctx.font = '10px Arial';
 	ctx.textAlign = 'center';
 
 	let lastMonth = '';
-
 	for (let x = 0; x < GRID_WIDTH; x++) {
 		if (store.monthLabels[x] !== lastMonth) {
 			const xPos = x * (CELL_SIZE + GAP_SIZE) + CELL_SIZE / 2;

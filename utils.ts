@@ -100,41 +100,36 @@ const buildGrid = (store: StoreType) => {
 	);
 
 	const truncateDate = (d: Date) => new Date(d.getFullYear(), d.getMonth(), d.getDate());
-	const now = truncateDate(new Date()); // hoje
-	const endDate = now; // ✅ Final até HOJE (não até sábado!)
+	const now = truncateDate(new Date());
+	const endDate = now;
 
-	// 🔁 1 ano atrás (364 dias) e volta até o domingo anterior
 	const startDate = new Date(endDate);
 	startDate.setDate(startDate.getDate() - 364);
-	startDate.setDate(startDate.getDate() - startDate.getDay()); // força domingo
+	startDate.setDate(startDate.getDate() - startDate.getDay());
 
-	console.log(`📅 Data inicial (ajustada para domingo): ${startDate.toISOString().split('T')[0]}`);
-	console.log(`📅 Data final (hoje): ${endDate.toISOString().split('T')[0]}`);
+	console.log(`🗕️ Data inicial (ajustada para domingo): ${startDate.toISOString().split('T')[0]}`);
+	console.log(`🗕️ Data final (hoje): ${endDate.toISOString().split('T')[0]}`);
 
 	store.contributions.forEach((contribution) => {
 		const date = truncateDate(new Date(contribution.date));
-
 		if (date < startDate || date > endDate) return;
 
-		const day = date.getUTCDay(); // 0 = domingo ... 6 = sábado
-		const week = getWeekOffset(startDate, date);
+		const shiftedDate = new Date(date);
+		shiftedDate.setDate(shiftedDate.getDate() + 1); // ⚠️ CORREÇÃO: adianta 1 dia
+
+		const day = shiftedDate.getDay();
+		const week = getWeekOffset(startDate, shiftedDate);
 
 		if (week >= GRID_WIDTH || day >= GRID_HEIGHT) {
-			console.warn(
-				`⚠️ Contribuição ignorada (fora dos limites): ${date.toISOString().split('T')[0]} | Week: ${week} | Day: ${day}`
-			);
+			console.warn(`⚠️ Contribuição ignorada (fora dos limites): ${shiftedDate.toISOString().split('T')[0]} | Week: ${week} | Day: ${day}`);
 			return;
 		}
 
 		const intensity = Math.min(1, contribution.count / 4);
 		if (intensity === 1) {
-			console.log(
-				`🎯 Alta intensidade: ${date.toISOString().split('T')[0]} | Count: ${contribution.count} | Week: ${week} | Day: ${day}`
-			);
+			console.log(`🎯 Alta intensidade: ${shiftedDate.toISOString().split('T')[0]} | Count: ${contribution.count} | Week: ${week} | Day: ${day}`);
 		}
-		console.log(
-			`🟥 Intensidade: ${date.toISOString().split('T')[0]} | Count: ${contribution.count} | Week: ${week} | Day: ${day}`
-		);
+		console.log(`🔵 Intensidade: ${shiftedDate.toISOString().split('T')[0]} | Count: ${contribution.count} | Week: ${week} | Day: ${day}`);
 
 		grid[week][day] = {
 			intensity,
@@ -168,6 +163,35 @@ const buildMonthLabels = (store: StoreType) => {
 	store.monthLabels = labels;
 };
 
+export const createGridFromData = (contributions: Contribution[]): { intensity: number; commitsCount: number }[][] => {
+	const grid = Array.from({ length: GRID_WIDTH }, () =>
+		Array.from({ length: GRID_HEIGHT }, () => ({ intensity: 0, commitsCount: 0 }))
+	);
+
+	contributions.forEach(({ date, count }) => {
+		const d = new Date(date);
+		const day = d.getDay()
+
+		// Começa no domingo mais próximo do início do período de 1 ano
+		const endDate = new Date(); // hoje
+		endDate.setHours(0, 0, 0, 0);
+
+		const startDate = new Date(endDate);
+		startDate.setDate(startDate.getDate() - 364);
+		startDate.setDate(startDate.getDate() - startDate.getDay()); // força domingo
+
+		const diff = d.getTime() - startDate.getTime();
+		const week = Math.floor(diff / (7 * 24 * 60 * 60 * 1000));
+
+		if (week >= 0 && week < GRID_WIDTH && day >= 0 && day < GRID_HEIGHT) {
+			const intensity = Math.min(1, count / 4);
+			grid[week][day] = { intensity, commitsCount: count };
+		}
+	});
+
+	return grid;
+};
+
 export const Utils = {
 	getGitlabContribution,
 	getGithubContribution,
@@ -175,5 +199,6 @@ export const Utils = {
 	hexToRGBA,
 	hexToHexAlpha,
 	buildGrid,
-	buildMonthLabels
+	buildMonthLabels,
+	createGridFromData
 };
