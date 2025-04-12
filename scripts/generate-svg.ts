@@ -42,9 +42,7 @@ console.log("🎨 Tema selecionado:", Store.config.gameTheme);
 /* -------------------------------------------------------------------------- */
 (async () => {
   // 3.1 – baixa contribuições
-  Store.contributions = await fetchGithubContributionsGraphQL(
-    Store
-  );
+  Store.contributions = await fetchGithubContributionsGraphQL(Store, username, accessToken);
 
   // 3.2 – monta paredes e roda o jogo
   Grid.buildWalls();

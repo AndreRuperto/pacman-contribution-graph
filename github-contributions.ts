@@ -27,10 +27,10 @@ interface GraphQLResponse {
 
 /* ─────────────────────── Função principal ───────────────────── */
 export async function fetchGithubContributionsGraphQL(
-  store: StoreType
+  store: StoreType,
+  username: string,
+  token: string
 ): Promise<Contribution[]> {
-  const { username, githubSettings } = store.config;
-  const token = githubSettings?.accessToken;
 
   const query = /* GraphQL */ `
     query ($login: String!) {
@@ -67,12 +67,12 @@ export async function fetchGithubContributionsGraphQL(
   }
 
   const json = (await response.json()) as GraphQLResponse;
-  const theme = getCurrentTheme(store); // 🟩 cor baseada no tema atual
 
   return json.data.user.contributionsCollection.contributionCalendar.weeks
     .flatMap((week) => week.contributionDays)
     .map((d) => {
       const level = d.contributionLevel;
+      const theme = getCurrentTheme(store);
       return {
         date: new Date(d.date),
         count: d.contributionCount,

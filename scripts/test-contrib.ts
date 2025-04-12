@@ -5,7 +5,7 @@ async function main() {
     const username = 'AndreRuperto';
     const accessToken = process.env.GITHUB_TOKEN!;   // coloque no .env ou exporte no shell
 
-    const data = await fetchGithubContributionsGraphQL(Store);
+    const data = await fetchGithubContributionsGraphQL(Store, username, accessToken);
 
   // Mostra só as 10 primeiras linhas
   data.sort((a, b) => a.date.getTime() - b.date.getTime());
