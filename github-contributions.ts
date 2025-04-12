@@ -1,11 +1,17 @@
 import fetch from 'node-fetch';
+import { ContributionLevel, Contribution, StoreType } from './types.js';
+import { getCurrentTheme } from './utils.js'; // já está importado no seu projeto
+import { levelToIndex } from './utils.js';    // certifique-se que essa função está exportada
 
-type ContributionDay = {
-  contributionCount: number;
+/* ────────────────────────── Tipagens ────────────────────────── */
+interface ContributionDay {
   date: string;
-};
+  contributionCount: number;
+  color: string;
+  contributionLevel: ContributionLevel;
+}
 
-type GraphQLResponse = {
+interface GraphQLResponse {
   data: {
     user: {
       contributionsCollection: {
@@ -17,21 +23,26 @@ type GraphQLResponse = {
       };
     };
   };
-};
+}
 
+/* ─────────────────────── Função principal ───────────────────── */
 export async function fetchGithubContributionsGraphQL(
-  username: string,
-  token: string
-): Promise<{ date: Date; count: number }[]> { // <- 👈 mudou de string para Date
-  const query = `
-    query {
-      user(login: "${username}") {
+  store: StoreType
+): Promise<Contribution[]> {
+  const { username, githubSettings } = store.config;
+  const token = githubSettings?.accessToken;
+
+  const query = /* GraphQL */ `
+    query ($login: String!) {
+      user(login: $login) {
         contributionsCollection {
           contributionCalendar {
             weeks {
               contributionDays {
-                contributionCount
                 date
+                contributionCount
+                color
+                contributionLevel
               }
             }
           }
@@ -40,29 +51,33 @@ export async function fetchGithubContributionsGraphQL(
     }
   `;
 
-  const res = await fetch('https://api.github.com/graphql', {
+  const response = await fetch('https://api.github.com/graphql', {
     method: 'POST',
     headers: {
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ query }),
+    body: JSON.stringify({ query, variables: { login: username } })
   });
 
-  if (!res.ok) {
-    throw new Error(`Erro ao buscar dados do GitHub: ${res.status} ${res.statusText}`);
+  if (!response.ok) {
+    throw new Error(
+      `GitHub GraphQL request failed: ${response.status} ${response.statusText}`
+    );
   }
 
-  const json = (await res.json()) as GraphQLResponse;
+  const json = (await response.json()) as GraphQLResponse;
+  const theme = getCurrentTheme(store); // 🟩 cor baseada no tema atual
 
-  const weeks = json.data.user.contributionsCollection.contributionCalendar.weeks;
-
-  const contributions = weeks.flatMap((week) =>
-    week.contributionDays.map((day) => ({
-      date: new Date(day.date), // 👈 conversão importante
-      count: day.contributionCount,
-    }))
-  );
-
-  return contributions;
+  return json.data.user.contributionsCollection.contributionCalendar.weeks
+    .flatMap((week) => week.contributionDays)
+    .map((d) => {
+      const level = d.contributionLevel;
+      return {
+        date: new Date(d.date),
+        count: d.contributionCount,
+        color: theme.intensityColors[levelToIndex(level)],
+        level
+      };
+    });
 }

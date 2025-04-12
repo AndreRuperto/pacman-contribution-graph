@@ -1,3 +1,4 @@
+// index.ts
 import { Game } from './game.js';
 import { Grid } from './grid.js';
 import { Store } from './store.js';
@@ -15,7 +16,7 @@ export class PacmanRenderer {
 	}
 
 	public async start() {
-		const defaultConfing: Config = {
+		const defaultConfig: Config = {
 			platform: 'github',
 			username: '',
 			canvas: undefined as unknown as HTMLCanvasElement,
@@ -25,11 +26,13 @@ export class PacmanRenderer {
 			gameTheme: 'github',
 			gameSpeed: 1,
 			enableSounds: false,
-			pointsIncreasedCallback: (_: number) => {}
+			pointsIncreasedCallback: (_: number) => {},
+			githubSettings: { accessToken: '' } // caso necessário
 		};
-		this.store.config = { ...defaultConfing, ...this.conf };
 
-		switch (this.conf.platform) {
+		this.store.config = { ...defaultConfig, ...this.conf };
+
+		switch (this.store.config.platform) {
 			case 'gitlab':
 				this.store.contributions = await Utils.getGitlabContribution(this.store);
 				break;
