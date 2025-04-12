@@ -91,18 +91,18 @@ export const levelToIndex = (level: ContributionLevel): number => {
 export const buildGrid = (store: StoreType) => {
   const endDate = truncateToUTCDate(new Date());
 
-  // Domingo de (hoje - 365)
+  // Ajusta para domingo de (hoje - 365)
   const startDate = new Date(endDate);
   startDate.setUTCDate(endDate.getUTCDate() - 365);
   startDate.setUTCDate(startDate.getUTCDate() - startDate.getUTCDay());
 
-  const realWidth = weeksBetween(startDate, endDate) + 1;
+  const realWidth = 53; // força 53 semanas, igual ao GitHub
 
   // Inicializa grid com valores padrão
   const grid = Array.from({ length: realWidth }, () =>
     Array.from({ length: GRID_HEIGHT }, () => ({
       commitsCount: 0,
-      color: '#ebedf0',
+      color: getCurrentTheme(store).intensityColors[0], // cor do nível 'NONE' do tema atual
       level: 'NONE' as ContributionLevel
     }))
   );
@@ -113,22 +113,19 @@ export const buildGrid = (store: StoreType) => {
     if (date < startDate || date > endDate) return;
 
     const day = date.getUTCDay(); // 0 a 6
-    const week = weeksBetween(startDate, date); // já é 0-based
+    const week = weeksBetween(startDate, date); // 0-based
 
-    // Proteção extra para garantir que grid[week] existe
     if (week >= 0 && week < realWidth) {
+      const theme = getCurrentTheme(store);
       grid[week][day] = {
         commitsCount: c.count,
-        color: getCurrentTheme(store).intensityColors[levelToIndex(c.level)],
+        color: theme.intensityColors[levelToIndex(c.level)],
         level: c.level
       };
     }
   });
 
-  // Mantém no máximo 52 colunas (1 ano + semana atual)
-  store.grid = realWidth > GRID_WIDTH
-    ? grid.slice(realWidth - GRID_WIDTH)
-    : grid;
+  store.grid = grid;
 };
 
 export const buildMonthLabels = (store: StoreType) => {
