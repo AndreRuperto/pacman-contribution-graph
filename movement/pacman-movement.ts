@@ -193,19 +193,22 @@ const updatePacmanPosition = (store: StoreType, position: Point2d) => {
 const checkAndEatPoint = (store: StoreType) => {
 	const cell = store.grid[store.pacman.x][store.pacman.y];
 	if (cell.level !== 'NONE') {
-		store.pacman.totalPoints += cell.commitsCount;
-		store.pacman.points++;
-		store.config.pointsIncreasedCallback(store.pacman.totalPoints);
-
-		// "Apaga" ponto com base no tema atual
-		const theme = Utils.getCurrentTheme(store);
-		cell.level = 'NONE';
-		cell.color = theme.intensityColors[0];
-		cell.commitsCount = 0;
-
-		if (store.pacman.points >= 10) activatePowerUp(store);
+	  store.pacman.totalPoints += cell.commitsCount;
+	  store.pacman.points++;
+	  store.config.pointsIncreasedCallback(store.pacman.totalPoints);
+  
+	  const theme = Utils.getCurrentTheme(store);
+	  if (cell.level === 'FOURTH_QUARTILE') {
+		console.log(`🔥 Power-up ativado na célula [${store.pacman.x}, ${store.pacman.y}] com nível ${cell.level}`);
+		activatePowerUp(store);
+	  }
+  
+	  // "Apaga" ponto da célula
+	  cell.level = 'NONE';
+	  cell.color = theme.intensityColors[0];
+	  cell.commitsCount = 0;
 	}
-};
+  };  
 
 const activatePowerUp = (store: StoreType) => {
 	store.pacman.powerupRemainingDuration = PACMAN_POWERUP_DURATION;

@@ -1,33 +1,30 @@
 // src/utils.ts
 import { GAME_THEMES, GRID_HEIGHT, GRID_WIDTH } from './constants.js';
-import type { StoreType, GameTheme,  ContributionLevel, Contribution} from './types.js';
+import type { StoreType, GameTheme, ContributionLevel, Contribution } from './types.js';
+import { writeFileSync } from 'fs';
 
 /* ─────────────────────────── Helpers ─────────────────────────── */
 const weeksBetween = (start: Date, end: Date) =>
-  Math.ceil((end.getTime() - start.getTime()) / (7 * 24 * 60 * 60 * 1000));
+  Math.floor((end.getTime() - start.getTime()) / (7 * 24 * 60 * 60 * 1000));
 
 const truncateToUTCDate = (d: Date) =>
   new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()));
 
-/* ─────────────────────────── GitLab fetch ───────────────────────
-   (caso ainda queira usar como fallback ou segundo modo)           */
+/* ─────────────────────────── GitLab fetch ─────────────────────── */
 const getGitlabContribution = async (store: StoreType) => {
   const response = await fetch(
     `https://v0-new-project-q1hhrdodoye-abozanona-gmailcoms-projects.vercel.app/api/contributions?username=${store.config.username}`
   );
   const contributionsList = await response.json();
-
-  // Aqui não temos 'color' nem 'level', então damos fallback:
   return Object.entries(contributionsList).map(([date, count]) => ({
     date: new Date(date),
     count: Number(count),
-    color: '#ebedf0',     // fallback clarinho (ou outro)
+    color: '#ebedf0',
     level: 'NONE' as const
   }));
 };
 
-/* ─────────────────────────── REST fetch ────────────────────────
-   (antigo - se quiser manter. Também não retorna cor/nível)      */
+/* ─────────────────────────── REST fetch ──────────────────────── */
 const getGithubContribution = async (store: StoreType): Promise<Contribution[]> => {
   const commits: any[] = [];
   let isComplete = false;
@@ -39,12 +36,10 @@ const getGithubContribution = async (store: StoreType): Promise<Contribution[]> 
       if (store.config.githubSettings?.accessToken) {
         headers['Authorization'] = 'Bearer ' + store.config.githubSettings.accessToken;
       }
-
       const response = await fetch(
         `https://api.github.com/search/commits?q=author:${store.config.username}&sort=author-date&order=desc&page=${page}&per_page=100`,
         { headers }
       );
-
       const data: { items?: any[] } = await response.json();
       isComplete = !data.items || data.items.length === 0;
       commits.push(...(data.items ?? []));
@@ -54,7 +49,6 @@ const getGithubContribution = async (store: StoreType): Promise<Contribution[]> 
     }
   } while (!isComplete);
 
-  // idem, não temos color/level
   return Array.from(
     commits
       .reduce((map: any, item: any) => {
@@ -65,7 +59,7 @@ const getGithubContribution = async (store: StoreType): Promise<Contribution[]> 
         return map.set(keyDate, {
           date: new Date(keyDate),
           count,
-          color: '#ebedf0',   // fallback
+          color: '#ebedf0',
           level: 'NONE' as const
         });
       }, new Map())
@@ -90,30 +84,25 @@ export const levelToIndex = (level: ContributionLevel): number => {
 
 export const buildGrid = (store: StoreType) => {
   const endDate = truncateToUTCDate(new Date());
-
-  // Ajusta para domingo de (hoje - 365)
   const startDate = new Date(endDate);
   startDate.setUTCDate(endDate.getUTCDate() - 365);
   startDate.setUTCDate(startDate.getUTCDate() - startDate.getUTCDay());
 
-  const realWidth = 53; // força 53 semanas, igual ao GitHub
-
-  // Inicializa grid com valores padrão
+  const realWidth = 53;
   const grid = Array.from({ length: realWidth }, () =>
     Array.from({ length: GRID_HEIGHT }, () => ({
       commitsCount: 0,
-      color: getCurrentTheme(store).intensityColors[0], // cor do nível 'NONE' do tema atual
+      color: getCurrentTheme(store).intensityColors[0],
       level: 'NONE' as ContributionLevel
     }))
   );
 
-  // Preenche células com base nas contribuições
   store.contributions.forEach((c) => {
     const date = truncateToUTCDate(new Date(c.date));
     if (date < startDate || date > endDate) return;
 
-    const day = date.getUTCDay(); // 0 a 6
-    const week = weeksBetween(startDate, date); // 0-based
+    const day = date.getUTCDay();
+    const week = weeksBetween(startDate, date);
 
     if (week >= 0 && week < realWidth) {
       const theme = getCurrentTheme(store);
@@ -126,6 +115,13 @@ export const buildGrid = (store: StoreType) => {
   });
 
   store.grid = grid;
+  const lastContributions = store.contributions;
+  console.log('\n📆 Datas das últimas contribuições:');
+  lastContributions.forEach(c => {
+    console.log(`${c.date.toISOString().split('T')[0]} → ${c.level}, ${c.color}, ${c.count} commits`);
+  });
+  const preenchidas = grid.flat().filter(cell => cell.level !== 'NONE').length;
+  console.log(`🟩 Células preenchidas: ${preenchidas}/${realWidth * GRID_HEIGHT}`);
 };
 
 export const buildMonthLabels = (store: StoreType) => {
@@ -149,31 +145,85 @@ export const buildMonthLabels = (store: StoreType) => {
     : labels;
 };
 
-/* Se você usa createGridFromData no modo "SVG", pode reaproveitar buildGrid */
 export const createGridFromData = (store: StoreType) => {
-  buildGrid(store);  // reaproveitamos
+  buildGrid(store);
   printArena(store);
   return store.grid;
 };
 
 export const printArena = (store: StoreType) => {
   console.log('\n🧱 Arena (via level + color) :\n');
-
-  // se quiser mapear level -> símbolo:
   const levelSymbol = {
-    NONE:           '⬛',
+    NONE: '⬛',
     FIRST_QUARTILE: '🟩',
-    SECOND_QUARTILE:'🟨',
+    SECOND_QUARTILE: '🟨',
     THIRD_QUARTILE: '🟧',
-    FOURTH_QUARTILE:'🟥'
+    FOURTH_QUARTILE: '🟥'
   } as const;
 
   for (let y = 0; y < GRID_HEIGHT; y++) {
-    const row = store.grid.map((col) => {
-      return levelSymbol[col[y].level];
-    }).join('');
+    const row = store.grid.map((col) => levelSymbol[col[y].level]).join('');
     console.log(row);
   }
+};
+
+export const printArenaAsHTML = (store: StoreType) => {
+  const weeks = store.grid.length;
+  const days = GRID_HEIGHT;
+
+  const dates = store.contributions.map(c => c.date).sort((a, b) => a.getTime() - b.getTime());
+  const firstDate = dates[0]?.toISOString().split('T')[0] ?? 'n/d';
+  const lastDate = dates[dates.length - 1]?.toISOString().split('T')[0] ?? 'n/d';
+
+  const html = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Arena Pac-Man</title>
+  <style>
+    body {
+      background-color: #0d1117;
+      font-family: monospace;
+      color: white;
+      padding: 20px;
+    }
+    .info {
+      margin-bottom: 1rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(${weeks}, 14px);
+      grid-template-rows: repeat(${days}, 14px);
+      gap: 2px;
+    }
+    .cell {
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body>
+  <div class="info">
+    <p><strong>🧱 Arena (via level + color)</strong></p>
+    <p>🧾 Tamanho da arena: ${weeks} semanas × ${days} dias</p>
+    <p>🗓️ Intervalo de datas: ${firstDate} → ${lastDate}</p>
+  </div>
+  <div class="grid">
+    ${Array.from({ length: days }).map((_, day) =>
+      Array.from({ length: weeks }).map((_, week) => {
+        const cell = store.grid[week][day];
+        return `<div class="cell" style="background-color: ${cell.color};"></div>`;
+      }).join('\n')
+    ).join('\n')}
+  </div>
+</body>
+</html>
+`;
+
+  writeFileSync('arena.html', html, 'utf-8');
+  console.log('📄 Arquivo "arena.html" gerado com sucesso!');
 };
 
 export const Utils = {
@@ -184,5 +234,6 @@ export const Utils = {
   buildMonthLabels,
   createGridFromData,
   printArena,
-  levelToIndex
+  levelToIndex,
+  printArenaAsHTML
 };

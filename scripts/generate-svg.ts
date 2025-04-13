@@ -3,15 +3,22 @@ import { Store } from '../store.js';
 import { Game } from '../game.js';
 import { Grid } from '../grid.js';
 import { fetchGithubContributionsGraphQL } from '../github-contributions.js';
+import { buildGrid, printArenaAsHTML } from '../utils.js';
 
 import { writeFileSync, mkdirSync } from 'fs';
 import * as path from 'path';
+import 'dotenv/config';
 
 /* -------------------------------------------------------------------------- */
 /* 1. Configurações básicas                                                   */
 /* -------------------------------------------------------------------------- */
-const username = 'AndreRuperto';
-const accessToken = process.env.GITHUB_TOKEN!; // ⬅︎ troque depois!
+
+const username = process.env.GITHUB_USERNAME!;
+const accessToken = process.env.GITHUB_TOKEN!;
+
+if (!username || !accessToken) {
+  throw new Error('Variáveis GITHUB_USERNAME e GITHUB_TOKEN não estão definidas no .env');
+};
 
 /* -------------------------------------------------------------------------- */
 /* 2. Store.config                                                            */
@@ -47,6 +54,8 @@ console.log("🎨 Tema selecionado:", Store.config.gameTheme);
   // 3.2 – monta paredes e roda o jogo
   Grid.buildWalls();
   await Game.startGame(Store);
+  // buildGrid(Store);
+  // printArenaAsHTML(Store);
 })().catch((err) => {
   console.error('❌  Erro ao gerar SVG:', err);
   process.exit(1);

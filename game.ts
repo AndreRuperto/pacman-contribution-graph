@@ -101,11 +101,11 @@ const updateGame = async (store: StoreType) => {
   PacmanMovement.movePacman(store);
   const cell = store.grid[store.pacman.x]?.[store.pacman.y];
 
-  if (cell && cell.level !== 'NONE' && store.pacman.powerupRemainingDuration === 0) {
+  if (cell && cell.level === 'FOURTH_QUARTILE' && store.pacman.powerupRemainingDuration === 0) {
     store.pacman.powerupRemainingDuration = 30;
     store.ghosts.forEach((g) => (g.scared = true));
   }
-
+  
   checkCollisions(store);
 
   if (store.pacman.deadRemainingDuration === 0) {

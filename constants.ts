@@ -21,7 +21,7 @@ export const PACMAN_POWERUP_DURATION = 15;
 /* ───────────── Paletas GitHub oficiais ─────────────
    Array de 5 cores: índice 0 = NONE … 4 = FOURTH_QUARTILE             */
 const GITHUB_LIGHT = ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'];
-const GITHUB_DARK  = ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'];
+const GITHUB_DARK  = ['#161b22', '#0e4429', '#006d32', '#26a641', /*'#39d353',*/ '#FD0000'];
 
 /* ───────────── Temas do jogo ───────────── */
 export const GAME_THEMES: { [key in ThemeKeys]: GameTheme } = {
