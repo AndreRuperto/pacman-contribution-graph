@@ -10,7 +10,7 @@ import {
 	PACMAN_COLOR_POWERUP,
 	WALLS
   } from './constants.js';
-  import { AnimationData, StoreType } from './types.js';
+  import { AnimationData, StoreType, GhostName } from './types.js';
   import { Utils } from './utils.js';
   
   const generateAnimatedSVG = (store: StoreType) => {
@@ -74,10 +74,13 @@ import {
 			values="${generatePacManPath(0.55)};${generatePacManPath(0.05)};${generatePacManPath(0.55)}"/>
 	  </path>`;
   
-	store.ghosts.forEach((ghost, index) => {
-	  const ghostPositionAnimation = generateChangingValuesAnimation(store, generateGhostPositions(store, index));
-	  const ghostColorAnimation = generateChangingValuesAnimation(store, generateGhostColors(store, index));
-	  svg += `<use id="ghost${index}" width="${CELL_SIZE}" height="${CELL_SIZE}" href="#ghost-${ghost.name}">
+	  store.ghosts.forEach((ghost, index) => {
+		const ghostPositionAnimation = generateChangingValuesAnimation(store, generateGhostPositions(store, index));
+		const ghostColorAnimation = generateChangingValuesAnimation(store, generateGhostColors(store, index));
+	  
+		const initialHref = ghost.scared ? '#ghost-scared' : `#ghost-${ghost.name}`;
+	  
+		svg += `<use id="ghost${index}" width="${CELL_SIZE}" height="${CELL_SIZE}" href="${initialHref}">
 		  <animateTransform attributeName="transform" type="translate" dur="${store.gameHistory.length * DELTA_TIME}ms" repeatCount="indefinite"
 			  keyTimes="${ghostPositionAnimation.keyTimes}"
 			  values="${ghostPositionAnimation.values}"/>
@@ -85,7 +88,7 @@ import {
 			  keyTimes="${ghostColorAnimation.keyTimes}"
 			  values="${ghostColorAnimation.values}"/>
 		</use>`;
-	});
+	  });	  
   
 	svg += '</svg>';
 	const usedColors = new Set<string>();
@@ -165,46 +168,32 @@ const generateGhostPositions = (store: StoreType, ghostIndex: number): string[] 
 const generateGhostColors = (store: StoreType, ghostIndex: number): string[] => {
 	return store.gameHistory.map((state) => {
 		const ghost = state.ghosts[ghostIndex];
-		return '#' + (ghost.scared ? ghostShort('scared') : ghostShort(ghost.name));
+		const id = `#ghost-${ghost.scared ? 'scared' : ghost.name}`;
+		if (!store.__loggedGhosts) store.__loggedGhosts = new Set();
+		const ghostKey = `${ghostIndex}-${id}`;
+		if (!store.__loggedGhosts.has(ghostKey)) {
+			console.log(`ghost ${ghostIndex}:`, id);
+			store.__loggedGhosts.add(ghostKey);
+		}
+		return id;
 	});
 };
 
 const generateGhostsPredefinition = () => {
 	return `<defs>
-		<symbol id="${ghostShort('blinky')}" viewBox="0 0 100 100">
-            <image href="${GHOSTS['blinky'].imgDate}" width="100" height="100"/>
-		</symbol>
-		<symbol id="${ghostShort('clyde')}" viewBox="0 0 100 100">
-            <image href="${GHOSTS['clyde'].imgDate}" width="100" height="100"/>
-		</symbol>
-		<symbol id="${ghostShort('inky')}" viewBox="0 0 100 100">
-            <image href="${GHOSTS['inky'].imgDate}" width="100" height="100"/>
-		</symbol>
-		<symbol id="${ghostShort('pinky')}" viewBox="0 0 100 100">
-            <image href="${GHOSTS['pinky'].imgDate}" width="100" height="100"/>
-		</symbol>
-		<symbol id="${ghostShort('scared')}" viewBox="0 0 100 100">
-            <image href="${GHOSTS['scared'].imgDate}" width="100" height="100"/>
-		</symbol>
+	  ${(['blinky', 'clyde', 'inky', 'pinky'] as GhostName[]).map(name => `
+		<symbol id="ghost-${name}" viewBox="0 0 100 100">
+		  <image href="${(GHOSTS[name] as Record<'right', string>)['right']}" width="100" height="100"/>
+		</symbol>`).join('')}
+	  <symbol id="ghost-scared" viewBox="0 0 100 100">
+		<image href="${(GHOSTS['scared'] as { imgDate: string }).imgDate}" width="100" height="100"/>
+	  </symbol>
+	  <image href="img/ghosts/red_right.png" x="0" y="100" width="40" height="40" />
+	  <image href="img/ghosts/pink_left.png" x="50" y="100" width="40" height="40" />
+	  <image href="img/ghosts/cyan_up.png" x="100" y="100" width="40" height="40" />
+	  <image href="img/ghosts/orange_down.png" x="150" y="100" width="40" height="40" />
 	</defs>`;
-};
-
-const ghostShort = (ghostName: string): string => {
-	switch (ghostName) {
-		case 'blinky':
-			return 'gb';
-		case 'clyde':
-			return 'gc';
-		case 'inky':
-			return 'gi';
-		case 'pinky':
-			return 'gp';
-		case 'scared':
-			return 'gs';
-		default:
-			return ghostName;
-	}
-};
+  };  
 
 const generateChangingValuesAnimation = (store: StoreType, changingValues: string[]): AnimationData => {
 	if (store.gameHistory.length !== changingValues.length) {

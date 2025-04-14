@@ -1,0 +1,441 @@
+
+> pacman-contribution-graph@1.0.0 generate:svg E:\pacman
+> pnpm exec tsc --project tsconfig.json && node dist/scripts/generate-svg.js
+
+🎨 Tema selecionado: github-dark
+
+📆 Datas das últimas contribuições:
+2024-04-14 → NONE, #161b22, 0 commits
+2024-04-15 → NONE, #161b22, 0 commits
+2024-04-16 → NONE, #161b22, 0 commits
+2024-04-17 → NONE, #161b22, 0 commits
+2024-04-18 → NONE, #161b22, 0 commits
+2024-04-19 → NONE, #161b22, 0 commits
+2024-04-20 → NONE, #161b22, 0 commits
+2024-04-21 → NONE, #161b22, 0 commits
+2024-04-22 → NONE, #161b22, 0 commits
+2024-04-23 → NONE, #161b22, 0 commits
+2024-04-24 → NONE, #161b22, 0 commits
+2024-04-25 → NONE, #161b22, 0 commits
+2024-04-26 → NONE, #161b22, 0 commits
+2024-04-27 → NONE, #161b22, 0 commits
+2024-04-28 → NONE, #161b22, 0 commits
+2024-04-29 → NONE, #161b22, 0 commits
+2024-04-30 → NONE, #161b22, 0 commits
+2024-05-01 → NONE, #161b22, 0 commits
+2024-05-02 → NONE, #161b22, 0 commits
+2024-05-03 → NONE, #161b22, 0 commits
+2024-05-04 → NONE, #161b22, 0 commits
+2024-05-05 → NONE, #161b22, 0 commits
+2024-05-06 → NONE, #161b22, 0 commits
+2024-05-07 → NONE, #161b22, 0 commits
+2024-05-08 → THIRD_QUARTILE, #26a641, 10 commits
+2024-05-09 → NONE, #161b22, 0 commits
+2024-05-10 → NONE, #161b22, 0 commits
+2024-05-11 → NONE, #161b22, 0 commits
+2024-05-12 → NONE, #161b22, 0 commits
+2024-05-13 → NONE, #161b22, 0 commits
+2024-05-14 → FIRST_QUARTILE, #0e4429, 1 commits
+2024-05-15 → FIRST_QUARTILE, #0e4429, 1 commits
+2024-05-16 → NONE, #161b22, 0 commits
+2024-05-17 → NONE, #161b22, 0 commits
+2024-05-18 → NONE, #161b22, 0 commits
+2024-05-19 → NONE, #161b22, 0 commits
+2024-05-20 → NONE, #161b22, 0 commits
+2024-05-21 → NONE, #161b22, 0 commits
+2024-05-22 → NONE, #161b22, 0 commits
+2024-05-23 → NONE, #161b22, 0 commits
+2024-05-24 → NONE, #161b22, 0 commits
+2024-05-25 → NONE, #161b22, 0 commits
+2024-05-26 → NONE, #161b22, 0 commits
+2024-05-27 → FIRST_QUARTILE, #0e4429, 2 commits
+2024-05-28 → NONE, #161b22, 0 commits
+2024-05-29 → NONE, #161b22, 0 commits
+2024-05-30 → NONE, #161b22, 0 commits
+2024-05-31 → NONE, #161b22, 0 commits
+2024-06-01 → NONE, #161b22, 0 commits
+2024-06-02 → NONE, #161b22, 0 commits
+2024-06-03 → NONE, #161b22, 0 commits
+2024-06-04 → NONE, #161b22, 0 commits
+2024-06-05 → NONE, #161b22, 0 commits
+2024-06-06 → NONE, #161b22, 0 commits
+2024-06-07 → NONE, #161b22, 0 commits
+2024-06-08 → NONE, #161b22, 0 commits
+2024-06-09 → NONE, #161b22, 0 commits
+2024-06-10 → NONE, #161b22, 0 commits
+2024-06-11 → NONE, #161b22, 0 commits
+2024-06-12 → NONE, #161b22, 0 commits
+2024-06-13 → NONE, #161b22, 0 commits
+2024-06-14 → NONE, #161b22, 0 commits
+2024-06-15 → NONE, #161b22, 0 commits
+2024-06-16 → NONE, #161b22, 0 commits
+2024-06-17 → NONE, #161b22, 0 commits
+2024-06-18 → NONE, #161b22, 0 commits
+2024-06-19 → NONE, #161b22, 0 commits
+2024-06-20 → NONE, #161b22, 0 commits
+2024-06-21 → NONE, #161b22, 0 commits
+2024-06-22 → NONE, #161b22, 0 commits
+2024-06-23 → NONE, #161b22, 0 commits
+2024-06-24 → NONE, #161b22, 0 commits
+2024-06-25 → NONE, #161b22, 0 commits
+2024-06-26 → NONE, #161b22, 0 commits
+2024-06-27 → NONE, #161b22, 0 commits
+2024-06-28 → NONE, #161b22, 0 commits
+2024-06-29 → NONE, #161b22, 0 commits
+2024-06-30 → NONE, #161b22, 0 commits
+2024-07-01 → NONE, #161b22, 0 commits
+2024-07-02 → NONE, #161b22, 0 commits
+2024-07-03 → NONE, #161b22, 0 commits
+2024-07-04 → NONE, #161b22, 0 commits
+2024-07-05 → NONE, #161b22, 0 commits
+2024-07-06 → NONE, #161b22, 0 commits
+2024-07-07 → NONE, #161b22, 0 commits
+2024-07-08 → NONE, #161b22, 0 commits
+2024-07-09 → NONE, #161b22, 0 commits
+2024-07-10 → NONE, #161b22, 0 commits
+2024-07-11 → NONE, #161b22, 0 commits
+2024-07-12 → NONE, #161b22, 0 commits
+2024-07-13 → NONE, #161b22, 0 commits
+2024-07-14 → NONE, #161b22, 0 commits
+2024-07-15 → NONE, #161b22, 0 commits
+2024-07-16 → NONE, #161b22, 0 commits
+2024-07-17 → NONE, #161b22, 0 commits
+2024-07-18 → FIRST_QUARTILE, #0e4429, 1 commits
+2024-07-19 → NONE, #161b22, 0 commits
+2024-07-20 → NONE, #161b22, 0 commits
+2024-07-21 → NONE, #161b22, 0 commits
+2024-07-22 → NONE, #161b22, 0 commits
+2024-07-23 → NONE, #161b22, 0 commits
+2024-07-24 → NONE, #161b22, 0 commits
+2024-07-25 → NONE, #161b22, 0 commits
+2024-07-26 → NONE, #161b22, 0 commits
+2024-07-27 → NONE, #161b22, 0 commits
+2024-07-28 → NONE, #161b22, 0 commits
+2024-07-29 → NONE, #161b22, 0 commits
+2024-07-30 → NONE, #161b22, 0 commits
+2024-07-31 → NONE, #161b22, 0 commits
+2024-08-01 → NONE, #161b22, 0 commits
+2024-08-02 → NONE, #161b22, 0 commits
+2024-08-03 → NONE, #161b22, 0 commits
+2024-08-04 → NONE, #161b22, 0 commits
+2024-08-05 → NONE, #161b22, 0 commits
+2024-08-06 → NONE, #161b22, 0 commits
+2024-08-07 → NONE, #161b22, 0 commits
+2024-08-08 → NONE, #161b22, 0 commits
+2024-08-09 → NONE, #161b22, 0 commits
+2024-08-10 → NONE, #161b22, 0 commits
+2024-08-11 → NONE, #161b22, 0 commits
+2024-08-12 → NONE, #161b22, 0 commits
+2024-08-13 → NONE, #161b22, 0 commits
+2024-08-14 → NONE, #161b22, 0 commits
+2024-08-15 → FIRST_QUARTILE, #0e4429, 4 commits
+2024-08-16 → NONE, #161b22, 0 commits
+2024-08-17 → NONE, #161b22, 0 commits
+2024-08-18 → NONE, #161b22, 0 commits
+2024-08-19 → NONE, #161b22, 0 commits
+2024-08-20 → NONE, #161b22, 0 commits
+2024-08-21 → NONE, #161b22, 0 commits
+2024-08-22 → NONE, #161b22, 0 commits
+2024-08-23 → NONE, #161b22, 0 commits
+2024-08-24 → NONE, #161b22, 0 commits
+2024-08-25 → NONE, #161b22, 0 commits
+2024-08-26 → NONE, #161b22, 0 commits
+2024-08-27 → NONE, #161b22, 0 commits
+2024-08-28 → NONE, #161b22, 0 commits
+2024-08-29 → NONE, #161b22, 0 commits
+2024-08-30 → NONE, #161b22, 0 commits
+2024-08-31 → NONE, #161b22, 0 commits
+2024-09-01 → NONE, #161b22, 0 commits
+2024-09-02 → NONE, #161b22, 0 commits
+2024-09-03 → NONE, #161b22, 0 commits
+2024-09-04 → NONE, #161b22, 0 commits
+2024-09-05 → NONE, #161b22, 0 commits
+2024-09-06 → NONE, #161b22, 0 commits
+2024-09-07 → NONE, #161b22, 0 commits
+2024-09-08 → NONE, #161b22, 0 commits
+2024-09-09 → FIRST_QUARTILE, #0e4429, 1 commits
+2024-09-10 → NONE, #161b22, 0 commits
+2024-09-11 → NONE, #161b22, 0 commits
+2024-09-12 → NONE, #161b22, 0 commits
+2024-09-13 → NONE, #161b22, 0 commits
+2024-09-14 → NONE, #161b22, 0 commits
+2024-09-15 → NONE, #161b22, 0 commits
+2024-09-16 → NONE, #161b22, 0 commits
+2024-09-17 → NONE, #161b22, 0 commits
+2024-09-18 → NONE, #161b22, 0 commits
+2024-09-19 → NONE, #161b22, 0 commits
+2024-09-20 → NONE, #161b22, 0 commits
+2024-09-21 → NONE, #161b22, 0 commits
+2024-09-22 → NONE, #161b22, 0 commits
+2024-09-23 → NONE, #161b22, 0 commits
+2024-09-24 → NONE, #161b22, 0 commits
+2024-09-25 → NONE, #161b22, 0 commits
+2024-09-26 → NONE, #161b22, 0 commits
+2024-09-27 → NONE, #161b22, 0 commits
+2024-09-28 → NONE, #161b22, 0 commits
+2024-09-29 → NONE, #161b22, 0 commits
+2024-09-30 → NONE, #161b22, 0 commits
+2024-10-01 → NONE, #161b22, 0 commits
+2024-10-02 → NONE, #161b22, 0 commits
+2024-10-03 → NONE, #161b22, 0 commits
+2024-10-04 → NONE, #161b22, 0 commits
+2024-10-05 → NONE, #161b22, 0 commits
+2024-10-06 → NONE, #161b22, 0 commits
+2024-10-07 → NONE, #161b22, 0 commits
+2024-10-08 → SECOND_QUARTILE, #006d32, 7 commits
+2024-10-09 → NONE, #161b22, 0 commits
+2024-10-10 → NONE, #161b22, 0 commits
+2024-10-11 → NONE, #161b22, 0 commits
+2024-10-12 → NONE, #161b22, 0 commits
+2024-10-13 → NONE, #161b22, 0 commits
+2024-10-14 → NONE, #161b22, 0 commits
+2024-10-15 → NONE, #161b22, 0 commits
+2024-10-16 → NONE, #161b22, 0 commits
+2024-10-17 → NONE, #161b22, 0 commits
+2024-10-18 → NONE, #161b22, 0 commits
+2024-10-19 → NONE, #161b22, 0 commits
+2024-10-20 → NONE, #161b22, 0 commits
+2024-10-21 → NONE, #161b22, 0 commits
+2024-10-22 → NONE, #161b22, 0 commits
+2024-10-23 → NONE, #161b22, 0 commits
+2024-10-24 → NONE, #161b22, 0 commits
+2024-10-25 → NONE, #161b22, 0 commits
+2024-10-26 → NONE, #161b22, 0 commits
+2024-10-27 → NONE, #161b22, 0 commits
+2024-10-28 → NONE, #161b22, 0 commits
+2024-10-29 → NONE, #161b22, 0 commits
+2024-10-30 → NONE, #161b22, 0 commits
+2024-10-31 → NONE, #161b22, 0 commits
+2024-11-01 → NONE, #161b22, 0 commits
+2024-11-02 → NONE, #161b22, 0 commits
+2024-11-03 → NONE, #161b22, 0 commits
+2024-11-04 → NONE, #161b22, 0 commits
+2024-11-05 → NONE, #161b22, 0 commits
+2024-11-06 → NONE, #161b22, 0 commits
+2024-11-07 → NONE, #161b22, 0 commits
+2024-11-08 → NONE, #161b22, 0 commits
+2024-11-09 → FIRST_QUARTILE, #0e4429, 2 commits
+2024-11-10 → NONE, #161b22, 0 commits
+2024-11-11 → FIRST_QUARTILE, #0e4429, 3 commits
+2024-11-12 → FIRST_QUARTILE, #0e4429, 2 commits
+2024-11-13 → FIRST_QUARTILE, #0e4429, 1 commits
+2024-11-14 → FIRST_QUARTILE, #0e4429, 1 commits
+2024-11-15 → SECOND_QUARTILE, #006d32, 7 commits
+2024-11-16 → NONE, #161b22, 0 commits
+2024-11-17 → NONE, #161b22, 0 commits
+2024-11-18 → SECOND_QUARTILE, #006d32, 8 commits
+2024-11-19 → SECOND_QUARTILE, #006d32, 6 commits
+2024-11-20 → SECOND_QUARTILE, #006d32, 5 commits
+2024-11-21 → FOURTH_QUARTILE, #39d353, 55 commits
+2024-11-22 → FIRST_QUARTILE, #0e4429, 1 commits
+2024-11-23 → FIRST_QUARTILE, #0e4429, 4 commits
+2024-11-24 → NONE, #161b22, 0 commits
+2024-11-25 → NONE, #161b22, 0 commits
+2024-11-26 → FIRST_QUARTILE, #0e4429, 1 commits
+2024-11-27 → NONE, #161b22, 0 commits
+2024-11-28 → NONE, #161b22, 0 commits
+2024-11-29 → NONE, #161b22, 0 commits
+2024-11-30 → NONE, #161b22, 0 commits
+2024-12-01 → NONE, #161b22, 0 commits
+2024-12-02 → NONE, #161b22, 0 commits
+2024-12-03 → NONE, #161b22, 0 commits
+2024-12-04 → NONE, #161b22, 0 commits
+2024-12-05 → NONE, #161b22, 0 commits
+2024-12-06 → NONE, #161b22, 0 commits
+2024-12-07 → NONE, #161b22, 0 commits
+2024-12-08 → NONE, #161b22, 0 commits
+2024-12-09 → NONE, #161b22, 0 commits
+2024-12-10 → NONE, #161b22, 0 commits
+2024-12-11 → NONE, #161b22, 0 commits
+2024-12-12 → NONE, #161b22, 0 commits
+2024-12-13 → NONE, #161b22, 0 commits
+2024-12-14 → NONE, #161b22, 0 commits
+2024-12-15 → NONE, #161b22, 0 commits
+2024-12-16 → NONE, #161b22, 0 commits
+2024-12-17 → NONE, #161b22, 0 commits
+2024-12-18 → NONE, #161b22, 0 commits
+2024-12-19 → NONE, #161b22, 0 commits
+2024-12-20 → NONE, #161b22, 0 commits
+2024-12-21 → NONE, #161b22, 0 commits
+2024-12-22 → NONE, #161b22, 0 commits
+2024-12-23 → NONE, #161b22, 0 commits
+2024-12-24 → NONE, #161b22, 0 commits
+2024-12-25 → NONE, #161b22, 0 commits
+2024-12-26 → NONE, #161b22, 0 commits
+2024-12-27 → NONE, #161b22, 0 commits
+2024-12-28 → NONE, #161b22, 0 commits
+2024-12-29 → NONE, #161b22, 0 commits
+2024-12-30 → NONE, #161b22, 0 commits
+2024-12-31 → NONE, #161b22, 0 commits
+2025-01-01 → NONE, #161b22, 0 commits
+2025-01-02 → FIRST_QUARTILE, #0e4429, 1 commits
+2025-01-03 → FIRST_QUARTILE, #0e4429, 4 commits
+2025-01-04 → NONE, #161b22, 0 commits
+2025-01-05 → NONE, #161b22, 0 commits
+2025-01-06 → FIRST_QUARTILE, #0e4429, 3 commits
+2025-01-07 → FIRST_QUARTILE, #0e4429, 3 commits
+2025-01-08 → SECOND_QUARTILE, #006d32, 5 commits
+2025-01-09 → NONE, #161b22, 0 commits
+2025-01-10 → FOURTH_QUARTILE, #39d353, 13 commits
+2025-01-11 → NONE, #161b22, 0 commits
+2025-01-12 → NONE, #161b22, 0 commits
+2025-01-13 → FIRST_QUARTILE, #0e4429, 3 commits
+2025-01-14 → THIRD_QUARTILE, #26a641, 9 commits
+2025-01-15 → SECOND_QUARTILE, #006d32, 8 commits
+2025-01-16 → SECOND_QUARTILE, #006d32, 6 commits
+2025-01-17 → NONE, #161b22, 0 commits
+2025-01-18 → NONE, #161b22, 0 commits
+2025-01-19 → NONE, #161b22, 0 commits
+2025-01-20 → NONE, #161b22, 0 commits
+2025-01-21 → NONE, #161b22, 0 commits
+2025-01-22 → NONE, #161b22, 0 commits
+2025-01-23 → NONE, #161b22, 0 commits
+2025-01-24 → NONE, #161b22, 0 commits
+2025-01-25 → NONE, #161b22, 0 commits
+2025-01-26 → NONE, #161b22, 0 commits
+2025-01-27 → FIRST_QUARTILE, #0e4429, 1 commits
+2025-01-28 → FIRST_QUARTILE, #0e4429, 3 commits
+2025-01-29 → NONE, #161b22, 0 commits
+2025-01-30 → FIRST_QUARTILE, #0e4429, 4 commits
+2025-01-31 → FIRST_QUARTILE, #0e4429, 1 commits
+2025-02-01 → NONE, #161b22, 0 commits
+2025-02-02 → NONE, #161b22, 0 commits
+2025-02-03 → FIRST_QUARTILE, #0e4429, 1 commits
+2025-02-04 → FIRST_QUARTILE, #0e4429, 1 commits
+2025-02-05 → NONE, #161b22, 0 commits
+2025-02-06 → NONE, #161b22, 0 commits
+2025-02-07 → NONE, #161b22, 0 commits
+2025-02-08 → NONE, #161b22, 0 commits
+2025-02-09 → NONE, #161b22, 0 commits
+2025-02-10 → NONE, #161b22, 0 commits
+2025-02-11 → FIRST_QUARTILE, #0e4429, 3 commits
+2025-02-12 → FIRST_QUARTILE, #0e4429, 1 commits
+2025-02-13 → NONE, #161b22, 0 commits
+2025-02-14 → NONE, #161b22, 0 commits
+2025-02-15 → NONE, #161b22, 0 commits
+2025-02-16 → NONE, #161b22, 0 commits
+2025-02-17 → NONE, #161b22, 0 commits
+2025-02-18 → NONE, #161b22, 0 commits
+2025-02-19 → NONE, #161b22, 0 commits
+2025-02-20 → SECOND_QUARTILE, #006d32, 8 commits
+2025-02-21 → FIRST_QUARTILE, #0e4429, 1 commits
+2025-02-22 → NONE, #161b22, 0 commits
+2025-02-23 → NONE, #161b22, 0 commits
+2025-02-24 → FIRST_QUARTILE, #0e4429, 2 commits
+2025-02-25 → NONE, #161b22, 0 commits
+2025-02-26 → NONE, #161b22, 0 commits
+2025-02-27 → FIRST_QUARTILE, #0e4429, 1 commits
+2025-02-28 → FIRST_QUARTILE, #0e4429, 1 commits
+2025-03-01 → NONE, #161b22, 0 commits
+2025-03-02 → NONE, #161b22, 0 commits
+2025-03-03 → NONE, #161b22, 0 commits
+2025-03-04 → NONE, #161b22, 0 commits
+2025-03-05 → NONE, #161b22, 0 commits
+2025-03-06 → NONE, #161b22, 0 commits
+2025-03-07 → SECOND_QUARTILE, #006d32, 6 commits
+2025-03-08 → NONE, #161b22, 0 commits
+2025-03-09 → NONE, #161b22, 0 commits
+2025-03-10 → THIRD_QUARTILE, #26a641, 10 commits
+2025-03-11 → NONE, #161b22, 0 commits
+2025-03-12 → FIRST_QUARTILE, #0e4429, 2 commits
+2025-03-13 → SECOND_QUARTILE, #006d32, 7 commits
+2025-03-14 → FIRST_QUARTILE, #0e4429, 4 commits
+2025-03-15 → NONE, #161b22, 0 commits
+2025-03-16 → FIRST_QUARTILE, #0e4429, 2 commits
+2025-03-17 → FOURTH_QUARTILE, #39d353, 13 commits
+2025-03-18 → NONE, #161b22, 0 commits
+2025-03-19 → THIRD_QUARTILE, #26a641, 12 commits
+2025-03-20 → SECOND_QUARTILE, #006d32, 6 commits
+2025-03-21 → FOURTH_QUARTILE, #39d353, 17 commits
+2025-03-22 → NONE, #161b22, 0 commits
+2025-03-23 → NONE, #161b22, 0 commits
+2025-03-24 → SECOND_QUARTILE, #006d32, 7 commits
+2025-03-25 → SECOND_QUARTILE, #006d32, 6 commits
+2025-03-26 → FIRST_QUARTILE, #0e4429, 4 commits
+2025-03-27 → FIRST_QUARTILE, #0e4429, 3 commits
+2025-03-28 → FOURTH_QUARTILE, #39d353, 29 commits
+2025-03-29 → FIRST_QUARTILE, #0e4429, 3 commits
+2025-03-30 → NONE, #161b22, 0 commits
+2025-03-31 → FIRST_QUARTILE, #0e4429, 2 commits
+2025-04-01 → SECOND_QUARTILE, #006d32, 7 commits
+2025-04-02 → NONE, #161b22, 0 commits
+2025-04-03 → FIRST_QUARTILE, #0e4429, 3 commits
+2025-04-04 → FIRST_QUARTILE, #0e4429, 1 commits
+2025-04-05 → NONE, #161b22, 0 commits
+2025-04-06 → FIRST_QUARTILE, #0e4429, 3 commits
+2025-04-07 → FOURTH_QUARTILE, #39d353, 36 commits
+2025-04-08 → FOURTH_QUARTILE, #39d353, 14 commits
+2025-04-09 → SECOND_QUARTILE, #006d32, 8 commits
+2025-04-10 → FIRST_QUARTILE, #0e4429, 4 commits
+2025-04-11 → FIRST_QUARTILE, #0e4429, 1 commits
+2025-04-12 → FIRST_QUARTILE, #0e4429, 3 commits
+2025-04-13 → FIRST_QUARTILE, #0e4429, 3 commits
+2025-04-14 → NONE, #161b22, 0 commits
+🟩 Células preenchidas: 72/371
+
+🧱 Arena (via level + color) :
+
+⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛🟩⬛⬛🟩🟩
+⬛⬛⬛⬛⬛⬛🟩⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛🟩⬛⬛⬛⬛⬛⬛⬛⬛🟩🟨⬛⬛⬛⬛⬛⬛🟩🟩⬛🟩🟩⬛⬛🟩⬛🟧🟥🟨🟩🟥⬛
+⬛⬛⬛⬛🟩⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛🟨⬛⬛⬛⬛🟩🟨🟩⬛⬛⬛⬛⬛🟩🟧⬛🟩🟩🟩⬛⬛⬛⬛⬛🟨🟨🟥⬛
+⬛⬛⬛🟧🟩⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛🟩🟨⬛⬛⬛⬛⬛⬛🟨🟨⬛⬛⬛🟩⬛⬛⬛🟩🟧🟩⬛🟨⬛
+⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛🟩⬛⬛⬛🟩⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛🟩🟥⬛⬛⬛⬛⬛🟩⬛🟨⬛🟩⬛⬛🟨🟩⬛🟨🟨🟩🟩🟩⬛
+⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛🟨🟩⬛⬛⬛⬛⬛🟩🟥⬛⬛🟩⬛⬛🟩🟩🟨🟩🟥🟥🟩🟩⬛
+⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛🟩⬛🟩⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛🟩⬛🟩⬛
+🔥 Power-up ativado na célula [31, 4] com nível FOURTH_QUARTILE
+🔥 Power-up ativado na célula [48, 5] com nível FOURTH_QUARTILE
+🔥 Power-up ativado na célula [48, 1] com nível FOURTH_QUARTILE
+🔥 Power-up ativado na célula [49, 5] com nível FOURTH_QUARTILE
+🔥 Power-up ativado na célula [51, 2] com nível FOURTH_QUARTILE
+🔥 Power-up ativado na célula [51, 1] com nível FOURTH_QUARTILE
+🔥 Power-up ativado na célula [38, 5] com nível FOURTH_QUARTILE
+ghost 0: #ghost-blinky
+ghost 0: #ghost-scared
+ghost 1: #ghost-inky
+ghost 1: #ghost-scared
+ghost 2: #ghost-pinky
+ghost 2: #ghost-scared
+ghost 3: #ghost-clyde
+ghost 3: #ghost-scared
+🎨 Cores únicas usadas nas células:
+[ '#161b22' ]
+✅  SVG animado salvo em E:\pacman\dist\pacman-novo1.svg
+🎮  Game over – SVG pronto!
+👻 Fantasmas no final: [
+  {
+    x: 33,
+    y: 4,
+    name: 'blinky',
+    direction: 'left',
+    scared: false,
+    target: { x: 31, y: 5 },
+    inHouse: false
+  },
+  {
+    x: 25,
+    y: 3,
+    name: 'inky',
+    direction: 'up',
+    scared: false,
+    target: undefined,
+    inHouse: true
+  },
+  {
+    x: 26,
+    y: 3,
+    name: 'pinky',
+    direction: 'up',
+    scared: false,
+    target: undefined,
+    inHouse: true
+  },
+  {
+    x: 27,
+    y: 3,
+    name: 'clyde',
+    direction: 'up',
+    scared: false,
+    target: undefined,
+    inHouse: true
+  }
+]

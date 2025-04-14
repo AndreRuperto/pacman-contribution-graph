@@ -3,7 +3,6 @@ import { Store } from '../store.js';
 import { Game } from '../game.js';
 import { Grid } from '../grid.js';
 import { fetchGithubContributionsGraphQL } from '../github-contributions.js';
-import { buildGrid, printArenaAsHTML } from '../utils.js';
 
 import { writeFileSync, mkdirSync } from 'fs';
 import * as path from 'path';
@@ -18,7 +17,7 @@ const accessToken = process.env.GITHUB_TOKEN!;
 
 if (!username || !accessToken) {
   throw new Error('Variáveis GITHUB_USERNAME e GITHUB_TOKEN não estão definidas no .env');
-};
+}
 
 /* -------------------------------------------------------------------------- */
 /* 2. Store.config                                                            */
@@ -42,6 +41,7 @@ Store.config = {
   },
   gameOverCallback: () => console.log('🎮  Game over – SVG pronto!'),
 } as const;
+
 console.log("🎨 Tema selecionado:", Store.config.gameTheme);
 
 /* -------------------------------------------------------------------------- */
@@ -51,11 +51,17 @@ console.log("🎨 Tema selecionado:", Store.config.gameTheme);
   // 3.1 – baixa contribuições
   Store.contributions = await fetchGithubContributionsGraphQL(Store, username, accessToken);
 
-  // 3.2 – monta paredes e roda o jogo
+  // 3.2 – monta paredes
   Grid.buildWalls();
+
+  // 3.3 – inicia jogo e gera SVG internamente
   await Game.startGame(Store);
-  // buildGrid(Store);
-  // printArenaAsHTML(Store);
+
+  // ✅ Log para debug: Verifica se fantasmas estão sendo colocados
+  console.log("👻 Fantasmas no final:", Store.ghosts);
+  if (!Store.ghosts.length) {
+    console.warn("⚠️ Nenhum fantasma foi encontrado após startGame!");
+  }
 })().catch((err) => {
   console.error('❌  Erro ao gerar SVG:', err);
   process.exit(1);

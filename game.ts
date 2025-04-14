@@ -1,5 +1,5 @@
 import { SVG } from './svg.js';
-import { StoreType } from './types';
+import { StoreType, GhostName } from './types';
 import {
   DELTA_TIME,
   GHOST_NAMES,
@@ -25,12 +25,12 @@ const placePacman = (store: StoreType) => {
 };
 
 const placeGhosts = (store: StoreType) => {
-  store.ghosts = [
-    { x: 23, y: 3, name: GHOST_NAMES[0], scared: false, target: undefined },
-    { x: 24, y: 3, name: GHOST_NAMES[1], scared: false, target: undefined },
-    { x: 27, y: 3, name: GHOST_NAMES[2], scared: false, target: undefined },
-    { x: 28, y: 3, name: GHOST_NAMES[3], scared: false, target: undefined }
-  ];
+	store.ghosts = [
+		{ x: 26, y: 2, name: 'blinky', direction: 'left', scared: false, target: undefined, inHouse: false }, // fora
+		{ x: 25, y: 3, name: 'inky', direction: 'up', scared: false, target: undefined, inHouse: true },
+		{ x: 26, y: 3, name: 'pinky', direction: 'up', scared: false, target: undefined, inHouse: true },
+		{ x: 27, y: 3, name: 'clyde', direction: 'up', scared: false, target: undefined, inHouse: true }
+	];
 };
 
 const stopGame = async (store: StoreType) => {
@@ -49,7 +49,10 @@ const startGame = async (store: StoreType) => {
   if (remainingCells()) {
     placePacman(store);
     placeGhosts(store);
-  }
+    setTimeout(() => releaseGhostFromHouse(store, 'pinky'), 3000);
+    setTimeout(() => releaseGhostFromHouse(store, 'inky'), 6000);
+    setTimeout(() => releaseGhostFromHouse(store, 'clyde'), 9000);
+  }  
 
   if (store.config.outputFormat === 'svg') {
     while (remainingCells()) {
@@ -154,8 +157,17 @@ const respawnGhost = (store: StoreType, ghostIndex: number) => {
     y,
     name: GHOST_NAMES[ghostIndex % GHOST_NAMES.length],
     scared: false,
+    direction: 'left',
     target: undefined
   };
+};
+
+const releaseGhostFromHouse = (store: StoreType, name: GhostName) => {
+	const ghost = store.ghosts.find((g) => g.name === name && g.inHouse);
+	if (ghost) {
+		ghost.inHouse = false;
+		ghost.y = 2; // posição fora da casa
+	}
 };
 
 export const Game = {

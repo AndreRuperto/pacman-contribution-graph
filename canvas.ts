@@ -123,12 +123,23 @@ const getLoadedImage = (key: string, imgDate: string): HTMLImageElement => {
 };
 
 const drawGhosts = (store: StoreType) => {
+	console.log("👻 Ghosts:", store.ghosts);
 	store.ghosts.forEach((ghost) => {
 		const x = ghost.x * (CELL_SIZE + GAP_SIZE);
 		const y = ghost.y * (CELL_SIZE + GAP_SIZE) + 15;
 		const size = CELL_SIZE;
 		const ctx = store.config.canvas.getContext('2d')!;
-		ctx.drawImage(getLoadedImage(ghost.scared ? 'scared' : ghost.name, GHOSTS[ghost.scared ? 'scared' : ghost.name].imgDate), x, y, size, size);
+
+		// Define a chave do ghost ('scared' ou nome)
+		const key = ghost.scared ? 'scared' : ghost.name;
+
+		// Define o caminho da imagem de acordo com a direção ou usa a imagem única de "scared"
+		const imagePath = ghost.scared
+			? (GHOSTS[key] as { imgDate: string }).imgDate
+			: (GHOSTS[key] as Record<'up' | 'down' | 'left' | 'right', string>)[ghost.direction];
+
+		// Renderiza a imagem correspondente
+		ctx.drawImage(getLoadedImage(`${key}_${ghost.direction}`, imagePath), x, y, size, size);
 	});
 };
 

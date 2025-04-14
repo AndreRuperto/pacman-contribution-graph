@@ -36,7 +36,9 @@ export interface Ghost {
   y: number;
   name: GhostName;
   scared: boolean;
+  direction: 'right' | 'left' | 'up' | 'down';
   target?: Point2d;
+  inHouse?: boolean;
 }
 
 /* ───────────────────────── Grid & Store ───────────────────────────── */
@@ -61,7 +63,8 @@ export interface StoreType {
 	  grid: GridCell[][];
 	}[];
 	config: Config;
-	useGithubThemeColor: boolean; // ← ADICIONE ESSA LINHA
+	useGithubThemeColor: boolean;
+  __loggedGhosts?: Set<string>;
   }  
 
 /* ───────────────────────── Configuração ───────────────────────────── */

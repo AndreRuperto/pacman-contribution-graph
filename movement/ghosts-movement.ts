@@ -3,13 +3,15 @@ import { Ghost, Point2d, StoreType } from '../types.js';
 import { MovementUtils } from './movement-utils.js';
 
 const moveGhosts = (store: StoreType) => {
-	store.ghosts.forEach((ghost) => {
+	for (const ghost of store.ghosts) {
+		if (ghost.inHouse) continue; // 👈 ainda preso na ghost house
+
 		if (ghost.scared || Math.random() < 0.15) {
 			moveScaredGhost(ghost, store);
 		} else {
 			moveGhostWithPersonality(ghost, store);
 		}
-	});
+	}
 };
 
 // When scared, ghosts move randomly but with some intelligence
