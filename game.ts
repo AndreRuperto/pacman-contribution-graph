@@ -176,12 +176,13 @@ const respawnGhost = (store: StoreType, ghostIndex: number) => {
 };
 
 const releaseGhostFromHouse = (store: StoreType, name: GhostName) => {
-	const ghost = store.ghosts.find((g) => g.name === name && g.inHouse);
-	if (ghost) {
-		ghost.inHouse = false;
-		ghost.y = 2; // posição fora da casa
-    ghost.direction = 'up';
-	}
+  const ghost = store.ghosts.find((g) => g.name === name && g.inHouse);
+  if (ghost) {
+      ghost.inHouse = false;
+      ghost.y = 2; // posição fora da casa
+      ghost.direction = 'up'; // direção inicial explícita
+      console.log(`Released ghost ${name} with direction ${ghost.direction}`);
+  }
 };
 
 export const Game = {

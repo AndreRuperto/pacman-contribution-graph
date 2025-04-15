@@ -3,15 +3,26 @@ import { Ghost, Point2d, StoreType } from '../types.js';
 import { MovementUtils } from './movement-utils.js';
 
 const moveGhosts = (store: StoreType) => {
-	for (const ghost of store.ghosts) {
-		if (ghost.inHouse) continue; // 👈 ainda preso na ghost house
+    // Log de diagnóstico para rastrear o movimento dos fantasmas
+    store.ghosts.forEach((ghost, i) => {
+        // Use uma estrutura de conjunto para evitar logs duplicados
+        store.__loggedGhosts = store.__loggedGhosts || new Set();
+        const key = `${ghost.name}:${ghost.x},${ghost.y}:${ghost.direction}`;
+        if (!store.__loggedGhosts.has(key)) {
+            console.log(`Ghost ${ghost.name} at (${ghost.x},${ghost.y}) moving ${ghost.direction}`);
+            store.__loggedGhosts.add(key);
+        }
+    });
 
-		if (ghost.scared || Math.random() < 0.15) {
-			moveScaredGhost(ghost, store);
-		} else {
-			moveGhostWithPersonality(ghost, store);
-		}
-	}
+    for (const ghost of store.ghosts) {
+        if (ghost.inHouse) continue; // 👈 ainda preso na ghost house
+
+        if (ghost.scared || Math.random() < 0.15) {
+            moveScaredGhost(ghost, store);
+        } else {
+            moveGhostWithPersonality(ghost, store);
+        }
+    }
 };
 
 // When scared, ghosts move randomly but with some intelligence
@@ -53,6 +64,10 @@ const moveScaredGhost = (ghost: Ghost, store: StoreType) => {
     
     ghost.x += moveX;
     ghost.y += moveY;
+
+	if (moveX !== 0 || moveY !== 0) {
+		console.log(`Ghost ${ghost.name} moved to (${ghost.x},${ghost.y}) direction ${ghost.direction}`);
+	};
 };
 
 const moveGhostWithPersonality = (ghost: Ghost, store: StoreType) => {
@@ -63,9 +78,13 @@ const moveGhostWithPersonality = (ghost: Ghost, store: StoreType) => {
     if (nextMove) {
         ghost.x = nextMove.x;
         ghost.y = nextMove.y;
-        // Atualizar a direção do fantasma com base no movimento
-        if (nextMove.direction) {
-            ghost.direction = nextMove.direction;
+        
+        // Atualiza a direção apenas a cada 3 frames para movimento mais suave visualmente
+        if (store.frameCount % 3 === 0) {
+            // Atualizar a direção do fantasma com base no movimento
+            if (nextMove.direction) {
+                ghost.direction = nextMove.direction;
+            }
         }
     }
 };
@@ -101,21 +120,18 @@ const BFSTargetLocation = (startX: number, startY: number, targetX: number, targ
 				const dx = newX - x;
 				const dy = newY - y;
 				
-				// Solução com asserção de tipo
-				let direction: 'right' | 'left' | 'up' | 'down';
-				if (dx > 0) direction = 'right';
-				else if (dx < 0) direction = 'left';
-				else if (dy > 0) direction = 'down';
-				else if (dy < 0) direction = 'up';
+				// Use uma única abordagem para determinar a direção
+				const direction: 'right' | 'left' | 'up' | 'down' = 
+					dx > 0 ? 'right' : 
+					dx < 0 ? 'left' : 
+					dy > 0 ? 'down' : 
+					dy < 0 ? 'up' : 'right'; // valor padrão
 				
-				// Retornar a próxima posição E a direção
+				// Retornar a primeira posição do caminho com a direção
 				return newPath.length > 0 ? { 
 					x: newPath[0].x, 
 					y: newPath[0].y,
-					direction: dx > 0 ? "right" : 
-							   dx < 0 ? "left" : 
-							   dy > 0 ? "down" : 
-							   dy < 0 ? "up" : "right" // valor padrão
+					direction: direction
 				} : null;
 			}
 
