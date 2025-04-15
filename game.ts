@@ -11,6 +11,8 @@ import { GhostsMovement } from './movement/ghosts-movement.js';
 import { PacmanMovement } from './movement/pacman-movement.js';
 import { Utils } from './utils.js';
 
+let frame = 0;
+
 const placePacman = (store: StoreType) => {
   store.pacman = {
     x: 0,
@@ -49,17 +51,26 @@ const startGame = async (store: StoreType) => {
   if (remainingCells()) {
     placePacman(store);
     placeGhosts(store);
-    setTimeout(() => releaseGhostFromHouse(store, 'pinky'), 3000);
-    setTimeout(() => releaseGhostFromHouse(store, 'inky'), 6000);
-    setTimeout(() => releaseGhostFromHouse(store, 'clyde'), 9000);
   }  
 
   if (store.config.outputFormat === 'svg') {
     while (remainingCells()) {
+      // Liberar fantasmas em frames específicos
+      if (frame === 10) releaseGhostFromHouse(store, 'pinky');  // ~3000ms com DELTA_TIME
+      if (frame === 20) releaseGhostFromHouse(store, 'inky');   // ~6000ms
+      if (frame === 30) releaseGhostFromHouse(store, 'clyde');  // ~9000ms
+      
       await updateGame(store);
+      frame++;
     }
+    // Uma atualização final após todos os pontos serem coletados
     await updateGame(store);
   } else {
+    // Para o modo canvas, usar setTimeout
+    setTimeout(() => releaseGhostFromHouse(store, 'pinky'), 3000);
+    setTimeout(() => releaseGhostFromHouse(store, 'inky'), 6000);
+    setTimeout(() => releaseGhostFromHouse(store, 'clyde'), 9000);
+    
     clearInterval(store.gameInterval as number);
     store.gameInterval = setInterval(() => updateGame(store), DELTA_TIME) as unknown as number;
   }
@@ -79,7 +90,9 @@ const updateGame = async (store: StoreType) => {
 
   if (store.pacman.deadRemainingDuration > 0) {
     store.pacman.deadRemainingDuration--;
-    if (store.pacman.deadRemainingDuration === 0) placeGhosts(store);
+    if (store.pacman.deadRemainingDuration === 0) 
+      placeGhosts(store);
+      frame = 0
   }
 
   if (store.pacman.powerupRemainingDuration > 0) {

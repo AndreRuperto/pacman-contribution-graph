@@ -9,99 +9,107 @@ import {
 	PACMAN_COLOR_DEAD,
 	PACMAN_COLOR_POWERUP,
 	WALLS
-  } from './constants.js';
-  import { AnimationData, StoreType, GhostName } from './types.js';
-  import { Utils } from './utils.js';
-  
-  const generateAnimatedSVG = (store: StoreType) => {
+} from './constants.js';
+import { AnimationData, GhostName, StoreType } from './types.js';
+import { Utils } from './utils.js';
+
+const initialPositions = [
+	{x: 23, y: 3}, // blinky
+	{x: 24, y: 3}, // inky
+	{x: 27, y: 3}, // pinky
+	{x: 28, y: 3}  // clyde
+  ];
+
+const generateAnimatedSVG = (store: StoreType) => {
 	const svgWidth = GRID_WIDTH * (CELL_SIZE + GAP_SIZE);
 	const svgHeight = GRID_HEIGHT * (CELL_SIZE + GAP_SIZE) + 20;
 	let svg = `<svg width="${svgWidth}" height="${svgHeight}" xmlns="http://www.w3.org/2000/svg">`;
 	svg += `<desc>Generated with https://github.com/abozanona/pacman-contribution-graph on ${new Date()}</desc>`;
 	svg += `<rect width="100%" height="100%" fill="${Utils.getCurrentTheme(store).gridBackground}"/>`;
-  
+
 	svg += generateGhostsPredefinition();
-  
+
+	// Month labels
 	let lastMonth = '';
 	for (let y = 0; y < GRID_WIDTH; y++) {
-	  if (store.monthLabels[y] !== lastMonth) {
-		const xPos = y * (CELL_SIZE + GAP_SIZE) + CELL_SIZE / 2;
-		svg += `<text x="${xPos}" y="10" text-anchor="middle" font-size="10" fill="${Utils.getCurrentTheme(store).textColor}">${store.monthLabels[y]}</text>`;
-		lastMonth = store.monthLabels[y];
-	  }
-	}
-  
-	for (let x = 0; x < GRID_WIDTH; x++) {
-	  for (let y = 0; y < GRID_HEIGHT; y++) {
-		const cellX = x * (CELL_SIZE + GAP_SIZE);
-		const cellY = y * (CELL_SIZE + GAP_SIZE) + 15;
-		const cellColorAnimation = generateChangingValuesAnimation(store, generateCellColorValues(store, x, y));
-		svg += `<rect id="c-${x}-${y}" x="${cellX}" y="${cellY}" width="${CELL_SIZE}" height="${CELL_SIZE}" rx="5" fill="${store.grid[x][y].color}">
-			<animate attributeName="fill" dur="${store.gameHistory.length * DELTA_TIME}ms" repeatCount="indefinite" 
-				values="${cellColorAnimation.values}" 
-				keyTimes="${cellColorAnimation.keyTimes}"/>
-		  </rect>`;
-	  }
-	}
-  
-	for (let x = 0; x < GRID_WIDTH; x++) {
-	  for (let y = 0; y < GRID_HEIGHT; y++) {
-		if (WALLS.horizontal[x][y].active) {
-		  svg += `<rect id="wh-${x}-${y}" x="${x * (CELL_SIZE + GAP_SIZE) - GAP_SIZE}" y="${y * (CELL_SIZE + GAP_SIZE) - GAP_SIZE + 15}" width="${CELL_SIZE + GAP_SIZE}" height="${GAP_SIZE}" rx="5" fill="${Utils.getCurrentTheme(store).wallColor}"></rect>`;
+		if (store.monthLabels[y] !== lastMonth) {
+			const xPos = y * (CELL_SIZE + GAP_SIZE) + CELL_SIZE / 2;
+			svg += `<text x="${xPos}" y="10" text-anchor="middle" font-size="10" fill="${Utils.getCurrentTheme(store).textColor}">${store.monthLabels[y]}</text>`;
+			lastMonth = store.monthLabels[y];
 		}
-		if (WALLS.vertical[x][y].active) {
-		  svg += `<rect id="wv-${x}-${y}" x="${x * (CELL_SIZE + GAP_SIZE) - GAP_SIZE}" y="${y * (CELL_SIZE + GAP_SIZE) - GAP_SIZE + 15}" width="${GAP_SIZE}" height="${CELL_SIZE + GAP_SIZE}" rx="5" fill="${Utils.getCurrentTheme(store).wallColor}"></rect>`;
-		}
-	  }
 	}
-  
+
+	// Grid
+	for (let x = 0; x < GRID_WIDTH; x++) {
+		for (let y = 0; y < GRID_HEIGHT; y++) {
+			const cellX = x * (CELL_SIZE + GAP_SIZE);
+			const cellY = y * (CELL_SIZE + GAP_SIZE) + 15;
+			const cellColorAnimation = generateChangingValuesAnimation(store, generateCellColorValues(store, x, y));
+			svg += `<rect id="c-${x}-${y}" x="${cellX}" y="${cellY}" width="${CELL_SIZE}" height="${CELL_SIZE}" rx="5" fill="${Utils.getCurrentTheme(store).intensityColors[0]}">
+                <animate attributeName="fill" dur="${store.gameHistory.length * DELTA_TIME}ms" repeatCount="indefinite" 
+                    values="${cellColorAnimation.values}" 
+                    keyTimes="${cellColorAnimation.keyTimes}"/>
+            </rect>`;
+		}
+	}
+
+	// Walls
+	for (let x = 0; x < GRID_WIDTH; x++) {
+		for (let y = 0; y < GRID_HEIGHT; y++) {
+			if (WALLS.horizontal[x][y].active) {
+				svg += `<rect id="wh-${x}-${y}" x="${x * (CELL_SIZE + GAP_SIZE) - GAP_SIZE}" y="${y * (CELL_SIZE + GAP_SIZE) - GAP_SIZE + 15}" width="${CELL_SIZE + GAP_SIZE}" height="${GAP_SIZE}" rx="5" fill="${Utils.getCurrentTheme(store).wallColor}"></rect>`;
+			}
+			if (WALLS.vertical[x][y].active) {
+				svg += `<rect id="wv-${x}-${y}" x="${x * (CELL_SIZE + GAP_SIZE) - GAP_SIZE}" y="${y * (CELL_SIZE + GAP_SIZE) - GAP_SIZE + 15}" width="${GAP_SIZE}" height="${CELL_SIZE + GAP_SIZE}" rx="5" fill="${Utils.getCurrentTheme(store).wallColor}"></rect>`;
+			}
+		}
+	}
+
+	// Pacman
 	const pacmanColorAnimation = generateChangingValuesAnimation(store, generatePacManColors(store));
 	const pacmanPositionAnimation = generateChangingValuesAnimation(store, generatePacManPositions(store));
 	const pacmanRotationAnimation = generateChangingValuesAnimation(store, generatePacManRotations(store));
-	svg += `<path id="pacman" d="${generatePacManPath(0.55)}">
+	svg += `<path id="pacman" d="${generatePacManPath(0.55)}"
+        >
 		<animate attributeName="fill" dur="${store.gameHistory.length * DELTA_TIME}ms" repeatCount="indefinite"
-			keyTimes="${pacmanColorAnimation.keyTimes}"
-			values="${pacmanColorAnimation.values}"/>
-		<animateTransform attributeName="transform" type="translate" dur="${store.gameHistory.length * DELTA_TIME}ms" repeatCount="indefinite"
-			keyTimes="${pacmanPositionAnimation.keyTimes}"
-			values="${pacmanPositionAnimation.values}"
-			additive="sum"/>
-		<animateTransform attributeName="transform" type="rotate" dur="${store.gameHistory.length * DELTA_TIME}ms" repeatCount="indefinite"
-			keyTimes="${pacmanRotationAnimation.keyTimes}"
-			values="${pacmanRotationAnimation.values}"
-			additive="sum"/>
-		<animate attributeName="d" dur="0.5s" repeatCount="indefinite"
-			values="${generatePacManPath(0.55)};${generatePacManPath(0.05)};${generatePacManPath(0.55)}"/>
-	  </path>`;
-  
-	  store.ghosts.forEach((ghost, index) => {
+            keyTimes="${pacmanColorAnimation.keyTimes}"
+            values="${pacmanColorAnimation.values}"/>
+        <animateTransform attributeName="transform" type="translate" dur="${store.gameHistory.length * DELTA_TIME}ms" repeatCount="indefinite"
+            keyTimes="${pacmanPositionAnimation.keyTimes}"
+            values="${pacmanPositionAnimation.values}"
+            additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate" dur="${store.gameHistory.length * DELTA_TIME}ms" repeatCount="indefinite"
+            keyTimes="${pacmanRotationAnimation.keyTimes}"
+            values="${pacmanRotationAnimation.values}"
+            additive="sum"/>
+        <animate attributeName="d" dur="0.5s" repeatCount="indefinite"
+            values="${generatePacManPath(0.55)};${generatePacManPath(0.05)};${generatePacManPath(0.55)}"/>
+    </path>`;
+
+	// Ghosts - MODIFICADO PARA INCLUIR POSIÇÃO INICIAL
+	store.ghosts.forEach((ghost, index) => {
+		console.log(`Ghost ${ghost.name} initial position: x=${ghost.x}, y=${ghost.y}`);
 		const ghostPositionAnimation = generateChangingValuesAnimation(store, generateGhostPositions(store, index));
 		const ghostColorAnimation = generateChangingValuesAnimation(store, generateGhostColors(store, index));
-	  
-		const initialHref = ghost.scared ? '#ghost-scared' : `#ghost-${ghost.name}`;
-	  
+		
+		const initialHref = ghost.scared 
+			? '#ghost-scared' 
+			: `#ghost-${ghost.name}-${ghost.direction || 'right'}`;
+		
 		svg += `<use id="ghost${index}" width="${CELL_SIZE}" height="${CELL_SIZE}" href="${initialHref}">
-		  <animateTransform attributeName="transform" type="translate" dur="${store.gameHistory.length * DELTA_TIME}ms" repeatCount="indefinite"
-			  keyTimes="${ghostPositionAnimation.keyTimes}"
-			  values="${ghostPositionAnimation.values}"/>
-		  <animate attributeName="href" dur="${store.gameHistory.length * DELTA_TIME}ms" repeatCount="indefinite"
-			  keyTimes="${ghostColorAnimation.keyTimes}"
-			  values="${ghostColorAnimation.values}"/>
+			<animateTransform attributeName="transform" type="translate" dur="${store.gameHistory.length * DELTA_TIME}ms" repeatCount="indefinite"
+				keyTimes="${ghostPositionAnimation.keyTimes}"
+				values="${ghostPositionAnimation.values}"
+				additive="replace"/>
+			<animate attributeName="href" dur="${store.gameHistory.length * DELTA_TIME}ms" repeatCount="indefinite"
+				keyTimes="${ghostColorAnimation.keyTimes}"
+				values="${ghostColorAnimation.values}"/>
 		</use>`;
-	  });	  
-  
-	svg += '</svg>';
-	const usedColors = new Set<string>();
-	for (let x = 0; x < GRID_WIDTH; x++) {
-	for (let y = 0; y < GRID_HEIGHT; y++) {
-		usedColors.add(store.grid[x][y].color);
-	}
-	}
-	console.log('🎨 Cores únicas usadas nas células:');
-	console.log([...usedColors]);
+	});
 
+	svg += '</svg>';
 	return svg;
-  };
+};
 
 const generatePacManPath = (mouthAngle: number) => {
 	const radius = CELL_SIZE / 2;
@@ -152,12 +160,16 @@ const generatePacManColors = (store: StoreType): string[] => {
 	});
 };
 
+// Alterar esta função para usar a propriedade correta
 const generateCellColorValues = (store: StoreType, x: number, y: number): string[] => {
 	return store.gameHistory.map((state) => state.grid[x][y].color);
-  };
+};
 
 const generateGhostPositions = (store: StoreType, ghostIndex: number): string[] => {
 	return store.gameHistory.map((state) => {
+		if (ghostIndex >= state.ghosts.length) {
+			return "0,0"; // Valor padrão para casos onde o fantasma não existe
+		}
 		const ghost = state.ghosts[ghostIndex];
 		const x = ghost.x * (CELL_SIZE + GAP_SIZE);
 		const y = ghost.y * (CELL_SIZE + GAP_SIZE) + 15;
@@ -167,33 +179,53 @@ const generateGhostPositions = (store: StoreType, ghostIndex: number): string[] 
 
 const generateGhostColors = (store: StoreType, ghostIndex: number): string[] => {
 	return store.gameHistory.map((state) => {
-		const ghost = state.ghosts[ghostIndex];
-		const id = `#ghost-${ghost.scared ? 'scared' : ghost.name}`;
-		if (!store.__loggedGhosts) store.__loggedGhosts = new Set();
-		const ghostKey = `${ghostIndex}-${id}`;
-		if (!store.__loggedGhosts.has(ghostKey)) {
-			console.log(`ghost ${ghostIndex}:`, id);
-			store.__loggedGhosts.add(ghostKey);
-		}
-		return id;
+	  if (ghostIndex >= state.ghosts.length) {
+		return "#ghost-blinky-right"; // Valor padrão
+	  }
+	  
+	  const ghost = state.ghosts[ghostIndex];
+	  
+	  // Se o fantasma estiver assustado, use a sprite de assustado
+	  if (ghost.scared) {
+		return '#ghost-scared';
+	  } 
+	  
+	  // Caso contrário, use a sprite correspondente à direção
+	  return `#ghost-${ghost.name}-${ghost.direction || 'right'}`;
 	});
-};
+  };
 
+// Função generateGhostsPredefinition adaptada para usar os caminhos do GHOSTS
 const generateGhostsPredefinition = () => {
-	return `<defs>
-	  ${(['blinky', 'clyde', 'inky', 'pinky'] as GhostName[]).map(name => `
-		<symbol id="ghost-${name}" viewBox="0 0 100 100">
-		  <image href="${(GHOSTS[name] as Record<'right', string>)['right']}" width="100" height="100"/>
-		</symbol>`).join('')}
+	let defs = `<defs>`;
+	
+	// Para cada fantasma
+	['blinky', 'inky', 'pinky', 'clyde'].forEach(ghostName => {
+	  // Para cada direção
+	  ['up', 'down', 'left', 'right'].forEach(direction => {
+		// Use um tipo mais específico e com asserção de tipo
+		const ghostObj = GHOSTS[ghostName as GhostName] as Record<string, string>;
+		
+		// Verifique explicitamente se a direção existe
+		if (direction in ghostObj) {
+		  defs += `
+			<symbol id="ghost-${ghostName}-${direction}" viewBox="0 0 100 100">
+			  <image href="${ghostObj[direction]}" width="100" height="100"/>
+			</symbol>
+		  `;
+		}
+	  });
+	});
+	
+	// Adicionar o fantasma assustado - use uma asserção de tipo mais específica
+	defs += `
 	  <symbol id="ghost-scared" viewBox="0 0 100 100">
 		<image href="${(GHOSTS['scared'] as { imgDate: string }).imgDate}" width="100" height="100"/>
 	  </symbol>
-	  <image href="img/ghosts/red_right.png" x="0" y="100" width="40" height="40" />
-	  <image href="img/ghosts/pink_left.png" x="50" y="100" width="40" height="40" />
-	  <image href="img/ghosts/cyan_up.png" x="100" y="100" width="40" height="40" />
-	  <image href="img/ghosts/orange_down.png" x="150" y="100" width="40" height="40" />
 	</defs>`;
-  };  
+	
+	return defs;
+  };
 
 const generateChangingValuesAnimation = (store: StoreType, changingValues: string[]): AnimationData => {
 	if (store.gameHistory.length !== changingValues.length) {
