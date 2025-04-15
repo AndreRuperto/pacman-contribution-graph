@@ -1,6 +1,7 @@
 import { GRID_HEIGHT, GRID_WIDTH } from '../constants.js';
 import { Ghost, Point2d, StoreType } from '../types.js';
 import { MovementUtils } from './movement-utils.js';
+import { determineGhostName } from '../game.js'
 
 const moveGhosts = (store: StoreType) => {
     // Log de diagnóstico para rastrear o movimento dos fantasmas
@@ -71,6 +72,47 @@ const moveScaredGhost = (ghost: Ghost, store: StoreType) => {
 };
 
 const moveGhostWithPersonality = (ghost: Ghost, store: StoreType) => {
+    // Se o fantasma está se respawnando (só olhos)
+    if (ghost.name === 'eyes') {
+        const respawnPosition = { x: 26, y: 3 }; // Centro da casa dos fantasmas
+        
+        // Mova mais rápido quando estiver em modo de olhos
+        const nextMove = BFSTargetLocation(ghost.x, ghost.y, respawnPosition.x, respawnPosition.y);
+        
+        if (nextMove) {
+            ghost.x = nextMove.x;
+            ghost.y = nextMove.y;
+            
+            if (nextMove.direction) {
+                ghost.direction = nextMove.direction;
+            }
+            
+            // Verificar se chegou à posição de respawn
+            if (ghost.x === respawnPosition.x && ghost.y === respawnPosition.y) {
+                // Iniciar o contador de respawn
+                ghost.respawnCounter = 30; // Aproximadamente 3 segundos a 10 frames por segundo
+                ghost.inHouse = true;
+            }
+        }
+        return;
+    }
+    
+    // Se o fantasma está dentro da casa aguardando respawn
+    if (ghost.respawnCounter !== undefined && ghost.respawnCounter > 0) {
+        ghost.respawnCounter--;
+        
+        // Quando o contador chegar a zero, restaurar o fantasma
+        if (ghost.respawnCounter === 0) {
+            ghost.name = ghost.originalName || determineGhostName(
+                store.ghosts.findIndex(g => g === ghost)
+            );
+            ghost.inHouse = false;
+            delete ghost.respawnCounter;
+        }
+        return;
+    }
+    
+    // Código original para fantasmas normais
     const target = calculateGhostTarget(ghost, store);
     ghost.target = target;
 
@@ -79,12 +121,8 @@ const moveGhostWithPersonality = (ghost: Ghost, store: StoreType) => {
         ghost.x = nextMove.x;
         ghost.y = nextMove.y;
         
-        // Atualiza a direção apenas a cada 3 frames para movimento mais suave visualmente
-        if (store.frameCount % 3 === 0) {
-            // Atualizar a direção do fantasma com base no movimento
-            if (nextMove.direction) {
-                ghost.direction = nextMove.direction;
-            }
+        if (nextMove.direction) {
+            ghost.direction = nextMove.direction;
         }
     }
 };

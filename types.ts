@@ -39,10 +39,13 @@ export interface Ghost {
   x: number;
   y: number;
   name: GhostName;
+  originalName?: GhostName;
   scared: boolean;
   direction: 'right' | 'left' | 'up' | 'down';
   target?: Point2d;
   inHouse?: boolean;
+  isRespawning?: boolean;
+  respawnCounter?: number;
 }
 
 /* ───────────────────────── Grid & Store ───────────────────────────── */

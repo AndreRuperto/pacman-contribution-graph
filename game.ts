@@ -76,6 +76,15 @@ const startGame = async (store: StoreType) => {
   }
 };
 
+// Adicionando uma nova função para reiniciar o Pacman
+const resetPacman = (store: StoreType) => {
+  store.pacman.x = 27;
+  store.pacman.y = 7;
+  store.pacman.direction = 'right';
+  store.pacman.recentPositions = [];
+  // Qualquer outra propriedade que você queira redefinir
+};
+
 const updateGame = async (store: StoreType) => {
   store.frameCount++;
 
@@ -90,9 +99,14 @@ const updateGame = async (store: StoreType) => {
 
   if (store.pacman.deadRemainingDuration > 0) {
     store.pacman.deadRemainingDuration--;
-    if (store.pacman.deadRemainingDuration === 0) 
+    if (store.pacman.deadRemainingDuration === 0) {
+      // Usar a função de reset para o Pacman
+      resetPacman(store);
+      
+      // Reposicionar os fantasmas
       placeGhosts(store);
-      frame = 0
+      frame = 0;
+    }
   }
 
   if (store.pacman.powerupRemainingDuration > 0) {
@@ -138,13 +152,30 @@ const updateGame = async (store: StoreType) => {
   });
 };
 
+export const determineGhostName = (index: number): GhostName => {
+  const ghostNames: GhostName[] = ['blinky', 'inky', 'pinky', 'clyde'];
+  return ghostNames[index % ghostNames.length];
+};
+
 const checkCollisions = (store: StoreType) => {
   if (store.pacman.deadRemainingDuration) return;
 
   store.ghosts.forEach((ghost, i) => {
     if (ghost.x === store.pacman.x && ghost.y === store.pacman.y) {
+      // Ignore colisões com fantasmas que já estão em modo de olhos
+      if (ghost.name === 'eyes') return;
+      
       if (store.pacman.powerupRemainingDuration && ghost.scared) {
-        respawnGhost(store, i);
+        // Salvar o nome original do fantasma antes de transformá-lo em olhos
+        ghost.originalName = ghost.name;
+        
+        // Transformar em olhos e definir comportamento de respawn
+        ghost.name = 'eyes';
+        ghost.scared = false;
+        
+        // Definir destino como a casa dos fantasmas
+        ghost.target = { x: 26, y: 3 };
+        
         store.pacman.points += 10;
       } else {
         store.pacman.points = 0;
@@ -156,23 +187,23 @@ const checkCollisions = (store: StoreType) => {
 };
 
 const respawnGhost = (store: StoreType, ghostIndex: number) => {
-  let x: number, y: number;
-  do {
-    x = Math.floor(Math.random() * GRID_WIDTH);
-    y = Math.floor(Math.random() * GRID_HEIGHT);
-  } while (
-    (Math.abs(x - store.pacman.x) <= 2 && Math.abs(y - store.pacman.y) <= 2) ||
-    store.grid[x][y].commitsCount === 0
-  );
-
-  store.ghosts[ghostIndex] = {
-    x,
-    y,
-    name: GHOST_NAMES[ghostIndex % GHOST_NAMES.length],
-    scared: false,
-    direction: 'left',
-    target: undefined
-  };
+  const ghost = store.ghosts[ghostIndex];
+  
+  // Transformar o fantasma em olhos
+  ghost.name = 'eyes';
+  ghost.scared = false;
+  
+  // Definir a posição de respawn (casa dos fantasmas)
+  const respawnPosition = { x: 26, y: 3 }; // Centro da casa dos fantasmas
+  
+  // Definir o target do fantasma como a posição de respawn
+  ghost.target = respawnPosition;
+  
+  // Quando chegar à posição de respawn, voltar à forma original
+  store.ghosts[ghostIndex].isRespawning = true;
+  
+  // Aumento na pontuação por comer um fantasma
+  store.pacman.points += 10;
 };
 
 const releaseGhostFromHouse = (store: StoreType, name: GhostName) => {

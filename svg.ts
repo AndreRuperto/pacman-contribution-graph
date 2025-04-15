@@ -18,6 +18,30 @@ const generateAnimatedSVG = (store: StoreType) => {
     store.gameHistory.slice(0, 20).forEach((state, index) => {
         console.log(`Frame ${index}:`, state.ghosts.map(g => `${g.name}:${g.direction}:${g.scared}`).join(', '));
     });
+	console.log("Estado inicial dos fantasmas:", 
+		store.ghosts.map(g => ({ 
+		  name: g.name, 
+		  x: g.x, 
+		  y: g.y, 
+		  direction: g.direction, 
+		  inHouse: g.inHouse,
+		  scared: g.scared
+		}))
+	  );
+	  
+	  console.log("Comprimento do histórico do jogo:", store.gameHistory.length);
+	  
+	  // Verificar os primeiros estados no histórico
+	  if (store.gameHistory.length > 0) {
+		console.log("Primeiro estado no histórico:", 
+		  store.gameHistory[0].ghosts.map(g => ({ 
+			name: g.name, 
+			x: g.x, 
+			y: g.y, 
+			direction: g.direction
+		  }))
+		);
+	  }
 	const svgWidth = GRID_WIDTH * (CELL_SIZE + GAP_SIZE);
 	const svgHeight = GRID_HEIGHT * (CELL_SIZE + GAP_SIZE) + 20;
 	let svg = `<svg width="${svgWidth}" height="${svgHeight}" xmlns="http://www.w3.org/2000/svg">`;
@@ -96,22 +120,40 @@ const generateAnimatedSVG = (store: StoreType) => {
         let lastState = '';
         
         store.gameHistory.forEach((state, frameIndex) => {
-            if (index >= state.ghosts.length) return;
-            const g = state.ghosts[index];
-            const currentState = g.scared ? 'scared' : `${g.name}-${g.direction || 'right'}`;
-            uniqueGhostStates.add(currentState);
-            
-            if (currentState !== lastState) {
-                const keyTime = frameIndex / (store.gameHistory.length - 1);
-                stateKeyTimes.push(keyTime);
-                stateValues.push(currentState);
-                lastState = currentState;
-            }
-        });
-        if (stateKeyTimes[stateKeyTimes.length - 1] !== 1) {
-            stateKeyTimes.push(1);
-            stateValues.push(lastState);
-        }
+			if (index >= state.ghosts.length) return;
+			const g = state.ghosts[index];
+			
+			// Atenção: Não remova o prefixo '#ghost-' aqui
+			const currentState = g.scared 
+				? 'scared' 
+				: `${g.name}-${g.direction || 'right'}`;
+			
+			uniqueGhostStates.add(currentState);
+			
+			if (currentState !== lastState) {
+				const keyTime = frameIndex / (store.gameHistory.length - 1);
+				stateKeyTimes.push(keyTime);
+				stateValues.push(currentState);
+				lastState = currentState;
+			}
+		});
+		
+		// Garantir que haja um estado inicial
+		if (stateKeyTimes.length === 0) {
+			// Se não houver estados definidos, use o estado inicial do fantasma
+			const initialState = ghost.scared 
+				? 'scared' 
+				: `${ghost.name}-${ghost.direction || 'right'}`;
+			
+			stateKeyTimes.push(0, 1);
+			stateValues.push(initialState, initialState);
+		}
+		
+		// Garantir que o último keyTime seja 1
+		if (stateKeyTimes[stateKeyTimes.length - 1] !== 1) {
+			stateKeyTimes.push(1);
+			stateValues.push(lastState);
+		}
         
         // Gere um grupo para este fantasma
         svg += `<g id="ghost${index}" transform="translate(0,0)">
@@ -123,60 +165,76 @@ const generateAnimatedSVG = (store: StoreType) => {
         
         // Adicione todos os estados possíveis para este fantasma
         const allPossibleStates = Array.from(uniqueGhostStates).filter(s => 
-            s === 'scared' || s.startsWith(ghost.name));
+			s === 'scared' || 
+			s.startsWith('eyes-') || // Ainda precisamos verificar "eyes-direction"
+			s.startsWith(ghost.name) || // Estados do fantasma atual
+			(ghost.originalName && s.startsWith(ghost.originalName)) // Estados do nome original (se existir)
+		);
         
         allPossibleStates.forEach(state => {
-            // Para cada estado, crie um elemento <use> com visibilidade animada
-            const isScared = state === 'scared';
-            const href = isScared ? '#ghost-scared' : `#ghost-${state}`;
-            
-            // Determine quando este estado deve ser visível
-            const visibilityKeyTimes: number[] = [];
-            const visibilityValues: string[] = [];
-            
-            // Inicialmente invisível
-            visibilityKeyTimes.push(0);
-            visibilityValues.push('hidden');
-            
-            stateKeyTimes.forEach((keyTime, i) => {
-                if (stateValues[i] === state) {
-                    // Tornar visível neste keyTime
-                    visibilityKeyTimes.push(keyTime);
-                    visibilityValues.push('visible');
-                    
-                    // Se houver um próximo estado, tornar invisível nele
-                    if (i < stateValues.length - 1) {
-                        visibilityKeyTimes.push(stateKeyTimes[i + 1] - 0.001);
-                        visibilityValues.push('visible');
-                        
-                        visibilityKeyTimes.push(stateKeyTimes[i + 1]);
-                        visibilityValues.push('hidden');
-                    }
-                }
-            });
-            
-            // Se este é o último estado ativo, manter visível até o final
-            if (stateValues[stateValues.length - 1] === state) {
-                if (visibilityKeyTimes[visibilityKeyTimes.length - 1] !== 1) {
-                    visibilityKeyTimes.push(1);
-                    visibilityValues.push('visible');
-                }
-            } else {
-                // Caso contrário, garantir que termine invisível
-                if (visibilityKeyTimes[visibilityKeyTimes.length - 1] !== 1) {
-                    visibilityKeyTimes.push(1);
-                    visibilityValues.push('hidden');
-                }
-            }
-            
-            // Adicione o elemento <use> com animação de visibilidade
-            svg += `<use href="${href}" width="${CELL_SIZE}" height="${CELL_SIZE}" visibility="hidden">
-                <animate attributeName="visibility" 
-                    dur="${store.gameHistory.length * DELTA_TIME}ms" repeatCount="indefinite"
-                    keyTimes="${visibilityKeyTimes.join(';')}"
-                    values="${visibilityValues.join(';')}" />
-            </use>`;
+			// Construir o href correto
+			const href = state === 'scared' 
+				? '#ghost-scared' 
+				: `#ghost-${state}`;
 			
+			// Determinar quando este estado deve ser visível
+			const visibilityKeyTimes: number[] = [];
+			const visibilityValues: string[] = [];
+			
+			// CORREÇÃO IMPORTANTE: Verificar se este estado deve estar visível no início
+			// Verificar se o primeiro estado na história do fantasma corresponde a este estado
+			const initialState = stateValues.length > 0 ? stateValues[0] : null;
+			const isInitialState = state === initialState;
+			
+			// Definir visibilidade inicial
+			visibilityKeyTimes.push(0);
+			visibilityValues.push(isInitialState ? 'visible' : 'hidden');
+			
+			// Definir as transições de visibilidade
+			stateKeyTimes.forEach((keyTime, i) => {
+				if (stateValues[i] === state) {
+					// Se não for a primeira transição para este estado
+					if (i > 0 || !isInitialState) {
+						visibilityKeyTimes.push(keyTime);
+						visibilityValues.push('visible');
+					}
+					
+					// Se houver um próximo estado diferente
+					if (i < stateValues.length - 1 && stateValues[i+1] !== state) {
+						visibilityKeyTimes.push(stateKeyTimes[i+1] - 0.001);
+						visibilityValues.push('visible');
+						
+						visibilityKeyTimes.push(stateKeyTimes[i+1]);
+						visibilityValues.push('hidden');
+					}
+				}
+			});
+			
+			// Se este é o último estado ativo, manter visível até o final
+			if (stateValues.length > 0 && stateValues[stateValues.length - 1] === state) {
+				if (visibilityKeyTimes[visibilityKeyTimes.length - 1] !== 1) {
+					visibilityKeyTimes.push(1);
+					visibilityValues.push('visible');
+				}
+			} else {
+				// Caso contrário, garantir que termine invisível
+				if (visibilityKeyTimes[visibilityKeyTimes.length - 1] !== 1) {
+					visibilityKeyTimes.push(1);
+					visibilityValues.push('hidden');
+				}
+			}
+			
+			// CORREÇÃO IMPORTANTE: Definir a visibilidade inicial corretamente
+			const initialVisibility = isInitialState ? "visible" : "hidden";
+			
+			// Renderizar o elemento use com a configuração correta
+			svg += `<use href="${href}" width="${CELL_SIZE}" height="${CELL_SIZE}" visibility="${initialVisibility}">
+				<animate attributeName="visibility" 
+					dur="${store.gameHistory.length * DELTA_TIME}ms" repeatCount="indefinite"
+					keyTimes="${visibilityKeyTimes.join(';')}"
+					values="${visibilityValues.join(';')}" />
+			</use>`;
+
 			// Adicionar um efeito de desvanecimento (fade) entre os estados para criar a ilusão de transição suave
 			// svg += `<use href="${href}" width="${CELL_SIZE}" height="${CELL_SIZE}" visibility="hidden" opacity="0">
 			// <animate attributeName="visibility" 
@@ -188,8 +246,7 @@ const generateAnimatedSVG = (store: StoreType) => {
 			// 	keyTimes="${visibilityKeyTimes.join(';')}"
 			// 	values="${visibilityKeyTimes.map(k => visibilityValues[visibilityKeyTimes.indexOf(k)] === 'visible' ? '1' : '0').join(';')}" />
 			// </use>`;
-        });
-        
+		});
         // Feche o grupo
         svg += `</g>`;
     });
@@ -265,35 +322,46 @@ const generateGhostPositions = (store: StoreType, ghostIndex: number): string[] 
 };
 
 const generateGhostColors = (store: StoreType, ghostIndex: number): string[] => {
-	return store.gameHistory.map((state) => {
-	  if (ghostIndex >= state.ghosts.length) {
-		return "#ghost-blinky-right"; // Valor padrão
-	  }
-	  
-	  const ghost = state.ghosts[ghostIndex];
-	  
-	  // Se o fantasma estiver assustado, use a sprite de assustado
-	  if (ghost.scared) {
-		return '#ghost-scared';
-	  } 
-	  
-	  // Caso contrário, use a sprite correspondente à direção
-	  return `#ghost-${ghost.name}-${ghost.direction || 'right'}`;
-	});
-  };
+    return store.gameHistory.map((state) => {
+        if (ghostIndex >= state.ghosts.length) {
+            return "#ghost-blinky-right"; // Valor padrão
+        }
+        
+        const ghost = state.ghosts[ghostIndex];
+        
+        // Se o fantasma estiver em modo de olhos, use a sprite de olhos
+        if (ghost.name === 'eyes') {
+            return `#ghost-eyes-${ghost.direction || 'right'}`;
+        }
+        
+        // Se o fantasma estiver assustado, use a sprite de assustado
+        if (ghost.scared) {
+            return '#ghost-scared';
+        } 
+        
+        // Caso contrário, use a sprite correspondente à direção
+        return `#ghost-${ghost.name}-${ghost.direction || 'right'}`;
+    });
+};
 
-// Função generateGhostsPredefinition adaptada para usar os caminhos do GHOSTS
 const generateGhostsPredefinition = () => {
+	console.log("Símbolos de fantasmas definidos:", 
+		['blinky', 'inky', 'pinky', 'clyde'].map(name => 
+		  ['up', 'down', 'left', 'right'].map(dir => `ghost-${name}-${dir}`)
+		).flat()
+	  );
+	  
+	  console.log("Símbolos de olhos definidos:", 
+		['up', 'down', 'left', 'right'].map(dir => `ghost-eyes-${dir}`)
+	  );
     let defs = `<defs>`;
     
-    // Para cada fantasma
+    // Para cada fantasma regular
     ['blinky', 'inky', 'pinky', 'clyde'].forEach(ghostName => {
         // Para cada direção
         ['up', 'down', 'left', 'right'].forEach(direction => {
-            // Use um tipo mais específico e com asserção de tipo
             const ghostObj = GHOSTS[ghostName as GhostName] as Record<string, string>;
             
-            // Verifique explicitamente se a direção existe
             if (direction in ghostObj) {
                 defs += `
                 <symbol id="ghost-${ghostName}-${direction}" viewBox="0 0 100 100">
@@ -308,9 +376,22 @@ const generateGhostsPredefinition = () => {
     defs += `
     <symbol id="ghost-scared" viewBox="0 0 100 100">
         <image href="${(GHOSTS['scared'] as { imgDate: string }).imgDate}" width="100" height="100"/>
-    </symbol>
-    </defs>`;
+    </symbol>`;
     
+    // Adicionar os olhos do fantasma (para cada direção)
+    ['up', 'down', 'left', 'right'].forEach(direction => {
+        const eyesObj = GHOSTS['eyes'] as Record<string, string>;
+        
+        if (direction in eyesObj) {
+            defs += `
+            <symbol id="ghost-eyes-${direction}" viewBox="0 0 100 100">
+                <image href="${eyesObj[direction]}" width="100" height="100"/>
+            </symbol>
+            `;
+        }
+    });
+    
+    defs += `</defs>`;
     return defs;
 };
 
