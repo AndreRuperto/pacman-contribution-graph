@@ -176,6 +176,18 @@ const generateAnimatedSVG = (store: StoreType) => {
                     keyTimes="${visibilityKeyTimes.join(';')}"
                     values="${visibilityValues.join(';')}" />
             </use>`;
+			
+			// Adicionar um efeito de desvanecimento (fade) entre os estados para criar a ilusão de transição suave
+			// svg += `<use href="${href}" width="${CELL_SIZE}" height="${CELL_SIZE}" visibility="hidden" opacity="0">
+			// <animate attributeName="visibility" 
+			// 	dur="${store.gameHistory.length * DELTA_TIME}ms" repeatCount="indefinite"
+			// 	keyTimes="${visibilityKeyTimes.join(';')}"
+			// 	values="${visibilityValues.join(';')}" />
+			// <animate attributeName="opacity" 
+			// 	dur="${store.gameHistory.length * DELTA_TIME}ms" repeatCount="indefinite"
+			// 	keyTimes="${visibilityKeyTimes.join(';')}"
+			// 	values="${visibilityKeyTimes.map(k => visibilityValues[visibilityKeyTimes.indexOf(k)] === 'visible' ? '1' : '0').join(';')}" />
+			// </use>`;
         });
         
         // Feche o grupo

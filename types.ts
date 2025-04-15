@@ -33,7 +33,7 @@ export interface Pacman {
   target?: Point2d;
 }
 
-export type GhostName = 'blinky' | 'clyde' | 'inky' | 'pinky';
+export type GhostName = 'blinky' | 'clyde' | 'inky' | 'pinky' | 'eyes';
 
 export interface Ghost {
   x: number;
