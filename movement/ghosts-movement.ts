@@ -45,20 +45,29 @@ const moveScaredGhost = (ghost: Ghost, store: StoreType) => {
 	// If Pacman has power-up, ghosts move slower
 	if (store.pacman.powerupRemainingDuration && Math.random() < 0.5) return;
 
-	ghost.x += moveX;
-	ghost.y += moveY;
+    // Atualizar a direção do fantasma com base no movimento
+    if (moveX > 0) ghost.direction = 'right';
+    else if (moveX < 0) ghost.direction = 'left';
+    else if (moveY > 0) ghost.direction = 'down';
+    else if (moveY < 0) ghost.direction = 'up';
+    
+    ghost.x += moveX;
+    ghost.y += moveY;
 };
 
-// Move ghost according to its personality
 const moveGhostWithPersonality = (ghost: Ghost, store: StoreType) => {
-	const target = calculateGhostTarget(ghost, store);
-	ghost.target = target;
+    const target = calculateGhostTarget(ghost, store);
+    ghost.target = target;
 
-	const nextMove = BFSTargetLocation(ghost.x, ghost.y, target.x, target.y);
-	if (nextMove) {
-		ghost.x = nextMove.x;
-		ghost.y = nextMove.y;
-	}
+    const nextMove = BFSTargetLocation(ghost.x, ghost.y, target.x, target.y);
+    if (nextMove) {
+        ghost.x = nextMove.x;
+        ghost.y = nextMove.y;
+        // Atualizar a direção do fantasma com base no movimento
+        if (nextMove.direction) {
+            ghost.direction = nextMove.direction;
+        }
+    }
 };
 
 // Find the next position to move to using BFS
@@ -86,8 +95,28 @@ const BFSTargetLocation = (startX: number, startY: number, targetX: number, targ
 
 			const newPath = [...path, { x: newX, y: newY }];
 
+			// No método BFSTargetLocation, quando um próximo movimento é encontrado:
 			if (newX === targetX && newY === targetY) {
-				return newPath.length > 0 ? newPath[0] : null;
+				// Determinar a direção com base na posição atual e na próxima posição
+				const dx = newX - x;
+				const dy = newY - y;
+				
+				// Solução com asserção de tipo
+				let direction: 'right' | 'left' | 'up' | 'down';
+				if (dx > 0) direction = 'right';
+				else if (dx < 0) direction = 'left';
+				else if (dy > 0) direction = 'down';
+				else if (dy < 0) direction = 'up';
+				
+				// Retornar a próxima posição E a direção
+				return newPath.length > 0 ? { 
+					x: newPath[0].x, 
+					y: newPath[0].y,
+					direction: dx > 0 ? "right" : 
+							   dx < 0 ? "left" : 
+							   dy > 0 ? "down" : 
+							   dy < 0 ? "up" : "right" // valor padrão
+				} : null;
 			}
 
 			queue.push({ x: newX, y: newY, path: newPath });

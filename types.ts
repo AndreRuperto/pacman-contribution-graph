@@ -1,5 +1,9 @@
 /* ───────────────────────── Tipos auxiliares ───────────────────────── */
-export type Point2d = { x: number; y: number };
+export type Point2d = { 
+  x: number; 
+  y: number;
+  direction?: 'right' | 'left' | 'up' | 'down';
+};
 
 /* ───────────────────────── Contribuições ──────────────────────────── */
 export type ContributionLevel =

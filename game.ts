@@ -180,6 +180,7 @@ const releaseGhostFromHouse = (store: StoreType, name: GhostName) => {
 	if (ghost) {
 		ghost.inHouse = false;
 		ghost.y = 2; // posição fora da casa
+    ghost.direction = 'up';
 	}
 };
 
