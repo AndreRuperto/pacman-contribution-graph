@@ -30,18 +30,26 @@ const placePacman = (store: StoreType) => {
 
 const placeGhosts = (store: StoreType) => {
   store.ghosts = [
-    { x: 26, y: 2, name: 'blinky', direction: 'left', scared: false, target: undefined, inHouse: false},
-    { x: 25, y: 3, name: 'inky',   direction: 'up',   scared: false, target: undefined, inHouse: true},
-    { x: 26, y: 3, name: 'pinky',  direction: 'up',   scared: false, target: undefined, inHouse: true},
-    { x: 27, y: 3, name: 'clyde',  direction: 'up',   scared: false, target: undefined, inHouse: true}
+      { x: 26, y: 2, name: 'blinky', direction: 'left', scared: false, target: undefined, inHouse: false},
+      { x: 25, y: 3, name: 'inky',   direction: 'up',   scared: false, target: undefined, inHouse: true},
+      { x: 26, y: 3, name: 'pinky',  direction: 'down', scared: false, target: undefined, inHouse: true},
+      { x: 27, y: 3, name: 'clyde',  direction: 'up',   scared: false, target: undefined, inHouse: true}
   ];
 
   // reset extras
   store.ghosts.forEach(g => {
-    g.confusionFrames       = 0;
-    g.justReleasedFromHouse = false;
-    g.respawnCounter        = 0;
-    g.isRespawning          = false;
+      g.confusionFrames       = 0;
+      g.justReleasedFromHouse = false;
+      g.respawnCounter        = 0;
+      g.isRespawning          = false;
+      
+      // Configurar direções diferentes para criar um efeito de movimento assíncrono
+      if (g.inHouse) {
+          // Distribuir as direções iniciais para não ficarem todos sincronizados
+          if (g.name === 'inky') g.direction = 'up';
+          else if (g.name === 'pinky') g.direction = 'down';
+          else if (g.name === 'clyde') g.direction = 'up';
+      }
   });
 };
 
@@ -214,7 +222,7 @@ const checkCollisions = (store: StoreType) => {
 const releaseGhostFromHouse = (store: StoreType, name: GhostName) => {
   const ghost = store.ghosts.find(g => g.name === name && g.inHouse);
   if (ghost) {
-    ghost.inHouse = false;
+    ghost.justReleasedFromHouse = true;
     ghost.y = 2;
     ghost.direction = 'up';
     ghost.justReleasedFromHouse = true;

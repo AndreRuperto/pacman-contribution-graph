@@ -16,7 +16,11 @@ const moveGhosts = (store: StoreType) => {
     });
 
     for (const ghost of store.ghosts) {
-        if (ghost.inHouse) continue; // 👈 ainda preso na ghost house
+        // Lógica especial para fantasmas dentro da casa
+        if (ghost.inHouse) {
+            moveGhostInHouse(ghost, store);
+            continue;
+        }
 
         if (ghost.scared || Math.random() < 0.15) {
             moveScaredGhost(ghost, store);
@@ -24,6 +28,78 @@ const moveGhosts = (store: StoreType) => {
             moveGhostWithPersonality(ghost, store);
         }
     }
+};
+
+const moveGhostInHouse = (ghost: Ghost, store: StoreType) => {
+    // Se o fantasma estiver sendo liberado, permitir que ele saia da casa
+    if (ghost.justReleasedFromHouse) {
+        // O fantasma só pode sair pela porta, que está na posição x=26
+        if (ghost.x === 26) {
+            ghost.y = 2; // Posição da porta
+            ghost.direction = 'up';
+            ghost.inHouse = false;
+            console.log(`Ghost ${ghost.name} released from house`);
+        } else {
+            // Se não estiver na posição da porta, mover em direção a ela
+            if (ghost.x < 26) {
+                ghost.x += 1;
+                ghost.direction = 'right';
+            } else if (ghost.x > 26) {
+                ghost.x -= 1;
+                ghost.direction = 'left';
+            }
+        }
+        return;
+    }
+    
+    // Se o fantasma estiver em processo de respawn, só decrementar o contador
+    if (ghost.respawnCounter && ghost.respawnCounter > 0) {
+        ghost.respawnCounter--;
+        // Quando o contador chegar a zero, restaurar o fantasma
+        if (ghost.respawnCounter === 0) {
+            if (ghost.originalName) {
+                ghost.name = ghost.originalName;
+                ghost.inHouse = false;
+                ghost.scared = store.pacman.powerupRemainingDuration > 0;
+                console.log(`Ghost respawned as ${ghost.name}`);
+            }
+        }
+        return;
+    }
+    
+    // Limite superior (parede do topo da casa)
+    const topWall = 3; // A posição y=2 é onde fica a porta
+    // Limite inferior (parede do fundo da casa)
+    const bottomWall = 4;
+    
+    // Movimento vertical dentro da casa
+    // Se estiver indo para cima e atingir o limite superior
+    if (ghost.direction === 'up' && ghost.y <= topWall) {
+        ghost.direction = 'down';
+        ghost.y = topWall; // Garantir que não ultrapasse a parede
+    }
+    // Se estiver indo para baixo e atingir o limite inferior
+    else if (ghost.direction === 'down' && ghost.y >= bottomWall - 1) {
+        ghost.direction = 'up';
+        ghost.y = bottomWall - 1; // Garantir que não ultrapasse a parede
+    }
+    
+    // Aplicar o movimento na direção atual (movimento discreto em vez de fracionado)
+    if (ghost.direction === 'up') {
+        ghost.y -= 1; // Mover para cima em incrementos inteiros
+    } else {
+        ghost.y += 1; // Mover para baixo em incrementos inteiros
+    }
+    
+    // Se o movimento resultou em uma posição inválida, reverter
+    if (ghost.y < topWall || ghost.y >= bottomWall) {
+        // Reverter para a posição anterior
+        ghost.y = ghost.direction === 'up' ? topWall : bottomWall - 1;
+        // Mudar direção
+        ghost.direction = ghost.direction === 'up' ? 'down' : 'up';
+    }
+    
+    console.log(`Ghost ${ghost.name} moving in house to ${ghost.x},${ghost.y} direction ${ghost.direction}`);
 };
 
 // When scared, ghosts move randomly but with some intelligence
