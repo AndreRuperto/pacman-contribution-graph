@@ -35,7 +35,7 @@ Store.config = {
   svgCallback: (svg) => {
     const dist = path.resolve('dist');
     mkdirSync(dist, { recursive: true });
-    const out = path.join(dist, 'pacman-novo1.svg');
+    const out = path.join(dist, 'pacman.svg');
     writeFileSync(out, svg, 'utf-8');
     console.log(`✅  SVG animado salvo em ${out}`);
   },

@@ -6,8 +6,10 @@ export const GAP_SIZE   = 2;
 export const GRID_WIDTH = 53;   // 52 semanas + semana corrente
 export const GRID_HEIGHT = 7;   // dom … sáb
 
+export const GHOST_HOUSE_COLOR = 'yellow';
+
 export const PACMAN_COLOR          = 'yellow';
-export const PACMAN_COLOR_POWERUP  = 'red';
+export const PACMAN_COLOR_POWERUP  = 'yellow';
 export const PACMAN_COLOR_DEAD     = '#80808064';
 
 export const GHOST_NAMES: GhostName[] = ['blinky', 'clyde', 'inky', 'pinky', 'eyes'];
@@ -93,28 +95,34 @@ export const GHOSTS: {
 };  
 
 export const WALLS: {
-  horizontal: { active: boolean; id: string }[][];
-  vertical:   { active: boolean; id: string }[][];
-} = {
-  horizontal: Array(GRID_WIDTH + 1)
-    .fill(null)
-    .map(() => Array(GRID_HEIGHT + 1).fill({ active: false, id: '' })),
-  vertical: Array(GRID_WIDTH + 1)
-    .fill(null)
-    .map(() => Array(GRID_HEIGHT + 1).fill({ active: false, id: '' }))
-};
+	horizontal: { active: boolean; id: string; color?: string }[][];
+	vertical:   { active: boolean; id: string; color?: string }[][];
+  } = {
+	horizontal: Array(GRID_WIDTH + 1)
+	  .fill(null)
+	  .map(() => Array(GRID_HEIGHT + 1).fill({ active: false, id: '' })),
+	vertical: Array(GRID_WIDTH + 1)
+	  .fill(null)
+	  .map(() => Array(GRID_HEIGHT + 1).fill({ active: false, id: '' }))
+  };
 
-export const setWall = (x: number, y: number, direction: 'horizontal' | 'vertical', lineId: string) => {
+  export const setWall = (
+	x: number, 
+	y: number, 
+	direction: 'horizontal' | 'vertical', 
+	lineId: string,
+	color?: string
+  ) => {
 	if (direction === 'horizontal') {
-		if (x >= 0 && x < WALLS.horizontal.length && y >= 0 && y < WALLS.horizontal[0].length) {
-			WALLS.horizontal[x][y] = { active: true, id: lineId };
-		}
+	  if (x >= 0 && x < WALLS.horizontal.length && y >= 0 && y < WALLS.horizontal[0].length) {
+		WALLS.horizontal[x][y] = { active: true, id: lineId, color };
+	  }
 	} else {
-		if (x >= 0 && x < WALLS.vertical.length && y >= 0 && y < WALLS.vertical[0].length) {
-			WALLS.vertical[x][y] = { active: true, id: lineId };
-		}
+	  if (x >= 0 && x < WALLS.vertical.length && y >= 0 && y < WALLS.vertical[0].length) {
+		WALLS.vertical[x][y] = { active: true, id: lineId, color };
+	  }
 	}
-};
+  };
 
 export const hasWall = (x: number, y: number, direction: 'up' | 'down' | 'left' | 'right'): boolean => {
 	switch (direction) {

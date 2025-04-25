@@ -1,4 +1,4 @@
-import { GRID_HEIGHT, GRID_WIDTH, setWall } from './constants.js';
+import { GRID_HEIGHT, GRID_WIDTH, GHOST_HOUSE_COLOR, setWall } from './constants.js';
 
 const setSymmetricWall = (x: number, y: number, direction: 'horizontal' | 'vertical', sym: '' | 'x' | 'y' | 'xy', lineId: string) => {
 	if (direction == 'horizontal') {
@@ -66,18 +66,18 @@ const buildWalls = () => {
 	setSymmetricWall(8, 4, 'vertical', 'x', 'L12');
 	setSymmetricWall(8, 5, 'vertical', 'x', 'L12');
 	setSymmetricWall(8, 6, 'vertical', 'x', 'L12');
-	setSymmetricWall(23, 2, 'horizontal', 'x', 'L13');
-	setSymmetricWall(24, 2, 'horizontal', 'x', 'L13');
-	setSymmetricWall(23, 4, 'horizontal', 'x', 'L13');
-	setSymmetricWall(24, 4, 'horizontal', 'x', 'L13');
-	setSymmetricWall(25, 4, 'horizontal', 'x', 'L13');
-	setSymmetricWall(23, 2, 'vertical', 'x', 'L14');
-	setSymmetricWall(23, 3, 'vertical', 'x', 'L14');
-	setSymmetricWall(26, 4, 'vertical', 'x', 'L15');
-	setSymmetricWall(26, 5, 'vertical', 'x', 'L15');
-	setSymmetricWall(23, 6, 'horizontal', 'x', 'L16');
-	setSymmetricWall(24, 6, 'horizontal', 'x', 'L16');
-	setSymmetricWall(25, 6, 'horizontal', 'x', 'L16');
+	// setSymmetricWall(23, 2, 'horizontal', 'x', 'L13');
+	// setSymmetricWall(24, 2, 'horizontal', 'x', 'L13');
+	// setSymmetricWall(23, 4, 'horizontal', 'x', 'L13');
+	// setSymmetricWall(24, 4, 'horizontal', 'x', 'L13');
+	// setSymmetricWall(25, 4, 'horizontal', 'x', 'L13');
+	// setSymmetricWall(23, 2, 'vertical', 'x', 'L14');
+	// setSymmetricWall(23, 3, 'vertical', 'x', 'L14');
+	// setSymmetricWall(26, 4, 'vertical', 'x', 'L15');
+	// setSymmetricWall(26, 5, 'vertical', 'x', 'L15');
+	// setSymmetricWall(23, 6, 'horizontal', 'x', 'L16');
+	// setSymmetricWall(24, 6, 'horizontal', 'x', 'L16');
+	// setSymmetricWall(25, 6, 'horizontal', 'x', 'L16');
 	// setSymmetricWall(26, 0, 'vertical', 'x', 'L17');
 	// setSymmetricWall(24, 1, 'vertical', 'x', 'L18');
 	setSymmetricWall(23, 1, 'horizontal', 'x', 'L18');
@@ -104,11 +104,14 @@ const buildWalls = () => {
 	// Ghost House
 	setWall(25, 2, 'horizontal', 'GH_TOP');
 	setWall(27, 2, 'horizontal', 'GH_TOP');
+	setWall(26, 2, 'horizontal', 'GH_DOOR', GHOST_HOUSE_COLOR);
 	setWall(25, 4, 'horizontal', 'GH_BOTTOM');
 	setWall(26, 4, 'horizontal', 'GH_BOTTOM');
 	setWall(27, 4, 'horizontal', 'GH_BOTTOM');
 	setWall(25, 3, 'vertical', 'GH_LEFT');
-	setWall(27, 3, 'vertical', 'GH_RIGHT');
+	setWall(28, 3, 'vertical', 'GH_RIGHT');
+	setWall(25, 2, 'vertical', 'GH_LEFT');
+	setWall(28, 2, 'vertical', 'GH_RIGHT');
 };
 
 export const Grid = {

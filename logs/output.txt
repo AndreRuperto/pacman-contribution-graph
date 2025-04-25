@@ -374,7 +374,7 @@
 2025-04-22 → NONE, #161b22, 0 commits
 2025-04-23 → NONE, #161b22, 0 commits
 2025-04-24 → SECOND_QUARTILE, #006d32, 6 commits
-2025-04-25 → SECOND_QUARTILE, #006d32, 8 commits
+2025-04-25 → THIRD_QUARTILE, #26a641, 9 commits
 🟩 Células preenchidas: 82/371
 
 🧱 Arena (via level + color) :
@@ -384,1699 +384,575 @@
 ⬛⬛⬛🟩⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛🟨⬛⬛⬛⬛🟩🟨🟩⬛⬛⬛⬛⬛🟩🟧⬛🟩🟩🟩⬛⬛⬛⬛⬛🟨🟨🟥🟩⬛
 ⬛⬛🟧🟩⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛🟩🟨⬛⬛⬛⬛⬛⬛🟨🟨⬛⬛⬛🟩⬛⬛⬛🟩🟧🟩⬛🟨🟩⬛
 ⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛🟩⬛⬛⬛🟩⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛🟩🟥⬛⬛⬛⬛⬛🟩⬛🟨⬛🟩⬛⬛🟨🟩⬛🟨🟨🟩🟩🟩🟩🟨
-⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛🟨🟩⬛⬛⬛⬛⬛🟩🟥⬛⬛🟩⬛⬛🟩🟩🟨🟩🟥🟥🟩🟩🟩🟨
+⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛🟨🟩⬛⬛⬛⬛⬛🟩🟥⬛⬛🟩⬛⬛🟩🟩🟨🟩🟥🟥🟩🟩🟩🟧
 ⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛🟩⬛🟩⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛🟩⬛🟩🟩⬛
 Ghost blinky at (26,2) moving left
 Ghost inky at (25,3) moving up
 Ghost pinky at (26,3) moving up
 Ghost clyde at (27,3) moving up
-Ghost blinky at (26,1) moving left
-Ghost blinky at (25,1) moving left
-Ghost blinky at (24,1) moving up
-Ghost blinky at (24,0) moving right
-Ghost blinky at (23,0) moving up
-Ghost blinky at (22,0) moving left
-Ghost blinky at (21,0) moving left
-Ghost blinky at (20,0) moving up
-Ghost blinky moved to (19,0) direction left
-Ghost blinky at (19,0) moving left
-Ghost blinky at (18,0) moving left
+Ghost blinky moved to (25,2) direction left
+Ghost blinky at (25,2) moving left
 Ghost pinky at (26,2) moving up
-Ghost pinky moved to (27,2) direction right
-Ghost blinky at (17,0) moving left
-Ghost pinky at (27,2) moving right
-Ghost blinky at (16,0) moving down
-Ghost pinky at (26,2) moving left
-Ghost blinky moved to (16,1) direction down
-Ghost blinky at (16,1) moving down
-Ghost pinky at (26,1) moving left
-Ghost blinky at (15,1) moving down
-Ghost pinky at (25,1) moving left
-Ghost blinky at (14,1) moving down
-Ghost pinky at (24,1) moving left
-Ghost blinky at (13,1) moving down
-Ghost pinky at (24,0) moving left
-Ghost blinky moved to (12,1) direction left
-Ghost pinky moved to (23,0) direction left
-Ghost blinky at (12,1) moving left
-Ghost pinky at (23,0) moving left
-Ghost blinky at (12,2) moving down
-Ghost pinky at (22,0) moving left
-Ghost blinky at (11,2) moving left
-Ghost pinky at (21,0) moving left
-Ghost blinky at (10,2) moving left
+Ghost blinky moved to (25,3) direction down
+Ghost blinky at (25,3) moving down
+Ghost blinky moved to (26,3) direction right
+Ghost blinky at (26,3) moving right
+Ghost blinky moved to (25,3) direction left
+Ghost blinky at (25,3) moving left
 Ghost inky at (25,2) moving up
-Ghost pinky at (20,0) moving down
-Ghost blinky at (9,2) moving left
-Ghost inky at (26,2) moving up
-Ghost pinky at (19,0) moving right
-Ghost inky moved to (25,2) direction left
-Ghost blinky at (8,2) moving down
-Ghost inky at (25,2) moving left
-Ghost pinky at (18,0) moving down
-Ghost blinky moved to (7,2) direction left
-Ghost blinky at (7,2) moving left
-Ghost inky at (26,2) moving down
-Ghost pinky at (17,0) moving down
-Ghost inky moved to (26,3) direction down
-Ghost blinky at (7,3) moving down
-Ghost inky at (26,3) moving down
-Ghost pinky at (16,0) moving down
-Ghost blinky moved to (7,4) direction down
-Ghost blinky at (7,4) moving down
-Ghost pinky at (15,0) moving down
-Ghost blinky moved to (7,5) direction down
-Ghost blinky at (7,5) moving down
-Ghost inky at (26,1) moving left
-Ghost pinky at (14,0) moving left
-Ghost inky moved to (25,1) direction left
-Ghost blinky at (7,6) moving left
-Ghost inky at (25,1) moving left
-Ghost pinky at (13,0) moving left
-Ghost pinky moved to (12,0) direction left
-Ghost blinky at (6,6) moving left
-Ghost inky at (24,1) moving left
-Ghost pinky at (12,0) moving left
-Ghost blinky at (5,6) moving up
-Ghost inky at (24,0) moving up
-Ghost pinky at (11,0) moving down
-Ghost blinky at (4,6) moving right
-Ghost inky at (23,0) moving left
-Ghost pinky at (12,0) moving down
-Ghost clyde at (27,2) moving up
-Ghost blinky at (4,5) moving right
-Ghost inky at (22,0) moving down
-Ghost pinky at (12,1) moving down
-Ghost clyde at (26,2) moving down
-Ghost inky moved to (21,0) direction left
-Ghost blinky at (5,5) moving right
-Ghost inky at (21,0) moving left
-Ghost pinky at (12,2) moving down
-Ghost clyde at (26,1) moving down
-Ghost blinky at (6,5) moving up
-Ghost inky at (20,0) moving left
-Ghost pinky at (11,2) moving up
-Ghost clyde at (25,1) moving down
-Ghost blinky moved to (7,5) direction right
-Ghost pinky moved to (11,1) direction up
-Ghost clyde moved to (24,1) direction left
-Ghost blinky at (7,5) moving right
-Ghost inky at (19,0) moving left
-Ghost pinky at (11,1) moving up
-Ghost clyde at (24,1) moving left
-Ghost blinky at (7,4) moving right
-Ghost inky at (18,0) moving right
-Ghost pinky at (11,2) moving down
-Ghost clyde at (24,0) moving down
-Ghost blinky at (7,3) moving right
-Ghost clyde at (23,0) moving down
-Ghost clyde moved to (22,0) direction left
-Ghost blinky at (8,3) moving right
-Ghost inky at (19,1) moving down
-Ghost pinky at (13,2) moving down
-Ghost clyde at (22,0) moving left
-Ghost blinky at (9,3) moving up
-Ghost inky at (18,1) moving left
-Ghost pinky at (12,2) moving left
-Ghost clyde at (21,0) moving left
-Ghost blinky at (10,3) moving up
-Ghost inky at (17,1) moving left
-Ghost pinky at (12,1) moving left
-Ghost clyde at (20,0) moving up
-Ghost inky at (16,1) moving left
-Ghost clyde at (19,0) moving left
-Ghost pinky moved to (11,0) direction left
-Ghost blinky at (10,1) moving left
-Ghost inky at (15,1) moving up
-Ghost pinky at (11,0) moving left
-Ghost clyde at (18,0) moving right
-Ghost pinky moved to (10,0) direction left
-Ghost blinky at (9,1) moving left
-Ghost inky at (14,1) moving left
-Ghost pinky at (10,0) moving left
-Ghost clyde at (17,0) moving down
-Ghost pinky moved to (9,0) direction left
-Ghost blinky at (8,1) moving up
-Ghost inky at (13,1) moving left
-Ghost pinky at (9,0) moving left
-Ghost clyde at (16,0) moving left
-Ghost clyde moved to (15,0) direction left
-Ghost blinky at (7,1) moving up
-Ghost inky at (12,1) moving up
-Ghost pinky at (8,0) moving up
-Ghost clyde at (15,0) moving left
-Ghost pinky moved to (7,0) direction left
-Ghost blinky at (6,1) moving up
-Ghost inky at (12,2) moving up
-Ghost pinky at (7,0) moving left
-Ghost clyde at (14,0) moving left
-Ghost inky moved to (12,1) direction up
-Ghost blinky at (27,1) moving left
-Ghost blinky at (28,1) moving left
-Ghost blinky at (29,1) moving down
-🔥 Power-up ativado na célula [30, 4] com nível FOURTH_QUARTILE
-Ghost blinky at (30,1) moving down
-Ghost blinky moved to (30,2) direction down
-Ghost blinky at (30,2) moving down
-Ghost eyes at (30,2) moving down
-Ghost eyes at (30,1) moving down
-Ghost eyes at (29,1) moving down
-Ghost eyes at (28,1) moving down
-Ghost eyes at (27,1) moving down
-Ghost pinky moved to (25,2) direction left
-Ghost eyes at (26,1) moving down
-Ghost pinky at (25,2) moving left
-Ghost pinky moved to (24,2) direction left
-Ghost eyes at (26,2) moving down
-Ghost pinky at (24,2) moving left
-Ghost eyes at (26,3) moving down
-Ghost eyes at (25,3) moving up
-Ghost pinky moved to (23,2) direction left
-Ghost pinky at (23,2) moving left
-Ghost pinky moved to (24,2) direction right
-Ghost eyes at (24,2) moving right
-Ghost eyes at (25,2) moving down
-Ghost clyde at (26,2) moving left
-Ghost clyde at (26,1) moving left
-Ghost clyde at (27,1) moving right
-Ghost clyde at (28,1) moving up
-Ghost clyde at (29,1) moving up
-Ghost clyde at (30,1) moving right
-Ghost clyde at (31,1) moving right
-Ghost clyde at (30,1) moving left
-Ghost clyde moved to (29,1) direction left
-Ghost clyde at (29,1) moving left
-Ghost clyde at (30,1) moving down
-Ghost clyde at (31,2) moving right
-Ghost clyde moved to (31,3) direction down
-🔥 Power-up ativado na célula [37, 5] com nível FOURTH_QUARTILE
-Ghost clyde at (31,3) moving down
-Ghost blinky at (26,3) moving down
-Ghost clyde moved to (31,4) direction down
-Ghost clyde at (31,4) moving down
-Ghost blinky moved to (26,2) direction up
-Ghost blinky at (26,2) moving up
-Ghost blinky moved to (26,1) direction up
-Ghost clyde moved to (32,4) direction right
-Ghost blinky at (26,1) moving up
-Ghost clyde at (32,4) moving right
-Ghost blinky moved to (27,1) direction right
-Ghost clyde moved to (33,4) direction right
-Ghost blinky at (27,1) moving right
-Ghost eyes at (33,4) moving right
-Ghost eyes moved to (32,4) direction left
-Ghost pinky at (26,3) moving down
-Ghost eyes at (32,4) moving left
-Ghost pinky moved to (26,2) direction up
-Ghost eyes at (31,4) moving down
-Ghost blinky moved to (28,1) direction right
-Ghost pinky moved to (27,2) direction right
-Ghost blinky at (28,1) moving right
-Ghost blinky moved to (28,0) direction up
-Ghost pinky moved to (27,3) direction down
-Ghost blinky at (28,0) moving up
-Ghost pinky at (27,3) moving down
-Ghost eyes at (30,4) moving down
-Ghost blinky moved to (27,0) direction left
-Ghost pinky moved to (28,3) direction right
-Ghost blinky at (27,0) moving left
-Ghost pinky at (28,3) moving right
-Ghost eyes at (30,3) moving down
-Ghost pinky moved to (29,3) direction right
-Ghost pinky at (29,3) moving right
-Ghost blinky moved to (28,0) direction right
-Ghost blinky at (28,0) moving right
-Ghost eyes at (28,0) moving right
-Ghost eyes at (27,0) moving down
-Ghost pinky moved to (29,2) direction up
-Ghost eyes moved to (27,1) direction left
-Ghost eyes at (26,0) moving down
-Ghost pinky at (29,2) moving up
-Ghost eyes at (27,1) moving left
-Ghost pinky at (28,2) moving right
-Ghost eyes moved to (26,3) direction down
-Ghost pinky at (26,2) moving right
-Ghost pinky at (26,1) moving up
-Ghost pinky moved to (27,1) direction right
-Ghost pinky at (27,1) moving right
-Ghost pinky at (28,1) moving up
-Ghost pinky moved to (29,1) direction right
-Ghost pinky at (29,1) moving right
-Ghost pinky at (30,1) moving up
-Ghost pinky at (31,1) moving up
-Ghost pinky at (31,2) moving down
-Ghost eyes moved to (25,3) direction left
-Ghost eyes at (25,3) moving left
-Ghost pinky at (31,3) moving down
-Ghost eyes moved to (25,2) direction up
-Ghost eyes at (25,2) moving up
-Ghost pinky at (31,4) moving down
-Ghost pinky at (32,4) moving right
-Ghost pinky at (33,4) moving up
-Ghost pinky at (34,4) moving up
-Ghost pinky moved to (34,3) direction up
-Ghost pinky at (34,3) moving up
-Ghost pinky at (35,3) moving right
-Ghost pinky at (36,3) moving down
-Ghost pinky at (37,3) moving down
-Ghost pinky at (38,3) moving down
-Ghost pinky at (39,3) moving down
-Ghost pinky at (40,3) moving down
-Ghost pinky at (40,4) moving down
-Ghost pinky at (40,5) moving down
-Ghost pinky at (39,5) moving left
-Ghost pinky at (38,5) moving left
-Ghost pinky moved to (38,6) direction down
-Ghost pinky at (38,6) moving down
-Ghost pinky at (37,6) moving left
-Ghost pinky at (36,6) moving left
-Ghost pinky moved to (35,6) direction left
-Ghost pinky at (35,6) moving left
-Ghost pinky at (34,6) moving left
-Ghost pinky at (33,6) moving up
-Ghost clyde at (26,3) moving down
-Ghost clyde moved to (25,3) direction left
-Ghost pinky at (32,6) moving right
-Ghost clyde at (25,3) moving left
-Ghost pinky at (31,6) moving up
-Ghost clyde at (26,3) moving left
-Ghost pinky at (30,6) moving left
-Ghost pinky at (30,5) moving right
-Ghost blinky moved to (27,2) direction right
-Ghost blinky at (27,2) moving right
-Ghost blinky moved to (28,2) direction right
-Ghost blinky at (28,2) moving right
-Ghost blinky at (27,2) moving left
-Ghost blinky at (26,2) moving down
-Ghost blinky at (26,1) moving right
-Ghost blinky at (28,1) moving down
-Ghost blinky at (31,1) moving down
-Ghost blinky at (31,2) moving down
-Ghost pinky at (26,1) moving down
-Ghost pinky moved to (27,1) direction right
-Ghost blinky at (31,3) moving down
-Ghost blinky at (31,4) moving down
-Ghost pinky at (28,1) moving down
-Ghost blinky at (32,4) moving down
-Ghost pinky at (29,1) moving down
-Ghost blinky moved to (33,4) direction right
-Ghost blinky at (33,4) moving right
-Ghost blinky at (33,5) moving down
-Ghost pinky at (28,0) moving right
-Ghost blinky at (34,5) moving down
-Ghost pinky at (29,0) moving right
-Ghost blinky at (35,5) moving right
-Ghost pinky at (30,0) moving right
-Ghost blinky moved to (36,5) direction right
-Ghost blinky at (36,5) moving right
-Ghost pinky at (31,0) moving right
-Ghost blinky at (37,5) moving up
-Ghost pinky at (32,0) moving down
-Ghost blinky moved to (38,5) direction right
-Ghost blinky at (38,5) moving right
+Ghost inky moved to (26,2) direction right
 Ghost inky at (26,2) moving right
-Ghost pinky at (33,0) moving down
-Ghost blinky moved to (39,5) direction right
-Ghost inky moved to (27,2) direction right
-Ghost blinky at (39,5) moving right
-Ghost inky at (27,2) moving right
-Ghost pinky at (33,1) moving down
-Ghost blinky moved to (40,5) direction right
-Ghost inky moved to (27,3) direction down
-Ghost blinky at (40,5) moving right
-Ghost inky at (27,3) moving down
-Ghost pinky at (34,1) moving up
-Ghost inky moved to (28,3) direction right
-Ghost blinky at (40,4) moving up
-Ghost inky at (28,3) moving right
-Ghost pinky at (35,1) moving up
-Ghost blinky at (40,3) moving right
-Ghost pinky at (36,1) moving right
-Ghost blinky at (40,2) moving right
-Ghost inky at (27,2) moving down
-Ghost pinky at (37,1) moving right
-Ghost blinky moved to (41,2) direction right
-Ghost blinky at (41,2) moving right
-Ghost pinky at (38,1) moving down
-Ghost inky moved to (26,3) direction down
-Ghost blinky at (42,2) moving down
-Ghost pinky at (39,1) moving down
-Ghost inky moved to (26,2) direction up
-Ghost blinky at (43,2) moving down
-Ghost pinky at (40,1) moving down
-Ghost pinky moved to (40,2) direction down
-Ghost blinky at (44,2) moving down
-Ghost inky at (26,1) moving down
-Ghost pinky at (40,2) moving down
-Ghost pinky moved to (40,3) direction down
-Ghost blinky at (45,2) moving down
-Ghost inky at (27,1) moving down
-Ghost blinky at (46,2) moving down
-Ghost inky at (28,1) moving right
-Ghost pinky at (40,2) moving right
-🔥 Power-up ativado na célula [47, 5] com nível FOURTH_QUARTILE
-Ghost blinky at (46,3) moving down
-Ghost inky at (28,0) moving right
-Ghost pinky at (41,2) moving right
-Ghost clyde at (27,1) moving down
-Ghost inky moved to (29,0) direction right
-Ghost clyde moved to (28,1) direction right
-Ghost inky at (29,0) moving right
-Ghost clyde at (28,1) moving right
-Ghost inky moved to (30,0) direction right
-Ghost pinky moved to (42,2) direction right
-Ghost clyde moved to (29,1) direction right
-Ghost inky at (30,0) moving right
-Ghost pinky at (42,2) moving right
-Ghost clyde at (29,1) moving right
-Ghost inky moved to (31,0) direction right
-Ghost pinky moved to (42,3) direction down
-Ghost inky at (31,0) moving right
-Ghost pinky at (42,3) moving down
-Ghost blinky moved to (46,4) direction down
-Ghost pinky moved to (43,3) direction right
-Ghost clyde moved to (30,1) direction right
-🔥 Power-up ativado na célula [47, 1] com nível FOURTH_QUARTILE
-Ghost blinky at (46,4) moving down
-Ghost pinky at (43,3) moving right
-Ghost inky moved to (32,0) direction right
-Ghost pinky moved to (44,3) direction right
-Ghost inky at (32,0) moving right
-Ghost pinky at (44,3) moving right
-Ghost pinky moved to (45,3) direction right
-Ghost clyde moved to (30,2) direction down
-Ghost pinky at (45,3) moving right
-Ghost clyde at (30,2) moving down
-Ghost blinky moved to (46,5) direction down
-Ghost inky moved to (32,1) direction down
-Ghost pinky moved to (45,4) direction down
-Ghost clyde moved to (30,3) direction down
-Ghost blinky at (46,5) moving down
-Ghost inky at (32,1) moving down
-Ghost pinky at (45,4) moving down
-Ghost clyde at (30,3) moving down
-Ghost blinky moved to (45,5) direction left
-Ghost inky moved to (32,2) direction down
-Ghost blinky at (45,5) moving left
-Ghost inky at (32,2) moving down
-Ghost inky moved to (32,3) direction down
-Ghost inky at (32,3) moving down
-Ghost pinky moved to (46,4) direction right
-Ghost clyde moved to (31,3) direction right
-Ghost pinky at (46,4) moving right
-Ghost clyde at (31,3) moving right
-Ghost blinky moved to (45,4) direction up
-Ghost inky moved to (33,3) direction right
-Ghost clyde moved to (31,4) direction down
-Ghost blinky at (45,4) moving up
-Ghost inky at (33,3) moving right
-Ghost inky moved to (33,2) direction up
-Ghost inky at (33,2) moving up
-Ghost eyes at (45,4) moving up
-Ghost inky moved to (34,2) direction right
-Ghost clyde moved to (32,4) direction right
-Ghost eyes at (45,3) moving down
-Ghost inky at (34,2) moving right
-Ghost eyes at (46,4) moving right
-Ghost clyde moved to (33,4) direction right
-Ghost eyes at (44,3) moving down
-Ghost eyes at (45,4) moving down
-Ghost clyde at (33,4) moving right
-Ghost inky moved to (35,2) direction right
-Ghost eyes moved to (45,3) direction up
-Ghost eyes at (43,3) moving down
-Ghost inky at (35,2) moving right
-Ghost eyes at (45,3) moving up
-Ghost clyde moved to (33,5) direction down
-Ghost eyes at (42,3) moving down
-Ghost clyde at (33,5) moving down
-Ghost inky moved to (35,3) direction down
-Ghost clyde moved to (34,5) direction right
-Ghost eyes at (41,3) moving down
-Ghost inky at (35,3) moving down
-Ghost clyde at (34,5) moving right
-Ghost inky moved to (35,4) direction down
-Ghost eyes at (41,2) moving down
-Ghost inky at (35,4) moving down
-Ghost clyde at (35,5) moving right
-Ghost eyes at (40,2) moving down
-Ghost inky at (36,4) moving down
-Ghost clyde at (36,5) moving down
-Ghost eyes at (40,1) moving down
-Ghost inky at (36,3) moving down
-Ghost clyde at (37,5) moving down
-Ghost eyes at (39,1) moving down
-Ghost inky at (37,3) moving down
-Ghost clyde at (38,5) moving down
-Ghost eyes at (38,1) moving down
-Ghost inky at (38,3) moving right
-Ghost clyde at (39,5) moving down
-Ghost eyes at (37,1) moving down
-Ghost inky at (39,3) moving right
-Ghost clyde at (38,5) moving left
-🔥 Power-up ativado na célula [48, 5] com nível FOURTH_QUARTILE
-Ghost eyes at (36,1) moving down
-Ghost inky at (40,3) moving right
-Ghost clyde at (39,5) moving right
-Ghost eyes moved to (37,1) direction left
-Ghost clyde moved to (40,5) direction right
-Ghost eyes at (37,1) moving left
-Ghost clyde at (40,5) moving right
-Ghost inky moved to (40,4) direction down
-Ghost clyde moved to (41,5) direction right
-Ghost inky at (40,4) moving down
-Ghost clyde at (41,5) moving right
-Ghost clyde moved to (42,5) direction right
-Ghost clyde at (42,5) moving right
-Ghost clyde moved to (43,5) direction right
-Ghost clyde at (43,5) moving right
-Ghost clyde moved to (44,5) direction right
-Ghost clyde at (44,5) moving right
-Ghost inky moved to (41,4) direction right
-Ghost clyde moved to (43,5) direction left
-Ghost inky at (41,4) moving right
-Ghost clyde at (43,5) moving left
-Ghost inky moved to (41,5) direction down
-Ghost eyes moved to (36,1) direction left
-Ghost inky at (41,5) moving down
-Ghost eyes at (36,1) moving left
-Ghost eyes moved to (35,1) direction left
-Ghost eyes at (35,1) moving left
-Ghost eyes moved to (35,1) direction left
-Ghost inky moved to (42,5) direction right
-Ghost eyes moved to (34,1) direction left
-Ghost inky at (42,5) moving right
-Ghost eyes at (34,1) moving left
-Ghost eyes moved to (34,1) direction left
-Ghost inky moved to (43,5) direction right
-Ghost inky at (43,5) moving right
-Ghost inky moved to (44,5) direction right
-Ghost eyes moved to (33,1) direction left
-Ghost clyde moved to (44,5) direction right
-Ghost inky at (44,5) moving right
-Ghost eyes at (33,1) moving left
-Ghost eyes moved to (33,1) direction left
-Ghost inky moved to (44,4) direction up
-Ghost clyde moved to (44,6) direction down
-Ghost inky at (44,4) moving up
-Ghost clyde at (44,6) moving down
-Ghost eyes moved to (32,1) direction left
-Ghost eyes moved to (33,2) direction down
-Ghost eyes at (32,1) moving left
-Ghost inky at (43,4) moving up
-Ghost eyes at (33,2) moving down
-Ghost clyde at (43,6) moving left
-Ghost eyes moved to (32,2) direction down
-Ghost eyes moved to (33,3) direction down
-Ghost eyes at (32,2) moving down
-Ghost inky at (42,4) moving up
-Ghost eyes at (33,3) moving down
-Ghost clyde at (42,6) moving left
-Ghost eyes moved to (32,3) direction down
-Ghost eyes moved to (32,3) direction left
-Ghost eyes at (32,3) moving down
-Ghost inky at (41,4) moving up
-Ghost eyes at (32,3) moving left
-Ghost clyde at (41,6) moving left
-Ghost eyes moved to (32,2) direction up
-Ghost eyes moved to (33,3) direction right
-Ghost eyes at (32,2) moving up
-Ghost inky at (40,4) moving up
-Ghost eyes at (33,3) moving right
-Ghost clyde at (40,6) moving left
-Ghost eyes moved to (32,3) direction down
-Ghost eyes moved to (32,3) direction left
-Ghost inky at (40,5) moving left
-Ghost clyde at (39,6) moving left
-Ghost eyes moved to (33,3) direction right
-Ghost eyes moved to (33,3) direction right
-Ghost inky at (40,4) moving left
-Ghost clyde at (38,6) moving left
-Ghost eyes moved to (32,3) direction left
-Ghost eyes moved to (32,3) direction left
-Ghost clyde moved to (37,6) direction left
-Ghost inky at (40,3) moving up
-Ghost clyde at (37,6) moving left
-Ghost eyes moved to (32,2) direction up
-Ghost inky moved to (39,3) direction left
-Ghost eyes moved to (32,2) direction up
-Ghost inky at (39,3) moving left
-Ghost clyde at (36,6) moving left
-Ghost eyes moved to (32,3) direction down
-Ghost eyes moved to (32,3) direction down
-Ghost inky at (38,3) moving left
-Ghost clyde at (35,6) moving left
-Ghost eyes moved to (32,2) direction up
-Ghost eyes moved to (33,3) direction right
-Ghost inky at (37,3) moving up
-Ghost clyde at (34,6) moving left
-Ghost eyes moved to (32,3) direction down
-Ghost eyes moved to (32,3) direction left
-Ghost inky at (36,3) moving up
-Ghost clyde at (33,6) moving left
-Ghost eyes moved to (33,3) direction right
-Ghost eyes moved to (32,2) direction up
-Ghost inky at (35,3) moving up
-Ghost clyde at (32,6) moving left
-Ghost eyes moved to (32,3) direction left
-Ghost eyes moved to (32,3) direction down
-Ghost clyde moved to (31,6) direction left
-Ghost inky at (35,2) moving up
-Ghost clyde at (31,6) moving left
-Ghost eyes moved to (33,3) direction right
-Ghost eyes moved to (32,2) direction up
-Ghost inky at (34,2) moving up
-Ghost clyde at (30,6) moving left
-Ghost eyes moved to (32,3) direction left
-Ghost eyes moved to (32,3) direction down
-Ghost clyde at (31,6) moving up
-Ghost eyes moved to (33,3) direction right
-Ghost eyes moved to (33,3) direction right
-Ghost inky at (33,1) moving up
-Ghost clyde at (32,6) moving up
-Ghost eyes moved to (32,3) direction left
-Ghost eyes moved to (32,3) direction left
-Ghost inky at (33,2) moving right
-Ghost eyes moved to (33,3) direction right
-Ghost eyes moved to (33,3) direction right
-Ghost clyde moved to (30,6) direction left
-Ghost inky at (33,1) moving right
-Ghost eyes moved to (32,3) direction left
-Ghost eyes moved to (32,3) direction left
-Ghost inky at (34,1) moving up
-Ghost eyes moved to (32,2) direction up
-Ghost eyes moved to (32,2) direction up
-Ghost inky at (35,1) moving up
-Ghost eyes moved to (32,3) direction down
-Ghost eyes moved to (32,3) direction down
-Ghost clyde moved to (33,6) direction right
-Ghost inky at (36,1) moving up
-Ghost clyde at (33,6) moving right
-Ghost eyes moved to (32,2) direction up
-Ghost eyes moved to (33,3) direction right
-Ghost inky at (37,1) moving right
-Ghost clyde at (34,6) moving right
-Ghost eyes moved to (32,3) direction down
-Ghost eyes moved to (32,3) direction left
-Ghost inky at (38,1) moving right
-Ghost clyde at (35,6) moving right
-Ghost eyes moved to (33,3) direction right
-Ghost eyes moved to (32,2) direction up
-Ghost inky at (39,1) moving right
-Ghost clyde at (36,6) moving right
-Ghost eyes moved to (32,3) direction left
-Ghost eyes moved to (32,3) direction down
-Ghost inky at (40,1) moving right
-Ghost clyde at (37,6) moving right
-Ghost eyes moved to (33,3) direction right
-Ghost eyes moved to (32,2) direction up
-Ghost inky at (40,0) moving right
-Ghost clyde at (38,6) moving up
-Ghost eyes moved to (32,3) direction left
-Ghost eyes moved to (32,3) direction down
-Ghost clyde moved to (38,5) direction up
-Ghost inky at (41,0) moving right
-Ghost clyde at (38,5) moving up
-Ghost eyes moved to (33,3) direction right
-Ghost eyes moved to (32,2) direction up
-Ghost inky at (42,0) moving up
-Ghost clyde at (39,5) moving up
-Ghost eyes moved to (32,3) direction left
-Ghost eyes moved to (32,3) direction down
-Ghost inky at (43,0) moving up
-Ghost clyde at (40,5) moving up
-Ghost eyes moved to (32,2) direction up
-Ghost eyes moved to (33,3) direction right
-Ghost inky at (44,0) moving down
-Ghost clyde at (40,4) moving right
-Ghost eyes moved to (32,3) direction down
-Ghost eyes moved to (32,3) direction left
-Ghost inky at (45,0) moving down
-Ghost clyde at (40,3) moving down
-Ghost eyes moved to (32,2) direction up
-Ghost eyes moved to (32,2) direction up
-Ghost inky at (46,0) moving right
-Ghost clyde at (39,3) moving left
-Ghost eyes moved to (32,3) direction down
-Ghost eyes moved to (32,3) direction down
-Ghost inky at (47,0) moving down
-Ghost clyde at (40,3) moving right
-Ghost eyes moved to (33,3) direction right
-Ghost eyes moved to (32,2) direction up
-Ghost inky at (47,1) moving up
-Ghost eyes moved to (32,3) direction left
-Ghost eyes moved to (32,3) direction down
-Ghost inky at (47,2) moving left
-Ghost eyes moved to (33,3) direction right
-Ghost inky moved to (47,3) direction down
-Ghost eyes moved to (32,2) direction up
-Ghost clyde moved to (40,4) direction down
-Ghost inky at (47,3) moving down
-Ghost clyde at (40,4) moving down
-Ghost eyes moved to (32,3) direction left
-Ghost eyes moved to (32,3) direction down
-Ghost clyde moved to (40,5) direction down
-Ghost inky at (47,4) moving right
-Ghost clyde at (40,5) moving down
-Ghost eyes moved to (33,3) direction right
-Ghost eyes moved to (33,3) direction right
-Ghost inky at (47,5) moving down
-Ghost eyes moved to (32,3) direction left
-Ghost eyes moved to (32,3) direction left
-Ghost inky at (48,5) moving right
-Ghost eyes moved to (32,2) direction up
-Ghost eyes moved to (33,3) direction right
-Ghost clyde moved to (40,4) direction down
-Ghost inky at (49,5) moving right
-Ghost eyes moved to (32,3) direction down
-Ghost eyes moved to (32,3) direction left
-Ghost inky at (49,6) moving right
-Ghost eyes moved to (32,2) direction up
-Ghost eyes moved to (32,2) direction up
-Ghost clyde at (40,2) moving up
-Ghost eyes moved to (32,3) direction down
-Ghost eyes moved to (32,3) direction down
-Ghost clyde moved to (41,2) direction right
-Ghost clyde at (41,2) moving right
-Ghost eyes moved to (33,3) direction right
-Ghost inky moved to (49,4) direction up
-Ghost eyes moved to (33,3) direction right
-Ghost inky at (49,4) moving up
-Ghost clyde at (42,2) moving down
-Ghost eyes moved to (32,3) direction left
-Ghost eyes moved to (32,3) direction left
-Ghost inky at (49,3) moving left
-Ghost clyde at (43,2) moving down
-Ghost eyes moved to (32,2) direction up
-Ghost eyes moved to (33,3) direction right
-Ghost blinky at (30,1) moving right
-Ghost blinky at (30,2) moving right
-Ghost pinky moved to (26,1) direction up
-Ghost blinky at (33,4) moving down
-Ghost pinky at (27,1) moving down
-Ghost pinky moved to (28,1) direction right
-Ghost pinky at (28,1) moving right
-Ghost blinky at (35,5) moving down
-Ghost pinky moved to (30,1) direction right
-Ghost blinky at (36,5) moving down
-Ghost pinky at (30,1) moving right
-Ghost blinky at (37,5) moving down
-Ghost pinky at (31,1) moving right
-Ghost pinky moved to (31,2) direction down
-Ghost blinky at (38,5) moving down
-Ghost blinky at (39,5) moving down
-Ghost pinky moved to (31,4) direction down
-Ghost blinky moved to (41,5) direction right
-Ghost blinky at (41,5) moving right
-Ghost blinky at (42,5) moving up
-Ghost pinky at (33,4) moving down
-Ghost blinky moved to (26,3) direction down
-Ghost blinky at (27,1) moving down
-Ghost blinky moved to (28,1) direction right
-Ghost blinky at (29,1) moving right
-Ghost blinky moved to (31,4) direction down
-Ghost blinky moved to (35,6) direction down
-Ghost blinky at (35,6) moving down
-Ghost blinky at (36,6) moving right
-Ghost pinky at (30,0) moving down
-Ghost blinky at (37,6) moving up
-Ghost pinky at (31,0) moving left
-Ghost blinky at (38,6) moving up
-Ghost pinky at (32,0) moving right
-Ghost blinky at (39,6) moving up
-Ghost blinky at (40,6) moving up
-Ghost blinky at (41,6) moving up
-Ghost inky at (27,1) moving up
-Ghost pinky at (33,2) moving down
-Ghost pinky at (34,2) moving down
-Ghost blinky at (40,5) moving up
-Ghost pinky at (33,2) moving up
-Ghost pinky at (33,1) moving up
-Ghost pinky moved to (33,0) direction up
-Ghost inky at (30,0) moving down
-Ghost pinky at (33,0) moving up
-Ghost blinky at (40,2) moving up
-Ghost pinky at (34,0) moving right
-Ghost blinky at (41,2) moving up
-Ghost pinky at (35,0) moving down
-Ghost blinky at (42,2) moving right
-Ghost inky at (33,0) moving right
-Ghost pinky at (36,0) moving down
-Ghost blinky at (42,1) moving right
-Ghost inky at (34,0) moving up
-Ghost pinky at (37,0) moving down
-Ghost clyde moved to (27,2) direction right
-Ghost blinky at (43,1) moving right
-Ghost inky at (35,0) moving right
-Ghost pinky at (38,0) moving up
-Ghost clyde at (27,2) moving right
-Ghost blinky at (44,1) moving right
-Ghost inky at (36,0) moving right
-Ghost pinky at (39,0) moving up
-Ghost pinky moved to (39,1) direction down
-Ghost blinky at (45,1) moving right
-Ghost inky at (37,0) moving right
-Ghost pinky moved to (40,1) direction right
-Ghost blinky at (46,1) moving right
-Ghost inky at (38,0) moving right
-Ghost pinky at (40,1) moving right
-Ghost blinky at (47,1) moving down
-Ghost inky at (39,0) moving down
-Ghost clyde at (28,1) moving down
-Ghost blinky moved to (47,2) direction down
-Ghost blinky at (47,2) moving down
-Ghost inky at (40,0) moving down
-Ghost pinky at (41,2) moving down
-Ghost clyde at (28,0) moving down
-Ghost blinky moved to (48,2) direction right
-Ghost blinky at (48,2) moving right
-Ghost inky at (41,0) moving down
-Ghost pinky at (42,2) moving down
-Ghost clyde at (29,0) moving down
-Ghost inky moved to (42,0) direction right
-Ghost inky at (42,0) moving right
-Ghost clyde at (30,0) moving down
-Ghost blinky moved to (47,3) direction down
-Ghost clyde moved to (31,0) direction right
-Ghost blinky at (47,3) moving down
-Ghost inky at (43,0) moving left
-Ghost clyde at (31,0) moving right
-Ghost clyde moved to (32,0) direction right
-Ghost blinky at (47,4) moving right
-Ghost inky at (44,0) moving right
-Ghost pinky at (43,2) moving up
-Ghost clyde at (32,0) moving right
-Ghost blinky at (47,5) moving right
-Ghost inky at (45,0) moving up
-Ghost pinky at (44,2) moving up
-Ghost clyde at (33,0) moving right
-Ghost clyde moved to (33,1) direction down
-Ghost blinky at (48,5) moving up
-Ghost inky at (46,0) moving up
-Ghost pinky at (45,2) moving up
-Ghost clyde at (33,1) moving down
-Ghost blinky at (49,5) moving up
-Ghost inky at (47,0) moving up
-Ghost pinky at (46,2) moving up
-Ghost clyde at (34,1) moving up
-Ghost blinky at (49,4) moving right
-Ghost pinky at (46,3) moving right
-Ghost clyde at (35,1) moving right
-Ghost pinky moved to (45,3) direction left
-Ghost blinky at (49,3) moving right
-Ghost inky at (47,2) moving right
-Ghost pinky at (45,3) moving left
-Ghost clyde at (36,1) moving right
-Ghost blinky moved to (50,3) direction right
-🔥 Power-up ativado na célula [50, 2] com nível FOURTH_QUARTILE
-Ghost blinky at (50,3) moving right
-Ghost inky at (47,3) moving up
-Ghost pinky at (46,3) moving up
-Ghost clyde at (37,1) moving up
-Ghost blinky moved to (51,3) direction right
-Ghost inky moved to (47,2) direction up
-Ghost blinky at (51,3) moving right
-Ghost inky at (47,2) moving up
-Ghost pinky moved to (46,2) direction up
-Ghost clyde moved to (38,1) direction right
-Ghost eyes at (51,3) moving right
-Ghost clyde at (38,1) moving right
-Ghost eyes at (50,3) moving down
-Ghost inky moved to (47,1) direction up
-Ghost pinky moved to (45,2) direction left
-Ghost eyes at (49,3) moving down
-Ghost pinky at (45,2) moving left
-Ghost inky moved to (48,1) direction right
-Ghost eyes at (49,4) moving down
-Ghost inky at (48,1) moving right
-Ghost pinky moved to (46,2) direction right
-Ghost clyde moved to (39,1) direction right
-Ghost eyes at (49,5) moving down
-Ghost pinky at (46,2) moving right
-Ghost clyde at (39,1) moving right
-Ghost inky moved to (48,0) direction up
-Ghost clyde moved to (40,1) direction right
-Ghost eyes at (48,5) moving down
-Ghost inky at (48,0) moving up
-Ghost clyde at (40,1) moving right
-Ghost inky moved to (47,0) direction left
-Ghost pinky moved to (46,3) direction down
-Ghost clyde moved to (40,2) direction down
-Ghost eyes at (47,5) moving down
-Ghost inky at (47,0) moving left
-Ghost pinky at (46,3) moving down
-Ghost clyde at (40,2) moving down
-Ghost eyes at (46,5) moving down
-Ghost inky moved to (48,0) direction right
-Ghost clyde moved to (41,2) direction right
-Ghost eyes at (45,5) moving down
-Ghost inky at (48,0) moving right
-Ghost pinky moved to (46,2) direction up
-Ghost clyde moved to (42,2) direction right
-Ghost clyde at (42,2) moving right
-Ghost clyde moved to (43,2) direction right
-Ghost clyde at (43,2) moving right
-Ghost clyde moved to (44,2) direction right
-Ghost clyde at (44,2) moving right
-Ghost pinky moved to (45,2) direction left
-Ghost inky moved to (48,1) direction down
-Ghost clyde moved to (45,2) direction right
-Ghost inky at (48,1) moving down
-Ghost clyde at (45,2) moving right
-Ghost pinky moved to (46,2) direction right
-Ghost inky at (47,1) moving down
-Ghost clyde at (44,2) moving left
-Ghost inky at (46,1) moving down
-Ghost pinky at (45,2) moving down
-Ghost clyde at (43,2) moving left
-Ghost clyde moved to (43,3) direction down
-Ghost pinky at (45,3) moving down
-Ghost clyde at (43,3) moving down
-Ghost eyes moved to (41,3) direction down
-Ghost pinky moved to (45,4) direction down
-Ghost inky at (47,2) moving down
-Ghost clyde at (42,3) moving left
-Ghost clyde at (41,3) moving left
-Ghost pinky at (46,5) moving right
-Ghost clyde at (41,2) moving left
-Ghost clyde moved to (41,3) direction down
-Ghost inky at (47,5) moving right
-Ghost pinky at (47,5) moving right
-Ghost clyde at (41,3) moving down
-Ghost clyde moved to (41,2) direction up
-Ghost pinky at (48,5) moving right
-Ghost clyde at (41,2) moving up
-Ghost clyde moved to (40,2) direction left
-Ghost pinky at (49,5) moving right
-Ghost clyde at (40,2) moving left
-Ghost pinky moved to (49,6) direction down
-Ghost pinky at (49,6) moving down
-Ghost clyde at (42,2) moving up
-Ghost eyes at (35,1) moving down
-Ghost pinky at (48,5) moving left
-Ghost pinky moved to (47,5) direction left
-Ghost clyde moved to (43,3) direction down
-Ghost eyes at (34,1) moving down
-Ghost inky at (48,5) moving left
-Ghost pinky at (47,5) moving left
-Ghost inky moved to (48,6) direction down
-Ghost eyes at (33,1) moving down
-Ghost inky at (48,6) moving down
-Ghost pinky at (48,5) moving up
-Ghost eyes at (32,1) moving down
-Ghost inky at (49,6) moving up
-Ghost pinky at (49,5) moving up
-Ghost inky moved to (49,5) direction up
-Ghost eyes at (32,0) moving down
-Ghost inky at (49,5) moving up
-Ghost pinky at (49,4) moving right
-Ghost clyde at (42,3) moving right
-Ghost inky moved to (49,4) direction up
-Ghost eyes at (31,0) moving down
-Ghost pinky at (49,3) moving up
-Ghost clyde at (43,3) moving up
-Ghost pinky moved to (50,3) direction right
-🔥 Power-up ativado na célula [50, 1] com nível FOURTH_QUARTILE
-Ghost eyes at (30,0) moving down
-Ghost pinky at (50,3) moving right
-Ghost pinky moved to (51,3) direction right
-Ghost clyde moved to (41,3) direction left
-Ghost pinky at (51,3) moving right
-Ghost pinky moved to (51,2) direction up
-Ghost clyde moved to (41,2) direction up
-Ghost eyes at (51,2) moving up
-Ghost inky moved to (48,5) direction left
-Ghost eyes at (51,3) moving down
-Ghost clyde moved to (41,3) direction down
-Ghost eyes moved to (29,0) direction left
-Ghost inky moved to (48,6) direction down
-Ghost clyde moved to (42,3) direction right
-Ghost eyes at (29,0) moving left
-Ghost inky moved to (48,5) direction up
-Ghost clyde moved to (41,3) direction left
-Ghost inky at (48,5) moving up
-Ghost eyes moved to (28,0) direction left
-Ghost eyes at (28,0) moving left
-Ghost inky moved to (49,5) direction right
-Ghost inky moved to (48,5) direction left
-Ghost clyde moved to (41,2) direction up
-Ghost clyde moved to (41,3) direction down
-Ghost inky moved to (49,5) direction right
-Ghost clyde moved to (41,2) direction up
-Ghost eyes at (49,5) moving right
-Ghost clyde moved to (41,3) direction down
-Ghost eyes moved to (28,1) direction down
-Ghost clyde moved to (41,2) direction up
-Ghost eyes moved to (27,1) direction left
-Ghost eyes moved to (26,1) direction left
-Ghost clyde moved to (40,2) direction left
-Ghost eyes at (26,1) moving left
-Ghost eyes moved to (26,2) direction down
-Ghost clyde moved to (40,3) direction down
-Ghost eyes moved to (26,3) direction down
-Ghost eyes moved to (26,2) direction up
-Ghost eyes at (26,2) moving up
-Ghost eyes moved to (27,2) direction right
-Ghost clyde moved to (42,2) direction right
-Ghost eyes at (27,2) moving right
-Ghost eyes moved to (27,3) direction down
-Ghost eyes at (27,3) moving down
-Ghost eyes moved to (28,3) direction right
-Ghost clyde moved to (40,2) direction left
-Ghost eyes at (28,3) moving right
-Ghost eyes moved to (27,3) direction left
-Ghost eyes at (27,3) moving left
-Ghost clyde at (40,1) moving left
-Ghost eyes moved to (28,3) direction right
-Ghost clyde at (40,2) moving right
-Ghost eyes moved to (29,3) direction right
-Ghost eyes at (29,3) moving right
-Ghost eyes moved to (28,3) direction left
-Ghost eyes at (28,3) moving left
-Ghost eyes moved to (29,3) direction right
-Ghost eyes moved to (34,1) direction left
-Ghost eyes moved to (28,3) direction left
-Ghost eyes moved to (28,2) direction up
-Ghost eyes at (28,2) moving up
-Ghost eyes moved to (28,3) direction down
-Ghost eyes at (28,3) moving down
-Ghost eyes moved to (29,3) direction right
-Ghost eyes moved to (35,1) direction left
-Ghost eyes moved to (28,3) direction left
-Ghost clyde moved to (43,3) direction down
-Ghost eyes moved to (27,3) direction left
-Ghost eyes at (29,0) moving down
-Ghost eyes moved to (28,3) direction right
-Ghost eyes moved to (33,2) direction down
-Ghost eyes at (28,0) moving down
-Ghost eyes moved to (27,3) direction left
-Ghost eyes moved to (33,3) direction down
-Ghost eyes moved to (27,0) direction left
-Ghost eyes at (27,0) moving left
-Ghost eyes moved to (28,3) direction right
-Ghost eyes moved to (27,1) direction down
-Ghost clyde moved to (42,2) direction up
-Ghost eyes moved to (28,2) direction up
-Ghost clyde at (43,2) moving up
-Ghost eyes moved to (28,3) direction down
-Ghost eyes moved to (29,3) direction right
-Ghost eyes moved to (26,3) direction down
-Ghost eyes moved to (28,3) direction left
-Ghost eyes moved to (25,3) direction left
-Ghost eyes moved to (28,2) direction up
-Ghost eyes at (26,3) moving right
-Ghost eyes moved to (28,3) direction down
-Ghost clyde at (42,2) moving left
-Ghost eyes moved to (28,2) direction up
-Ghost eyes moved to (28,3) direction down
-Ghost eyes moved to (29,3) direction right
-Ghost eyes moved to (28,3) direction left
-Ghost eyes moved to (28,2) direction up
-Ghost eyes moved to (26,2) direction down
-Ghost clyde moved to (43,2) direction right
-Ghost eyes moved to (28,3) direction down
-Ghost eyes moved to (27,3) direction left
-Ghost eyes moved to (28,3) direction right
-Ghost eyes moved to (27,3) direction left
-Ghost eyes moved to (28,3) direction right
-Ghost eyes moved to (29,3) direction right
-Ghost eyes moved to (28,3) direction left
-Ghost eyes moved to (28,2) direction up
-Ghost clyde moved to (40,3) direction down
-Ghost eyes moved to (28,3) direction down
-Ghost eyes moved to (29,3) direction right
-Ghost eyes moved to (28,3) direction left
-Ghost eyes moved to (27,3) direction left
-Ghost clyde at (38,3) moving left
-Ghost eyes moved to (28,3) direction right
-Ghost clyde at (37,3) moving left
-Ghost eyes moved to (29,3) direction right
-Ghost clyde moved to (37,4) direction down
-Ghost clyde at (37,4) moving down
-Ghost eyes moved to (28,3) direction left
-Ghost clyde at (38,4) moving right
-Ghost eyes moved to (27,3) direction left
-Ghost clyde at (37,4) moving left
-Ghost eyes moved to (28,3) direction right
-Ghost eyes moved to (29,3) direction right
-Ghost clyde at (36,3) moving left
-Ghost eyes moved to (28,3) direction left
-Ghost clyde at (35,3) moving left
-Ghost eyes moved to (28,2) direction up
-Ghost clyde at (35,2) moving left
-Ghost eyes moved to (28,3) direction down
-Ghost clyde at (34,2) moving left
-Ghost eyes moved to (27,3) direction left
-Ghost clyde moved to (33,2) direction left
-Ghost clyde at (33,2) moving left
-Ghost eyes moved to (28,3) direction right
-Ghost pinky at (26,3) moving right
-Ghost clyde at (32,2) moving left
-Ghost eyes moved to (28,2) direction up
-Ghost pinky at (26,2) moving down
-Ghost clyde at (33,2) moving down
-Ghost eyes moved to (28,3) direction down
-Ghost pinky at (26,1) moving right
-Ghost eyes moved to (27,3) direction left
-Ghost clyde at (32,1) moving left
-Ghost eyes moved to (28,3) direction right
-Ghost clyde at (32,0) moving left
-Ghost eyes moved to (27,3) direction left
-Ghost pinky moved to (29,1) direction right
-Ghost clyde at (31,0) moving left
-Ghost eyes moved to (28,3) direction right
-Ghost pinky moved to (30,1) direction right
-Ghost clyde moved to (30,0) direction left
-Ghost clyde at (30,0) moving left
-Ghost eyes moved to (29,3) direction right
-Ghost pinky at (30,2) moving right
-Ghost clyde at (29,0) moving left
-Ghost eyes moved to (28,3) direction left
-Ghost inky moved to (25,3) direction left
-Ghost pinky moved to (31,2) direction right
-Ghost clyde moved to (28,0) direction left
-Ghost inky at (25,3) moving left
-Ghost pinky at (31,2) moving right
-Ghost clyde at (28,0) moving left
-Ghost eyes moved to (28,2) direction up
-Ghost clyde moved to (28,1) direction down
+Ghost blinky moved to (26,3) direction right
+Ghost clyde at (27,2) moving up
+Ghost blinky moved to (25,3) direction left
+Ghost inky moved to (25,2) direction left
+Ghost pinky moved to (25,2) direction left
+Ghost inky at (25,2) moving left
+Ghost pinky at (25,2) moving left
+Ghost clyde moved to (27,3) direction down
+Ghost clyde at (27,3) moving down
+Ghost blinky moved to (26,3) direction right
+Ghost inky moved to (25,3) direction down
+Ghost inky at (25,3) moving down
+Ghost inky moved to (26,3) direction right
 Ghost inky at (26,3) moving right
-Ghost pinky at (30,2) moving left
-Ghost eyes moved to (28,3) direction down
+Ghost blinky moved to (25,3) direction left
 Ghost inky moved to (26,2) direction up
-Ghost pinky at (30,3) moving left
-Ghost clyde at (27,1) moving left
-Ghost eyes moved to (27,3) direction left
+Ghost clyde moved to (26,3) direction left
+Ghost inky at (26,2) moving up
+Ghost clyde at (26,3) moving left
+🔥 Power-up ativado na célula [30, 4] com nível FOURTH_QUARTILE
+Ghost blinky moved to (26,3) direction right
 Ghost inky moved to (27,2) direction right
-Ghost pinky at (30,4) moving left
-Ghost eyes moved to (28,3) direction right
-Ghost pinky moved to (29,4) direction left
+Ghost inky at (27,2) moving right
+Ghost blinky moved to (27,3) direction right
+Ghost inky moved to (27,3) direction down
+Ghost clyde moved to (25,3) direction left
+Ghost blinky at (27,3) moving right
+Ghost inky at (27,3) moving down
+Ghost clyde at (25,3) moving left
+Ghost inky moved to (27,2) direction up
+Ghost clyde moved to (25,2) direction up
+Ghost inky at (27,2) moving up
+Ghost clyde at (25,2) moving up
+Ghost blinky moved to (27,2) direction up
+Ghost pinky moved to (26,2) direction right
+Ghost clyde moved to (25,3) direction down
+Ghost blinky at (27,2) moving up
+Ghost pinky at (26,2) moving right
+Ghost clyde at (25,3) moving down
+Ghost blinky moved to (27,3) direction down
+Ghost pinky moved to (27,2) direction right
+Ghost blinky at (27,3) moving down
+Ghost pinky at (27,2) moving right
+Ghost blinky moved to (27,2) direction up
+Ghost clyde moved to (25,2) direction up
+Ghost blinky moved to (27,3) direction down
+Ghost inky moved to (27,3) direction down
+Ghost blinky moved to (26,3) direction left
+Ghost inky moved to (27,2) direction up
+Ghost pinky moved to (27,3) direction down
+Ghost clyde moved to (25,3) direction down
+Ghost blinky at (26,3) moving left
+Ghost pinky at (27,3) moving down
+Ghost blinky moved to (27,3) direction right
+Ghost inky moved to (27,3) direction down
+Ghost pinky moved to (27,2) direction up
+Ghost clyde moved to (26,3) direction right
+Ghost pinky at (27,2) moving up
+Ghost clyde at (26,3) moving right
+Ghost blinky moved to (26,3) direction left
+Ghost inky moved to (26,3) direction left
+Ghost inky at (26,3) moving left
+Ghost inky moved to (27,3) direction right
+Ghost clyde moved to (25,3) direction left
+Ghost inky at (27,3) moving right
+Ghost inky moved to (26,3) direction left
+Ghost pinky moved to (27,3) direction down
+Ghost blinky moved to (27,3) direction right
+Ghost inky moved to (27,3) direction right
+Ghost clyde moved to (26,3) direction right
+Ghost blinky moved to (26,3) direction left
+Ghost inky moved to (27,2) direction up
+Ghost clyde moved to (25,3) direction left
+Ghost blinky moved to (25,3) direction left
+Ghost pinky moved to (26,3) direction left
+Ghost pinky at (26,3) moving left
+Ghost clyde moved to (25,2) direction up
+Ghost pinky moved to (25,3) direction left
+Ghost pinky at (25,3) moving left
+Ghost blinky moved to (25,2) direction up
+Ghost blinky at (25,2) moving up
+Ghost pinky moved to (26,3) direction right
+Ghost pinky at (26,3) moving right
+Ghost blinky moved to (25,3) direction down
+Ghost inky moved to (27,3) direction down
+Ghost pinky moved to (25,3) direction left
+Ghost inky moved to (26,3) direction left
+Ghost blinky moved to (26,3) direction right
+Ghost blinky moved to (25,3) direction left
+Ghost pinky moved to (26,3) direction right
+Ghost clyde moved to (25,3) direction down
+Ghost inky moved to (27,3) direction right
+Ghost blinky moved to (26,3) direction right
+Ghost inky moved to (27,2) direction up
+Ghost clyde moved to (26,3) direction right
+Ghost blinky moved to (27,3) direction right
+Ghost inky moved to (26,2) direction left
 Ghost inky at (26,2) moving left
-Ghost pinky at (29,4) moving left
-Ghost clyde at (25,1) moving left
-Ghost eyes moved to (29,3) direction right
-Ghost eyes moved to (28,3) direction left
-Ghost inky at (25,1) moving right
-Ghost pinky at (30,5) moving left
-Ghost clyde at (24,0) moving left
-Ghost eyes moved to (29,3) direction right
-Ghost clyde moved to (23,0) direction left
-Ghost inky at (24,1) moving right
-Ghost clyde at (23,0) moving left
-Ghost eyes moved to (28,3) direction left
-Ghost pinky moved to (29,6) direction left
-Ghost clyde moved to (22,0) direction left
-Ghost inky at (23,1) moving right
-Ghost pinky at (29,6) moving left
-Ghost eyes moved to (28,2) direction up
-Ghost clyde moved to (21,0) direction left
-Ghost inky at (22,1) moving right
-Ghost pinky at (28,6) moving left
-Ghost eyes moved to (28,3) direction down
-Ghost inky at (22,2) moving down
-Ghost pinky at (27,6) moving left
-Ghost clyde at (20,0) moving left
-Ghost eyes moved to (29,3) direction right
-Ghost pinky moved to (26,6) direction left
-Ghost inky at (22,3) moving left
-Ghost pinky at (26,6) moving left
-Ghost eyes moved to (28,3) direction left
-Ghost inky at (22,4) moving left
-Ghost pinky at (25,6) moving left
-Ghost clyde at (18,0) moving left
-Ghost eyes moved to (28,2) direction up
-Ghost inky at (21,4) moving down
-Ghost pinky at (24,6) moving left
-Ghost clyde at (17,0) moving left
-Ghost eyes moved to (28,3) direction down
-Ghost pinky moved to (23,6) direction left
-Ghost inky at (20,4) moving down
-Ghost pinky at (23,6) moving left
-Ghost eyes moved to (27,3) direction left
-Ghost clyde moved to (15,0) direction left
-Ghost inky at (19,4) moving down
-Ghost pinky at (22,6) moving left
-Ghost eyes moved to (28,3) direction right
-Ghost inky at (19,5) moving down
-Ghost pinky at (21,6) moving left
-Ghost eyes moved to (28,2) direction up
-Ghost inky at (18,5) moving down
-Ghost pinky at (20,6) moving left
-Ghost clyde at (13,0) moving left
-Ghost eyes moved to (28,3) direction down
-Ghost inky at (17,5) moving down
-Ghost pinky at (19,6) moving left
-Ghost clyde at (12,0) moving left
-Ghost eyes moved to (27,3) direction left
-Ghost inky at (16,5) moving down
-Ghost pinky at (18,6) moving left
-Ghost clyde at (11,0) moving left
-Ghost eyes moved to (28,3) direction right
-Ghost inky at (15,5) moving down
-Ghost pinky at (17,6) moving left
-Ghost clyde at (10,0) moving left
-Ghost eyes moved to (28,2) direction up
-Ghost inky moved to (14,5) direction left
-Ghost inky at (14,5) moving left
-Ghost pinky at (16,6) moving left
-Ghost clyde at (9,0) moving left
-Ghost eyes moved to (28,3) direction down
-Ghost inky at (13,5) moving down
-Ghost pinky at (15,6) moving left
-Ghost clyde at (8,0) moving left
-Ghost eyes moved to (27,3) direction left
-Ghost inky moved to (12,5) direction left
-Ghost pinky moved to (14,6) direction left
-Ghost inky at (12,5) moving left
-Ghost pinky at (14,6) moving left
-Ghost clyde at (7,0) moving left
-Ghost eyes moved to (28,3) direction right
-Ghost pinky moved to (13,6) direction left
-Ghost inky at (11,5) moving down
-Ghost pinky at (13,6) moving left
-Ghost clyde at (6,0) moving left
-Ghost eyes moved to (27,3) direction left
-Ghost clyde moved to (5,0) direction left
-Ghost inky at (12,5) moving down
-Ghost pinky at (12,6) moving left
-Ghost clyde at (5,0) moving left
-Ghost eyes moved to (28,3) direction right
-Ghost inky at (12,4) moving left
-Ghost pinky at (12,5) moving down
-Ghost clyde at (5,1) moving left
-Ghost eyes moved to (27,3) direction left
-Ghost pinky moved to (11,5) direction left
-Ghost inky at (12,3) moving down
-Ghost pinky at (11,5) moving left
-Ghost clyde at (5,2) moving left
-Ghost eyes moved to (28,3) direction right
-Ghost clyde moved to (5,3) direction down
-Ghost inky at (12,2) moving left
-Ghost pinky at (12,5) moving left
-Ghost clyde at (5,3) moving down
-Ghost eyes moved to (27,3) direction left
-Ghost pinky moved to (12,4) direction up
-Ghost inky at (12,3) moving left
-Ghost pinky at (12,4) moving up
-Ghost clyde at (5,4) moving left
-Ghost eyes moved to (28,3) direction right
-Ghost clyde moved to (4,4) direction left
-Ghost inky at (12,4) moving down
-Ghost pinky at (11,4) moving down
-Ghost clyde at (4,4) moving left
-Ghost eyes moved to (27,3) direction left
-Ghost inky at (11,4) moving down
-Ghost pinky at (10,4) moving down
-Ghost eyes moved to (28,3) direction right
-Ghost clyde at (5,5) moving left
-Ghost eyes moved to (27,3) direction left
-Ghost pinky moved to (12,4) direction right
-Ghost clyde moved to (4,5) direction left
-Ghost pinky at (12,4) moving right
-Ghost clyde at (4,5) moving left
-Ghost eyes moved to (28,3) direction right
-Ghost inky moved to (12,6) direction down
-Ghost blinky at (25,1) moving right
-Ghost blinky at (24,1) moving right
-Ghost blinky at (23,1) moving right
-Ghost blinky at (22,1) moving right
-Ghost blinky at (22,2) moving down
-Ghost blinky at (22,3) moving left
-Ghost blinky at (22,4) moving left
-Ghost blinky at (21,4) moving down
-Ghost blinky at (20,4) moving down
-Ghost pinky moved to (25,2) direction left
-Ghost blinky at (19,4) moving down
-Ghost blinky at (19,5) moving down
-Ghost blinky at (18,5) moving down
-Ghost blinky at (17,5) moving down
-Ghost pinky at (25,1) moving down
-Ghost blinky moved to (17,6) direction down
-Ghost blinky at (17,6) moving down
-Ghost pinky at (24,1) moving down
-Ghost blinky at (16,6) moving up
-Ghost pinky at (24,0) moving down
-Ghost pinky moved to (23,0) direction left
-Ghost blinky at (15,6) moving up
-Ghost blinky at (14,6) moving up
-Ghost blinky at (13,6) moving up
-Ghost blinky at (12,6) moving up
-Ghost pinky at (20,0) moving left
-Ghost inky moved to (24,2) direction left
-Ghost blinky at (12,5) moving up
-Ghost inky at (24,2) moving left
-Ghost pinky at (19,0) moving left
-Ghost blinky at (12,4) moving up
-Ghost pinky at (19,1) moving left
-Ghost blinky at (13,4) moving up
-Ghost pinky at (19,2) moving down
-Ghost pinky moved to (18,2) direction left
-Ghost blinky at (14,4) moving up
-Ghost pinky at (18,2) moving left
-Ghost pinky moved to (17,2) direction left
-Ghost blinky at (15,4) moving right
-Ghost inky at (25,1) moving down
-Ghost pinky at (17,2) moving left
-Ghost inky moved to (24,1) direction left
-Ghost blinky at (15,3) moving down
-Ghost pinky at (17,3) moving down
-Ghost inky moved to (23,1) direction left
-Ghost blinky at (16,3) moving down
-Ghost inky at (23,1) moving left
-Ghost pinky at (18,3) moving right
-Ghost blinky moved to (18,5) direction left
-Ghost blinky at (18,5) moving left
-Ghost blinky moved to (18,6) direction down
-Ghost blinky at (18,6) moving down
-Ghost pinky at (23,1) moving down
-Ghost blinky at (17,6) moving up
-Ghost pinky at (23,1) moving left
-Ghost pinky at (22,1) moving left
-Ghost blinky moved to (13,5) direction up
-Ghost pinky moved to (24,0) direction up
-Ghost blinky at (13,5) moving up
-Ghost pinky at (24,0) moving up
-Ghost blinky moved to (12,4) direction up
-Ghost inky moved to (25,2) direction left
-Ghost pinky at (22,0) moving down
-Ghost inky moved to (24,2) direction left
-Ghost blinky at (12,3) moving right
-Ghost pinky at (21,0) moving down
-Ghost pinky moved to (20,0) direction left
-Ghost blinky at (12,2) moving right
-Ghost blinky at (12,1) moving right
-Ghost pinky at (20,1) moving down
-Ghost inky moved to (25,2) direction left
-Ghost blinky at (13,1) moving up
-Ghost pinky at (19,1) moving up
-Ghost blinky at (14,1) moving up
-Ghost pinky at (20,1) moving right
-Ghost blinky at (15,1) moving up
-Ghost inky at (26,1) moving up
-Ghost pinky at (20,0) moving right
-Ghost inky moved to (26,0) direction up
-Ghost blinky at (16,1) moving right
-Ghost inky at (26,0) moving up
-Ghost blinky at (17,1) moving right
-Ghost inky at (25,0) moving down
-Ghost pinky moved to (21,0) direction right
-Ghost blinky at (18,1) moving right
-Ghost inky at (26,0) moving down
-Ghost pinky at (21,0) moving right
-Ghost blinky at (19,1) moving down
-Ghost inky at (25,0) moving left
-Ghost blinky moved to (33,4) direction right
-Ghost pinky moved to (30,1) direction right
-Ghost blinky moved to (37,5) direction right
-Ghost blinky at (37,5) moving right
-Ghost blinky moved to (38,6) direction down
-Ghost blinky at (38,6) moving down
-Ghost pinky at (31,4) moving right
-Ghost blinky moved to (41,5) direction up
-Ghost blinky at (41,5) moving up
-Ghost inky at (26,1) moving right
-Ghost pinky at (34,4) moving down
-Ghost pinky moved to (29,1) direction right
-Ghost pinky moved to (29,1) direction right
-Ghost blinky moved to (37,6) direction down
-Ghost blinky at (37,6) moving down
-Ghost blinky moved to (38,6) direction right
-Ghost pinky moved to (29,1) direction right
-Ghost blinky at (38,6) moving right
-Ghost pinky moved to (30,1) direction right
-Ghost blinky moved to (41,5) direction up
-Ghost pinky moved to (31,2) direction down
-Ghost blinky at (40,5) moving left
-Ghost inky moved to (28,1) direction right
-Ghost blinky at (40,4) moving left
-Ghost pinky at (31,3) moving right
-Ghost blinky at (39,4) moving left
-Ghost inky at (29,1) moving down
-Ghost blinky at (38,4) moving up
-Ghost pinky at (32,4) moving up
-Ghost inky moved to (29,1) direction right
-Ghost pinky moved to (33,4) direction right
-Ghost blinky at (37,4) moving left
-Ghost inky at (29,1) moving right
-Ghost pinky at (33,4) moving right
-Ghost blinky at (37,3) moving left
-Ghost inky at (28,1) moving down
-Ghost blinky at (36,3) moving up
-Ghost blinky at (35,3) moving left
-Ghost blinky at (35,2) moving left
-Ghost inky at (27,1) moving right
-Ghost blinky at (34,2) moving left
-Ghost pinky at (30,4) moving right
-Ghost blinky at (33,2) moving up
-Ghost pinky at (30,3) moving right
-Ghost inky moved to (28,1) direction right
-Ghost clyde moved to (24,1) direction left
-Ghost blinky at (32,2) moving up
-Ghost blinky at (32,1) moving left
-Ghost blinky at (32,0) moving left
-Ghost pinky at (29,1) moving up
-Ghost blinky at (31,0) moving left
-Ghost blinky moved to (30,0) direction left
-Ghost clyde moved to (21,0) direction left
-Ghost blinky at (30,0) moving left
-Ghost pinky at (27,1) moving up
-Ghost pinky moved to (26,1) direction left
-Ghost blinky at (29,0) moving left
-Ghost inky at (24,0) moving left
-Ghost blinky moved to (28,0) direction left
-Ghost pinky moved to (25,1) direction left
-Ghost blinky at (28,0) moving left
-Ghost blinky at (27,0) moving down
-Ghost inky at (23,1) moving down
-Ghost clyde moved to (17,0) direction left
-Ghost blinky at (26,0) moving down
-Ghost pinky at (23,1) moving right
-Ghost clyde moved to (18,1) direction down
-Ghost blinky at (26,2) moving right
-Ghost clyde at (18,1) moving down
-Ghost clyde moved to (19,1) direction right
-Ghost clyde at (19,1) moving right
-Ghost blinky at (28,2) moving down
-Ghost pinky at (27,1) moving left
-Ghost clyde at (20,1) moving down
-Ghost pinky moved to (28,1) direction right
-Ghost blinky moved to (29,1) direction right
-Ghost blinky moved to (31,1) direction right
-Ghost blinky at (31,1) moving right
-Ghost blinky at (31,4) moving right
-Ghost blinky at (32,4) moving right
-Ghost pinky moved to (25,2) direction left
-Ghost blinky at (40,5) moving down
-Ghost blinky moved to (40,6) direction down
-Ghost pinky moved to (30,0) direction right
-Ghost blinky at (40,6) moving down
-Ghost blinky at (42,6) moving up
-Ghost blinky at (43,6) moving up
-Ghost inky at (28,1) moving up
-Ghost inky moved to (29,1) direction right
-Ghost inky moved to (30,1) direction right
-Ghost inky at (30,1) moving right
-Ghost inky at (31,1) moving up
-Ghost pinky at (35,2) moving down
-Ghost inky at (31,2) moving right
-Ghost pinky at (35,3) moving down
-Ghost inky moved to (31,3) direction down
-Ghost blinky at (39,4) moving up
-Ghost inky at (31,3) moving down
-Ghost pinky at (36,3) moving up
-Ghost inky at (30,3) moving right
-Ghost pinky at (37,3) moving up
-Ghost inky at (31,3) moving right
-Ghost pinky at (38,3) moving right
-Ghost clyde at (26,2) moving up
-Ghost inky at (31,4) moving right
-Ghost pinky at (39,3) moving right
-Ghost blinky moved to (40,3) direction up
-Ghost blinky at (40,3) moving up
-Ghost inky at (32,4) moving up
-Ghost pinky at (40,3) moving up
-Ghost blinky at (40,2) moving left
-Ghost inky at (33,4) moving up
-Ghost pinky at (40,2) moving left
-Ghost pinky moved to (39,2) direction left
-Ghost blinky at (40,1) moving left
-Ghost inky at (34,4) moving up
-Ghost pinky at (39,2) moving left
-Ghost blinky at (39,1) moving left
-Ghost pinky at (38,2) moving up
-Ghost blinky at (38,1) moving left
-Ghost pinky at (37,2) moving up
-Ghost blinky at (37,1) moving left
-Ghost inky at (31,4) moving left
-Ghost clyde at (27,0) moving left
-Ghost blinky moved to (36,1) direction left
-Ghost blinky at (36,1) moving left
-Ghost inky at (30,4) moving left
-Ghost clyde at (26,0) moving left
-Ghost inky moved to (30,3) direction up
-Ghost blinky at (35,1) moving left
-Ghost inky at (30,3) moving up
-Ghost pinky at (35,3) moving left
-Ghost clyde at (25,0) moving left
-Ghost blinky at (34,1) moving left
-Ghost inky at (30,2) moving left
-Ghost pinky at (34,3) moving left
-Ghost blinky at (33,1) moving up
-Ghost pinky at (35,3) moving up
+Ghost clyde moved to (25,3) direction left
+Ghost pinky moved to (27,3) direction right
+Ghost pinky at (27,3) moving right
+Ghost clyde moved to (26,3) direction right
+Ghost clyde moved to (27,3) direction right
+Ghost clyde at (27,3) moving right
+Ghost blinky moved to (27,2) direction up
+Ghost pinky moved to (27,2) direction up
+Ghost inky moved to (27,2) direction right
+Ghost blinky moved to (26,2) direction left
+Ghost pinky moved to (26,2) direction left
+Ghost clyde moved to (27,2) direction up
+Ghost pinky at (26,2) moving left
+Ghost inky moved to (27,3) direction down
 Ghost blinky moved to (27,2) direction right
-Ghost blinky at (31,2) moving right
-Ghost blinky at (31,3) moving right
-Ghost pinky moved to (28,1) direction right
-Ghost pinky at (30,1) moving down
-Ghost blinky moved to (36,6) direction down
-Ghost blinky at (36,6) moving down
-Ghost pinky at (31,1) moving down
-Ghost pinky at (31,2) moving up
-Ghost pinky at (31,3) moving up
-Ghost pinky moved to (31,2) direction up
-Ghost blinky moved to (40,5) direction up
-Ghost pinky at (31,4) moving up
+Ghost inky moved to (27,2) direction up
+Ghost blinky at (27,2) moving right
+Ghost clyde moved to (27,3) direction down
+🔥 Power-up ativado na célula [47, 5] com nível FOURTH_QUARTILE
+Ghost pinky moved to (26,3) direction down
+Ghost pinky at (26,3) moving down
+Ghost blinky moved to (27,3) direction down
+Ghost inky moved to (27,3) direction down
+Ghost pinky moved to (27,3) direction right
+Ghost blinky moved to (26,3) direction left
+Ghost blinky moved to (27,3) direction right
+Ghost inky moved to (26,3) direction left
+Ghost inky moved to (27,3) direction right
+Ghost inky moved to (27,2) direction up
+Ghost clyde moved to (27,2) direction up
+Ghost blinky moved to (27,2) direction up
+Ghost inky moved to (27,3) direction down
+Ghost pinky moved to (27,2) direction up
+Ghost inky moved to (27,2) direction up
+Ghost blinky moved to (27,3) direction down
+Ghost pinky moved to (27,3) direction down
+Ghost clyde moved to (27,3) direction down
+Ghost blinky moved to (27,2) direction up
+Ghost inky moved to (27,3) direction down
+Ghost pinky moved to (27,2) direction up
+Ghost clyde moved to (26,3) direction left
+Ghost pinky moved to (27,3) direction down
+Ghost blinky moved to (27,3) direction down
+Ghost inky moved to (26,3) direction left
+Ghost pinky moved to (26,3) direction left
+Ghost clyde moved to (27,3) direction right
+Ghost blinky moved to (27,2) direction up
+Ghost inky moved to (27,3) direction right
+Ghost pinky moved to (27,3) direction right
+Ghost clyde moved to (26,3) direction left
+Ghost blinky moved to (27,3) direction down
+Ghost inky moved to (26,3) direction left
+Ghost blinky moved to (27,2) direction up
+Ghost blinky moved to (27,3) direction down
+Ghost inky moved to (27,3) direction right
+Ghost clyde moved to (27,3) direction right
+Ghost pinky moved to (27,2) direction up
+🔥 Power-up ativado na célula [48, 5] com nível FOURTH_QUARTILE
+Ghost blinky moved to (27,2) direction up
+Ghost inky moved to (27,2) direction up
+Ghost pinky moved to (27,3) direction down
+Ghost clyde moved to (26,3) direction left
+Ghost blinky moved to (27,3) direction down
+Ghost blinky moved to (26,3) direction left
+Ghost inky moved to (27,3) direction down
+Ghost clyde moved to (27,3) direction right
+Ghost blinky moved to (27,3) direction right
+Ghost pinky moved to (26,3) direction left
+Ghost clyde moved to (27,2) direction up
+Ghost inky moved to (26,3) direction left
+Ghost clyde moved to (27,3) direction down
+Ghost blinky moved to (27,2) direction up
+Ghost inky moved to (27,3) direction right
+Ghost clyde moved to (27,2) direction up
+Ghost inky moved to (27,2) direction up
+Ghost clyde moved to (27,3) direction down
+Ghost blinky moved to (27,3) direction down
+Ghost inky moved to (27,3) direction down
+Ghost pinky moved to (27,3) direction right
+Ghost clyde moved to (27,2) direction up
+Ghost inky moved to (27,2) direction up
+Ghost pinky moved to (26,3) direction left
+Ghost clyde moved to (27,3) direction down
+Ghost blinky moved to (27,2) direction up
+Ghost pinky moved to (27,3) direction right
+Ghost clyde moved to (27,2) direction up
+Ghost pinky moved to (26,3) direction left
+Ghost inky moved to (27,3) direction down
+Ghost blinky moved to (27,3) direction down
+Ghost inky moved to (27,2) direction up
+Ghost clyde moved to (27,3) direction down
+Ghost blinky moved to (27,2) direction up
+🔥 Power-up ativado na célula [50, 2] com nível FOURTH_QUARTILE
+Ghost blinky moved to (27,3) direction down
+Ghost inky moved to (26,2) direction left
+Ghost clyde moved to (27,2) direction up
+Ghost blinky moved to (27,2) direction up
+Ghost clyde moved to (27,3) direction down
+Ghost blinky moved to (27,3) direction down
 Ghost inky moved to (27,2) direction right
-Ghost blinky at (40,3) moving left
-Ghost blinky moved to (39,3) direction left
+Ghost blinky moved to (27,2) direction up
+Ghost inky moved to (27,3) direction down
+Ghost pinky moved to (26,2) direction up
+Ghost clyde moved to (27,2) direction up
+Ghost inky moved to (27,2) direction up
+Ghost pinky moved to (27,2) direction right
+Ghost blinky moved to (26,2) direction left
+Ghost inky moved to (27,3) direction down
+Ghost pinky moved to (26,2) direction left
+Ghost blinky moved to (27,2) direction right
+Ghost pinky moved to (27,2) direction right
+Ghost blinky moved to (27,3) direction down
+Ghost inky moved to (27,2) direction up
+Ghost pinky moved to (26,2) direction left
+Ghost clyde moved to (26,2) direction left
+Ghost clyde at (26,2) moving left
+Ghost inky moved to (27,3) direction down
+Ghost clyde moved to (27,2) direction right
+Ghost clyde at (27,2) moving right
+Ghost blinky moved to (27,2) direction up
+Ghost pinky moved to (27,2) direction right
+Ghost blinky moved to (26,2) direction left
+Ghost pinky moved to (27,3) direction down
+Ghost clyde moved to (27,3) direction down
+Ghost blinky moved to (27,2) direction right
+Ghost pinky moved to (27,2) direction up
+Ghost clyde moved to (27,2) direction up
+Ghost blinky moved to (27,3) direction down
+Ghost clyde moved to (26,2) direction left
+Ghost blinky moved to (27,2) direction up
+Ghost inky moved to (27,2) direction up
+Ghost blinky moved to (26,2) direction left
+Ghost inky moved to (27,3) direction down
+Ghost pinky moved to (27,3) direction down
+Ghost clyde moved to (27,2) direction right
+🔥 Power-up ativado na célula [50, 1] com nível FOURTH_QUARTILE
+Ghost inky moved to (27,2) direction up
+Ghost clyde moved to (26,2) direction left
+Ghost inky moved to (26,2) direction left
 Ghost inky moved to (27,2) direction right
-Ghost blinky at (39,3) moving left
-Ghost blinky moved to (38,3) direction left
-Ghost blinky at (38,3) moving left
-Ghost pinky at (35,4) moving up
-Ghost blinky at (39,3) moving up
-Ghost pinky at (35,2) moving left
-Ghost pinky at (34,2) moving left
-Ghost blinky at (40,1) moving up
-Ghost pinky at (33,2) moving left
-Ghost blinky at (39,1) moving up
-Ghost pinky at (32,2) moving left
-Ghost inky at (22,0) moving left
-Ghost pinky at (32,1) moving left
-Ghost blinky moved to (37,1) direction left
-Ghost pinky at (32,0) moving left
-Ghost pinky at (30,0) moving left
-Ghost blinky at (34,1) moving down
-Ghost inky at (20,0) moving down
-Ghost pinky at (29,0) moving down
-Ghost blinky at (33,1) moving right
-Ghost inky at (21,0) moving right
-Ghost pinky moved to (31,0) direction right
-Ghost clyde moved to (22,0) direction left
-Ghost blinky at (32,1) moving right
-Ghost blinky at (32,0) moving down
-Ghost blinky at (31,0) moving down
-Ghost inky at (24,0) moving down
-Ghost blinky moved to (32,0) direction right
-Ghost blinky at (32,0) moving right
-Ghost inky at (26,0) moving right
-Ghost pinky moved to (30,0) direction right
-Ghost blinky at (30,0) moving right
-Ghost inky at (27,0) moving down
-Ghost clyde at (25,0) moving right
-Ghost blinky at (29,0) moving right
-Ghost inky at (28,0) moving down
-Ghost pinky at (31,0) moving down
-Ghost clyde at (26,0) moving right
-Ghost blinky moved to (30,0) direction right
-Ghost pinky moved to (32,0) direction right
-Ghost inky at (29,0) moving down
-Ghost clyde at (27,0) moving right
-Ghost blinky moved to (31,0) direction right
-Ghost pinky moved to (33,0) direction right
-Ghost blinky at (31,0) moving right
-Ghost pinky at (33,0) moving right
-Ghost inky at (31,0) moving down
-Ghost pinky at (34,0) moving down
-Ghost blinky moved to (32,1) direction down
-Ghost blinky at (32,1) moving down
-Ghost inky at (32,0) moving down
-Ghost pinky at (35,0) moving right
-Ghost blinky moved to (33,1) direction right
-Ghost inky moved to (33,0) direction right
-Ghost clyde moved to (27,0) direction left
-Ghost blinky at (33,2) moving down
-Ghost inky at (34,0) moving down
-Ghost blinky at (34,2) moving down
-Ghost pinky at (38,0) moving right
-Ghost inky moved to (36,0) direction right
-Ghost clyde moved to (30,0) direction right
-Ghost blinky at (35,2) moving down
-Ghost pinky at (39,0) moving right
-Ghost clyde at (30,0) moving right
-Ghost clyde moved to (31,0) direction right
-Ghost blinky at (36,2) moving down
-Ghost inky at (37,0) moving down
-Ghost pinky at (40,0) moving right
-Ghost blinky at (36,3) moving down
-Ghost inky at (38,0) moving down
-Ghost clyde at (32,0) moving down
-Ghost clyde at (33,0) moving left
-Ghost pinky moved to (39,2) direction left
-Ghost blinky at (38,3) moving down
-Ghost clyde at (34,0) moving down
-Ghost inky moved to (40,1) direction down
-Ghost blinky at (39,3) moving down
-Ghost inky at (40,1) moving down
-Ghost pinky at (38,2) moving down
-Ghost blinky at (40,3) moving down
-Ghost inky at (40,2) moving down
-Ghost pinky at (37,2) moving down
-Ghost blinky at (40,4) moving down
-Ghost inky at (39,2) moving left
-Ghost pinky at (37,3) moving left
-Ghost pinky moved to (37,4) direction down
-Ghost inky at (38,2) moving left
-Ghost pinky at (37,4) moving down
-Ghost inky at (37,2) moving left
-Ghost inky at (37,3) moving left
-Ghost pinky at (36,3) moving left
-Ghost blinky moved to (37,5) direction left
-Ghost inky moved to (37,4) direction down
-Ghost blinky at (37,5) moving left
-Ghost inky at (37,4) moving down
-Ghost blinky at (36,5) moving left
-Ghost clyde moved to (26,1) direction down
-Ghost blinky at (35,5) moving left
-Ghost inky at (36,3) moving left
-Ghost pinky at (34,4) moving left
-Ghost blinky at (34,5) moving left
-Ghost inky at (35,3) moving left
-Ghost pinky at (33,4) moving left
-Ghost blinky at (33,5) moving left
-Ghost inky at (34,3) moving left
-Ghost pinky at (32,4) moving left
-Ghost blinky at (33,6) moving left
-Ghost inky at (34,4) moving left
-Ghost pinky at (31,4) moving left
-Ghost blinky at (32,6) moving left
-Ghost inky at (33,4) moving left
-Ghost blinky moved to (31,6) direction left
-Ghost blinky at (31,6) moving left
-Ghost inky at (32,4) moving left
-Ghost inky moved to (31,4) direction left
-Ghost blinky at (30,6) moving left
-Ghost blinky at (29,6) moving left
-Ghost blinky moved to (28,6) direction left
-Ghost blinky at (28,6) moving left
-Ghost inky at (30,5) moving left
-Ghost pinky moved to (27,6) direction left
-Ghost blinky at (27,6) moving left
-Ghost inky at (30,6) moving left
-Ghost blinky at (26,6) moving left
-Ghost inky at (29,6) moving left
-Ghost blinky at (25,6) moving left
-Ghost inky at (28,6) moving left
-Ghost blinky at (24,6) moving left
-Ghost inky at (27,6) moving left
-Ghost pinky moved to (23,6) direction left
-Ghost blinky at (23,6) moving left
-Ghost inky at (26,6) moving down
-Ghost blinky at (22,6) moving left
-Ghost inky at (25,6) moving left
-Ghost blinky at (21,6) moving left
-Ghost inky at (24,6) moving left
-Ghost inky moved to (23,6) direction left
-Ghost blinky at (20,6) moving left
-Ghost inky at (23,6) moving left
-Ghost pinky moved to (19,6) direction left
-Ghost clyde moved to (10,0) direction left
-Ghost blinky at (19,6) moving left
-Ghost inky at (22,6) moving down
-Ghost blinky moved to (18,6) direction left
-Ghost blinky at (18,6) moving left
-Ghost inky at (21,6) moving left
-Ghost inky moved to (20,6) direction left
-Ghost inky at (20,6) moving left
-Ghost pinky at (17,6) moving up
-Ghost blinky moved to (16,6) direction left
-Ghost blinky at (16,6) moving left
-Ghost inky at (19,6) moving left
-Ghost pinky at (16,6) moving up
-Ghost inky at (18,6) moving left
-Ghost pinky at (15,6) moving up
-Ghost inky at (17,6) moving left
-Ghost pinky at (14,6) moving up
-Ghost blinky at (13,6) moving left
-Ghost inky at (16,6) moving up
-Ghost blinky at (12,6) moving left
-Ghost inky at (15,6) moving up
-Ghost blinky at (12,5) moving down
-Ghost inky at (14,6) moving up
-Ghost pinky at (11,6) moving left
-Ghost clyde at (5,3) moving left
-Ghost blinky moved to (11,5) direction left
-Ghost blinky at (11,5) moving left
-Ghost inky at (13,6) moving up
-Ghost pinky at (12,6) moving down
-Ghost blinky at (12,5) moving left
-Ghost inky at (12,6) moving up
-Ghost blinky at (12,4) moving left
-Ghost inky at (12,5) moving up
-Ghost pinky at (12,4) moving down
-Ghost blinky at (12,3) moving left
-Ghost pinky at (12,3) moving right
-Ghost clyde at (3,5) moving left
-Ghost clyde moved to (3,6) direction down
-Ghost clyde at (3,6) moving down
-Ghost blinky at (11,2) moving down
-Ghost inky at (12,2) moving down
-Ghost pinky at (11,2) moving left
-Ghost clyde at (2,6) moving left
-Ghost blinky at (10,2) moving down
-Ghost inky at (11,2) moving left
-Ghost pinky at (10,2) moving left
-Ghost clyde at (1,6) moving left
-Ghost blinky moved to (9,2) direction left
-Ghost inky at (10,2) moving down
-Ghost pinky at (9,2) moving left
-Ghost clyde at (0,6) moving left
-Ghost blinky at (8,2) moving left
-Ghost inky at (9,2) moving left
-Ghost pinky at (8,2) moving left
-Ghost clyde moved to (1,6) direction right
-Ghost inky at (8,2) moving left
-Ghost pinky at (7,2) moving up
-Ghost clyde at (1,6) moving right
-Ghost blinky moved to (7,3) direction down
-Ghost inky moved to (8,3) direction down
-Ghost inky at (8,3) moving down
-Ghost pinky at (6,2) moving up
-Ghost pinky moved to (6,3) direction down
-Ghost blinky at (6,3) moving up
-Ghost inky at (7,3) moving left
-Ghost pinky at (6,3) moving down
-Ghost blinky at (6,4) moving up
-Ghost inky at (6,3) moving up
-Ghost pinky at (6,4) moving up
-Ghost blinky moved to (6,3) direction up
-Ghost inky moved to (6,2) direction up
-Ghost inky at (6,2) moving up
-Ghost pinky at (6,5) moving left
-Ghost blinky at (6,4) moving left
-Ghost pinky at (5,5) moving left
-Ghost inky at (6,4) moving up
-Ghost pinky at (4,5) moving up
-Ghost inky at (6,5) moving up
-Ghost pinky at (5,5) moving up
+Ghost clyde moved to (27,2) direction right
+Ghost inky moved to (27,3) direction down
+Ghost blinky moved to (27,2) direction right
+Ghost pinky moved to (27,2) direction up
+Ghost clyde moved to (27,3) direction down
+Ghost inky moved to (27,2) direction up
+Ghost clyde moved to (27,2) direction up
+Ghost clyde moved to (27,3) direction down
+Ghost inky moved to (27,3) direction down
+Ghost pinky moved to (26,2) direction left
+Ghost clyde moved to (27,2) direction up
+Ghost blinky moved to (27,3) direction down
+Ghost inky moved to (27,2) direction up
+Ghost pinky moved to (27,2) direction right
+Ghost clyde moved to (27,3) direction down
+Ghost clyde moved to (27,2) direction up
+Ghost blinky moved to (27,2) direction up
+Ghost clyde moved to (27,3) direction down
+Ghost inky moved to (27,3) direction down
+Ghost pinky moved to (26,2) direction left
+Ghost clyde moved to (27,2) direction up
+Ghost clyde moved to (27,3) direction down
+Ghost blinky moved to (26,2) direction left
+Ghost inky moved to (27,2) direction up
+Ghost inky moved to (27,3) direction down
+Ghost pinky moved to (26,3) direction down
+Ghost pinky moved to (27,3) direction right
+Ghost blinky moved to (27,2) direction right
+Ghost inky moved to (27,2) direction up
+🔥 Power-up ativado na célula [47, 1] com nível FOURTH_QUARTILE
+Ghost pinky moved to (27,2) direction up
+Ghost clyde moved to (27,2) direction up
+Ghost blinky moved to (27,3) direction down
+Ghost pinky moved to (27,3) direction down
+Ghost clyde moved to (27,3) direction down
+Ghost inky moved to (27,3) direction down
+Ghost blinky moved to (27,2) direction up
+Ghost inky moved to (27,2) direction up
+Ghost pinky moved to (27,2) direction up
+Ghost blinky moved to (27,3) direction down
+Ghost pinky moved to (27,3) direction down
+Ghost blinky moved to (27,2) direction up
+Ghost inky moved to (26,2) direction left
+Ghost pinky moved to (27,2) direction up
+Ghost clyde moved to (27,2) direction up
+Ghost blinky moved to (27,3) direction down
+Ghost inky moved to (27,2) direction right
+Ghost clyde moved to (26,2) direction left
+Ghost clyde moved to (27,2) direction right
+Ghost blinky moved to (27,2) direction up
+Ghost inky moved to (27,3) direction down
+Ghost pinky moved to (26,2) direction left
+Ghost blinky moved to (26,2) direction left
+Ghost pinky moved to (27,2) direction right
+Ghost pinky moved to (26,2) direction left
+Ghost clyde moved to (27,3) direction down
+Ghost blinky moved to (27,2) direction right
+Ghost inky moved to (27,2) direction up
+Ghost pinky moved to (27,2) direction right
+Ghost blinky moved to (27,3) direction down
+Ghost blinky moved to (27,2) direction up
+Ghost pinky moved to (27,3) direction down
+Ghost inky moved to (26,2) direction left
+Ghost pinky moved to (27,2) direction up
+Ghost blinky moved to (26,2) direction left
+Ghost pinky moved to (26,2) direction left
+Ghost blinky moved to (27,2) direction right
+Ghost inky moved to (27,2) direction right
+Ghost pinky moved to (27,2) direction right
+Ghost blinky moved to (27,3) direction down
+Ghost pinky moved to (27,3) direction down
+Ghost blinky moved to (27,2) direction up
+Ghost blinky moved to (27,3) direction down
+Ghost clyde moved to (26,3) direction left
+Ghost blinky moved to (26,3) direction left
+🔥 Power-up ativado na célula [37, 5] com nível FOURTH_QUARTILE
+Ghost blinky moved to (27,3) direction right
+Ghost inky moved to (27,3) direction down
+Ghost blinky moved to (27,2) direction up
+Ghost inky moved to (27,2) direction up
+Ghost pinky moved to (27,2) direction up
+Ghost clyde moved to (27,3) direction right
+Ghost inky moved to (27,3) direction down
+Ghost pinky moved to (27,3) direction down
+Ghost clyde moved to (26,3) direction left
+Ghost pinky moved to (26,3) direction left
+Ghost clyde moved to (27,3) direction right
+Ghost pinky moved to (27,3) direction right
+Ghost inky moved to (27,2) direction up
+Ghost pinky moved to (27,2) direction up
+Ghost blinky moved to (27,3) direction down
+Ghost blinky moved to (26,3) direction left
+Ghost pinky moved to (27,3) direction down
+Ghost inky moved to (27,3) direction down
+Ghost clyde moved to (27,2) direction up
+Ghost inky moved to (27,2) direction up
+Ghost pinky moved to (27,2) direction up
+Ghost blinky moved to (27,3) direction right
+Ghost pinky moved to (27,3) direction down
+Ghost blinky moved to (26,3) direction left
+Ghost inky moved to (27,3) direction down
+Ghost pinky moved to (27,2) direction up
+Ghost inky moved to (27,2) direction up
+Ghost pinky moved to (27,3) direction down
+Ghost clyde moved to (27,3) direction down
+Ghost inky moved to (27,3) direction down
+Ghost clyde moved to (27,2) direction up
+Ghost blinky moved to (27,3) direction right
+Ghost clyde moved to (27,3) direction down
+Ghost inky moved to (27,2) direction up
+Ghost clyde moved to (26,3) direction left
+Ghost inky moved to (27,3) direction down
+Ghost clyde moved to (27,3) direction right
+Ghost inky moved to (27,2) direction up
+Ghost blinky moved to (27,2) direction up
+Ghost inky moved to (27,3) direction down
+Ghost blinky moved to (27,3) direction down
+Ghost pinky moved to (26,3) direction left
+Ghost pinky moved to (26,2) direction up
+Ghost inky moved to (27,2) direction up
+Ghost inky moved to (27,3) direction down
+Ghost clyde moved to (27,2) direction up
+Ghost pinky moved to (27,2) direction right
+Ghost clyde moved to (27,3) direction down
+Ghost clyde moved to (27,2) direction up
+Ghost pinky moved to (27,3) direction down
+Ghost pinky moved to (27,2) direction up
+Ghost blinky moved to (27,2) direction up
+Ghost inky moved to (27,2) direction up
+Ghost pinky moved to (27,3) direction down
+Ghost clyde moved to (27,3) direction down
+Ghost clyde moved to (27,2) direction up
+Ghost clyde moved to (27,3) direction down
+Ghost clyde moved to (26,3) direction left
+Ghost inky moved to (27,3) direction down
+Ghost pinky moved to (27,2) direction up
+Ghost pinky moved to (27,3) direction down
+Ghost clyde moved to (27,3) direction right
+Ghost inky moved to (26,3) direction left
+Ghost blinky moved to (27,3) direction down
+Ghost pinky moved to (27,2) direction up
+Ghost blinky moved to (27,2) direction up
+Ghost pinky moved to (27,3) direction down
+Ghost blinky moved to (27,3) direction down
+Ghost inky moved to (27,3) direction right
+Ghost blinky moved to (27,2) direction up
+Ghost pinky moved to (27,2) direction up
+Ghost blinky moved to (26,2) direction left
+Ghost blinky moved to (27,2) direction right
+Ghost clyde moved to (27,2) direction up
+Ghost inky moved to (27,2) direction up
+Ghost pinky moved to (27,3) direction down
+Ghost blinky moved to (26,2) direction left
+Ghost inky moved to (27,3) direction down
+Ghost pinky moved to (27,2) direction up
+Ghost inky moved to (27,2) direction up
+Ghost pinky moved to (27,3) direction down
+Ghost blinky moved to (27,2) direction right
+Ghost clyde moved to (26,2) direction left
+Ghost inky moved to (27,3) direction down
+Ghost inky moved to (27,2) direction up
+Ghost inky moved to (27,3) direction down
+Ghost blinky moved to (27,3) direction down
+Ghost pinky moved to (26,3) direction left
+Ghost inky moved to (27,2) direction up
+Ghost clyde moved to (26,3) direction down
+Ghost clyde at (26,3) moving down
+Ghost blinky moved to (27,2) direction up
+Ghost pinky moved to (26,2) direction up
+Ghost inky moved to (26,2) direction left
+Ghost inky moved to (27,2) direction right
+Ghost blinky moved to (27,3) direction down
+Ghost clyde moved to (25,3) direction left
+Ghost inky moved to (27,3) direction down
+Ghost blinky moved to (26,3) direction left
+Ghost blinky moved to (27,3) direction right
+Ghost inky moved to (26,3) direction left
+Ghost blinky moved to (26,3) direction left
+Ghost inky moved to (25,3) direction left
+Ghost inky at (25,3) moving left
+Ghost clyde moved to (25,2) direction up
+Ghost clyde moved to (25,3) direction down
+Ghost pinky moved to (25,2) direction left
+Ghost blinky moved to (25,3) direction left
+Ghost pinky moved to (25,3) direction down
+Ghost pinky at (25,3) moving down
+Ghost clyde moved to (26,3) direction right
+Ghost blinky moved to (25,2) direction up
+Ghost inky moved to (26,3) direction right
+Ghost clyde moved to (25,3) direction left
+Ghost pinky moved to (26,3) direction right
+Ghost clyde moved to (26,3) direction right
+Ghost inky moved to (25,3) direction left
+Ghost blinky moved to (25,3) direction down
+Ghost inky moved to (25,2) direction up
+Ghost clyde moved to (25,3) direction left
+Ghost blinky moved to (25,2) direction up
+Ghost inky moved to (25,3) direction down
+Ghost blinky moved to (26,2) direction right
+Ghost blinky at (26,2) moving right
+Ghost inky moved to (25,2) direction up
+Ghost blinky moved to (25,2) direction left
+Ghost blinky moved to (25,3) direction down
+Ghost inky moved to (26,2) direction right
+Ghost pinky moved to (25,3) direction left
+Ghost inky moved to (25,2) direction left
+Ghost pinky moved to (26,3) direction right
+Ghost inky moved to (25,3) direction down
+Ghost blinky moved to (25,2) direction up
+Ghost inky moved to (26,3) direction right
+Ghost pinky moved to (27,3) direction right
+Ghost blinky moved to (26,2) direction right
+Ghost clyde moved to (25,2) direction up
+Ghost pinky moved to (27,2) direction up
+Ghost blinky moved to (27,2) direction right
+Ghost inky moved to (27,3) direction right
+Ghost pinky moved to (26,2) direction left
+Ghost pinky moved to (26,3) direction down
+Ghost inky moved to (27,2) direction up
+Ghost pinky moved to (27,3) direction right
+Ghost clyde moved to (25,3) direction down
+Ghost pinky moved to (26,3) direction left
+Ghost blinky moved to (26,2) direction left
+Ghost blinky moved to (25,2) direction left
+Ghost blinky moved to (25,3) direction down
+Ghost clyde moved to (25,2) direction up
+Ghost clyde moved to (25,3) direction down
+Ghost clyde moved to (25,2) direction up
+Ghost inky moved to (26,2) direction left
+Ghost clyde moved to (25,3) direction down
+Ghost inky moved to (25,2) direction left
+Ghost inky moved to (25,3) direction down
+Ghost pinky moved to (26,2) direction up
+Ghost blinky moved to (25,2) direction up
+Ghost inky moved to (25,2) direction up
+Ghost clyde moved to (25,2) direction up
+Ghost pinky moved to (25,2) direction left
+Ghost pinky moved to (25,3) direction down
+Ghost clyde moved to (25,3) direction down
+Ghost blinky moved to (25,3) direction down
+Ghost inky moved to (25,3) direction down
+Ghost pinky moved to (25,2) direction up
+Ghost clyde moved to (25,2) direction up
+Ghost pinky at (25,2) moving up
+Ghost blinky moved to (25,2) direction up
+Ghost pinky moved to (26,2) direction right
+Ghost pinky moved to (25,2) direction left
+Ghost inky moved to (25,2) direction up
+Ghost clyde moved to (25,3) direction down
+Ghost blinky moved to (25,3) direction down
+Ghost inky moved to (25,3) direction down
+Ghost clyde moved to (26,3) direction right
+Ghost clyde moved to (25,3) direction left
+Ghost pinky moved to (25,3) direction down
+Ghost clyde moved to (26,3) direction right
+Ghost pinky moved to (26,3) direction right
+Ghost clyde moved to (26,2) direction up
+Ghost clyde at (26,2) moving up
+Ghost pinky moved to (26,2) direction up
+Ghost blinky moved to (25,2) direction up
+Ghost pinky moved to (25,2) direction left
+Ghost inky moved to (26,3) direction right
+Ghost pinky moved to (25,3) direction down
+Ghost clyde moved to (26,3) direction down
+Ghost inky moved to (25,3) direction left
+Ghost pinky moved to (25,2) direction up
+Ghost clyde moved to (25,3) direction left
+Ghost inky moved to (25,2) direction up
+Ghost blinky moved to (26,2) direction right
+Ghost pinky moved to (25,3) direction down
+Ghost inky moved to (25,3) direction down
+Ghost clyde moved to (25,2) direction up
+Ghost blinky moved to (25,2) direction left
+Ghost blinky moved to (25,3) direction down
+Ghost blinky moved to (26,3) direction right
+Ghost inky moved to (25,2) direction up
+Ghost clyde moved to (25,3) direction down
+Ghost pinky moved to (26,3) direction right
+Ghost blinky moved to (25,3) direction left
+Ghost inky moved to (26,2) direction right
+Ghost pinky moved to (27,3) direction right
+Ghost inky moved to (27,2) direction right
+Ghost pinky moved to (27,2) direction up
+Ghost blinky moved to (26,3) direction right
+Ghost pinky moved to (27,3) direction down
+Ghost inky moved to (27,3) direction down
+Ghost blinky moved to (27,3) direction right
+Ghost inky moved to (27,2) direction up
+Ghost clyde moved to (26,3) direction right
+Ghost inky moved to (27,3) direction down
+Ghost clyde moved to (27,3) direction right
+Ghost clyde moved to (27,2) direction up
+Ghost pinky moved to (26,3) direction left
+Ghost inky moved to (26,3) direction left
+Ghost pinky moved to (27,3) direction right
 Definindo símbolos dos fantasmas
 
 ============================
 🕒 SVG ANIMATION DURATION:
-   - 2m 54s (174000ms)
-   - 870 frames @ 200ms per frame
+   - 1m 52s (111600ms)
+   - 558 frames @ 200ms per frame
 ============================
 
-✅  SVG animado salvo em E:\pacman\dist\pacman-novo1.svg
+✅  SVG animado salvo em E:\pacman\dist\pacman.svg
 🎮  Game over – SVG pronto!
 👻 Fantasmas no final: [
   {
-    x: 4,
-    y: 5,
+    x: 27,
+    y: 3,
     name: 'blinky',
     direction: 'right',
     scared: false,
-    target: { x: 3, y: 2 },
+    target: { x: 44, y: 4 },
     inHouse: false,
     confusionFrames: 0,
     justReleasedFromHouse: false,
@@ -2084,38 +960,38 @@ Definindo símbolos dos fantasmas
     isRespawning: false
   },
   {
-    x: 5,
-    y: 5,
+    x: 26,
+    y: 3,
     name: 'inky',
-    direction: 'up',
-    scared: false,
-    target: { x: 6, y: 0 },
-    inHouse: false,
-    confusionFrames: 30,
-    justReleasedFromHouse: true,
-    respawnCounter: 0,
-    isRespawning: false
-  },
-  {
-    x: 6,
-    y: 5,
-    name: 'pinky',
-    direction: 'up',
-    scared: false,
-    target: { x: 7, y: 2 },
-    inHouse: false,
-    confusionFrames: 30,
-    justReleasedFromHouse: true,
-    respawnCounter: 0,
-    isRespawning: false
-  },
-  {
-    x: 0,
-    y: 6,
-    name: 'clyde',
     direction: 'left',
     scared: false,
-    target: { x: 0, y: 6 },
+    target: { x: 52, y: 1 },
+    inHouse: false,
+    confusionFrames: 30,
+    justReleasedFromHouse: true,
+    respawnCounter: 0,
+    isRespawning: false
+  },
+  {
+    x: 27,
+    y: 3,
+    name: 'pinky',
+    direction: 'right',
+    scared: false,
+    target: { x: 48, y: 5 },
+    inHouse: false,
+    confusionFrames: 30,
+    justReleasedFromHouse: true,
+    respawnCounter: 0,
+    isRespawning: false
+  },
+  {
+    x: 27,
+    y: 2,
+    name: 'clyde',
+    direction: 'up',
+    scared: false,
+    target: { x: 44, y: 4 },
     inHouse: false,
     confusionFrames: 30,
     justReleasedFromHouse: true,

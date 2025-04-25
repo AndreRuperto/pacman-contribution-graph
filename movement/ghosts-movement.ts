@@ -74,6 +74,9 @@ const moveScaredGhost = (ghost: Ghost, store: StoreType) => {
 const moveGhostWithPersonality = (ghost: Ghost, store: StoreType) => {
     // Se o fantasma está se respawnando (só olhos)
     if (ghost.name === 'eyes') {
+        // Garantir que olhos nunca estejam scared
+        ghost.scared = false;
+        
         const respawnPosition = { x: 26, y: 3 }; // Centro da casa dos fantasmas
         
         // Mova mais rápido quando estiver em modo de olhos
@@ -87,27 +90,40 @@ const moveGhostWithPersonality = (ghost: Ghost, store: StoreType) => {
                 ghost.direction = nextMove.direction;
             }
             
-            // Verificar se chegou à posição de respawn
-            if (ghost.x === respawnPosition.x && ghost.y === respawnPosition.y) {
-                // Iniciar o contador de respawn
-                ghost.respawnCounter = 30; // Aproximadamente 3 segundos a 10 frames por segundo
+            // Verificar se chegou próximo à posição de respawn
+            if (Math.abs(ghost.x - respawnPosition.x) <= 1 && Math.abs(ghost.y - respawnPosition.y) <= 1) {
+                // Ajustar para a posição exata de respawn
+                ghost.x = respawnPosition.x;
+                ghost.y = respawnPosition.y;
+                // Iniciar o contador de respawn com um valor maior que zero
+                ghost.respawnCounter = 1; // 30 frames = aproximadamente 3 segundos
                 ghost.inHouse = true;
+                console.log(`Ghost ${ghost.name} entered ghost house for respawn, counter: ${ghost.respawnCounter}`);
             }
         }
         return;
     }
     
     // Se o fantasma está dentro da casa aguardando respawn
-    if (ghost.respawnCounter !== undefined && ghost.respawnCounter > 0) {
-        ghost.respawnCounter--;
+    if (ghost.inHouse && ghost.respawnCounter !== undefined) {
+        if (ghost.respawnCounter > 0) {
+            ghost.respawnCounter--;
+            console.log(`Ghost respawn countdown: ${ghost.respawnCounter}`);
+        }
         
         // Quando o contador chegar a zero, restaurar o fantasma
         if (ghost.respawnCounter === 0) {
+            if (!ghost.originalName) {
+                console.log(`Warning: Ghost has no original name stored!`);
+            }
+            
             ghost.name = ghost.originalName || determineGhostName(
                 store.ghosts.findIndex(g => g === ghost)
             );
             ghost.inHouse = false;
+            ghost.scared = store.pacman.powerupRemainingDuration > 0;
             delete ghost.respawnCounter;
+            console.log(`Ghost respawned as ${ghost.name} (scared: ${ghost.scared})`);
         }
         return;
     }
