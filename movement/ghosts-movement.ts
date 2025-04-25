@@ -161,7 +161,7 @@ const moveScaredGhost = (ghost: Ghost, store: StoreType) => {
 };
 
 const moveGhostWithPersonality = (ghost: Ghost, store: StoreType) => {
-    // Se o fantasma está se respawnando (só olhos)
+	// Se o fantasma está se respawnando (só olhos)
 	if (ghost.name === 'eyes') {
 		// Garantir que olhos nunca estejam scared
 		ghost.scared = false;
@@ -174,23 +174,23 @@ const moveGhostWithPersonality = (ghost: Ghost, store: StoreType) => {
 			ghost.x = respawnPosition.x;
 			ghost.y = respawnPosition.y;
 			ghost.inHouse = true;
-			ghost.respawnCounter = 10; // Tempo para respawnar (ajuste conforme necessário)
-			console.log(`Ghost ${ghost.name} entered ghost house for respawn, counter set to ${ghost.respawnCounter}`);
+			ghost.respawnCounter = 1; // Tempo para respawnar (ajuste conforme necessário)
+			console.log(`Ghost eyes at ${ghost.name} entered ghost house for respawn, counter: ${ghost.respawnCounter}`);
 			return;
 		}
 		
-		// Use BFS para encontrar o caminho mais curto e determinístico
+		// Use o algoritmo mais confiável para encontrar o caminho
 		const nextMove = MovementUtils.findNextStepDijkstra(
 			{ x: ghost.x, y: ghost.y }, 
 			respawnPosition
 		);
 		
 		if (nextMove) {
-			// Atualizar posição e direção
+			// Atualizar posição
 			ghost.x = nextMove.x;
 			ghost.y = nextMove.y;
 			
-			// Atualizar direção baseada no movimento
+			// Importante: atualizar a direção baseada no movimento real
 			if (nextMove.x > ghost.x) ghost.direction = 'right';
 			else if (nextMove.x < ghost.x) ghost.direction = 'left';
 			else if (nextMove.y > ghost.y) ghost.direction = 'down';
@@ -199,7 +199,7 @@ const moveGhostWithPersonality = (ghost: Ghost, store: StoreType) => {
 			console.log(`Ghost eyes moved to (${ghost.x},${ghost.y}) direction ${ghost.direction}`);
 		}
 		
-		return; // Importante: retorna para não executar a lógica normal
+		return; // Retorna para não executar mais lógica
 	}
     
     // Se o fantasma está dentro da casa aguardando respawn

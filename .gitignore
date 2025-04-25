@@ -27,3 +27,5 @@ dist/
 *.js.map
 
 .gitignore
+
+output.txt
