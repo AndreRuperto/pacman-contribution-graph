@@ -30,10 +30,10 @@ const placePacman = (store: StoreType) => {
 
 const placeGhosts = (store: StoreType) => {
   store.ghosts = [
-    { x: 26, y: 2, name: 'blinky', direction: 'left', scared: false, target: undefined, inHouse: false,  initialWanderFrames: 15},
-    { x: 25, y: 3, name: 'inky',   direction: 'up',   scared: false, target: undefined, inHouse: true, initialWanderFrames: 15},
-    { x: 26, y: 3, name: 'pinky',  direction: 'up',   scared: false, target: undefined, inHouse: true, initialWanderFrames: 15},
-    { x: 27, y: 3, name: 'clyde',  direction: 'up',   scared: false, target: undefined, inHouse: true, initialWanderFrames: 15  }
+    { x: 26, y: 2, name: 'blinky', direction: 'left', scared: false, target: undefined, inHouse: false},
+    { x: 25, y: 3, name: 'inky',   direction: 'up',   scared: false, target: undefined, inHouse: true},
+    { x: 26, y: 3, name: 'pinky',  direction: 'up',   scared: false, target: undefined, inHouse: true},
+    { x: 27, y: 3, name: 'clyde',  direction: 'up',   scared: false, target: undefined, inHouse: true}
   ];
 
   // reset extras
