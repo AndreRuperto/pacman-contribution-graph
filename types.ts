@@ -46,7 +46,7 @@ export interface Ghost {
   inHouse?: boolean;
   isRespawning?: boolean;
   respawnCounter?: number;
-  initialWanderFrames?: number;
+  immunityFrames?: number;
   justReleasedFromHouse?: boolean;
   confusionFrames?: number;
 }

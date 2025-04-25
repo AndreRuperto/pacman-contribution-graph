@@ -22,6 +22,19 @@ const moveGhosts = (store: StoreType) => {
             continue;
         }
 
+		if (ghost.name === 'eyes') {
+			ghost.scared = false;
+		  }
+
+		if (ghost.immunityFrames !== undefined && ghost.immunityFrames > 0) {
+			ghost.immunityFrames--;
+			// Quando a imunidade terminar, verificar se deve ficar assustado
+			if (ghost.immunityFrames === 0) {
+				ghost.scared = store.pacman.powerupRemainingDuration > 0;
+				console.log(`Ghost ${ghost.name} immunity ended, scared: ${ghost.scared}`);
+			}
+		}
+
         if (ghost.scared || Math.random() < 0.15) {
             moveScaredGhost(ghost, store);
         } else {
@@ -149,36 +162,45 @@ const moveScaredGhost = (ghost: Ghost, store: StoreType) => {
 
 const moveGhostWithPersonality = (ghost: Ghost, store: StoreType) => {
     // Se o fantasma está se respawnando (só olhos)
-    if (ghost.name === 'eyes') {
-        // Garantir que olhos nunca estejam scared
-        ghost.scared = false;
-        
-        const respawnPosition = { x: 26, y: 3 }; // Centro da casa dos fantasmas
-        
-        // Mova mais rápido quando estiver em modo de olhos
-        const nextMove = BFSTargetLocation(ghost.x, ghost.y, respawnPosition.x, respawnPosition.y);
-        
-        if (nextMove) {
-            ghost.x = nextMove.x;
-            ghost.y = nextMove.y;
-            
-            if (nextMove.direction) {
-                ghost.direction = nextMove.direction;
-            }
-            
-            // Verificar se chegou próximo à posição de respawn
-            if (Math.abs(ghost.x - respawnPosition.x) <= 1 && Math.abs(ghost.y - respawnPosition.y) <= 1) {
-                // Ajustar para a posição exata de respawn
-                ghost.x = respawnPosition.x;
-                ghost.y = respawnPosition.y;
-                // Iniciar o contador de respawn com um valor maior que zero
-                ghost.respawnCounter = 1; // 30 frames = aproximadamente 3 segundos
-                ghost.inHouse = true;
-                console.log(`Ghost ${ghost.name} entered ghost house for respawn, counter: ${ghost.respawnCounter}`);
-            }
-        }
-        return;
-    }
+	if (ghost.name === 'eyes') {
+		// Garantir que olhos nunca estejam scared
+		ghost.scared = false;
+		
+		const respawnPosition = { x: 26, y: 3 }; // Centro da casa dos fantasmas
+		
+		// Verificar se já está próximo/dentro da casa
+		if (Math.abs(ghost.x - respawnPosition.x) <= 1 && Math.abs(ghost.y - respawnPosition.y) <= 1) {
+			// Ajustar para a posição exata de respawn e iniciar o processo de respawn
+			ghost.x = respawnPosition.x;
+			ghost.y = respawnPosition.y;
+			ghost.inHouse = true;
+			ghost.respawnCounter = 10; // Tempo para respawnar (ajuste conforme necessário)
+			console.log(`Ghost ${ghost.name} entered ghost house for respawn, counter set to ${ghost.respawnCounter}`);
+			return;
+		}
+		
+		// Use BFS para encontrar o caminho mais curto e determinístico
+		const nextMove = MovementUtils.findNextStepDijkstra(
+			{ x: ghost.x, y: ghost.y }, 
+			respawnPosition
+		);
+		
+		if (nextMove) {
+			// Atualizar posição e direção
+			ghost.x = nextMove.x;
+			ghost.y = nextMove.y;
+			
+			// Atualizar direção baseada no movimento
+			if (nextMove.x > ghost.x) ghost.direction = 'right';
+			else if (nextMove.x < ghost.x) ghost.direction = 'left';
+			else if (nextMove.y > ghost.y) ghost.direction = 'down';
+			else if (nextMove.y < ghost.y) ghost.direction = 'up';
+			
+			console.log(`Ghost eyes moved to (${ghost.x},${ghost.y}) direction ${ghost.direction}`);
+		}
+		
+		return; // Importante: retorna para não executar a lógica normal
+	}
     
     // Se o fantasma está dentro da casa aguardando respawn
     if (ghost.inHouse && ghost.respawnCounter !== undefined) {
@@ -189,18 +211,32 @@ const moveGhostWithPersonality = (ghost: Ghost, store: StoreType) => {
         
         // Quando o contador chegar a zero, restaurar o fantasma
         if (ghost.respawnCounter === 0) {
-            if (!ghost.originalName) {
-                console.log(`Warning: Ghost has no original name stored!`);
-            }
-            
-            ghost.name = ghost.originalName || determineGhostName(
-                store.ghosts.findIndex(g => g === ghost)
-            );
-            ghost.inHouse = false;
-            ghost.scared = store.pacman.powerupRemainingDuration > 0;
-            delete ghost.respawnCounter;
-            console.log(`Ghost respawned as ${ghost.name} (scared: ${ghost.scared})`);
-        }
+			if (!ghost.originalName) {
+				console.log(`Warning: Ghost has no original name stored!`);
+			}
+			
+			ghost.name = ghost.originalName || determineGhostName(
+				store.ghosts.findIndex(g => g === ghost)
+			);
+			ghost.inHouse = false;
+			
+			// Adicionar período de imunidade - não ficar assustado imediatamente
+			ghost.immunityFrames = 30; // Cerca de 3 segundos de imunidade
+			
+			// Começar sem estar assustado independentemente do power-up
+			ghost.scared = false;
+			
+			delete ghost.respawnCounter;
+			console.log(`Ghost respawned as ${ghost.name} (immunity active)`);
+		}
+		if (ghost.immunityFrames !== undefined && ghost.immunityFrames > 0) {
+			ghost.immunityFrames--;
+			// Quando a imunidade terminar, verificar se deve ficar assustado
+			if (ghost.immunityFrames === 0) {
+				ghost.scared = store.pacman.powerupRemainingDuration > 0;
+				console.log(`Ghost ${ghost.name} immunity ended, scared: ${ghost.scared}`);
+			}
+		}
         return;
     }
     

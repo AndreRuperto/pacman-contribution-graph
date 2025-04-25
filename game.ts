@@ -203,10 +203,13 @@ const checkCollisions = (store: StoreType) => {
   if (store.pacman.deadRemainingDuration) return;
 
   store.ghosts.forEach(ghost => {
-    if (ghost.x === store.pacman.x && ghost.y === store.pacman.y && ghost.name !== 'eyes') {
+    // Se o fantasma for olhos, não deve haver colisão
+    if (ghost.name === 'eyes') return;
+    
+    if (ghost.x === store.pacman.x && ghost.y === store.pacman.y) {
       if (store.pacman.powerupRemainingDuration && ghost.scared) {
         ghost.originalName = ghost.name;
-        ghost.name   = 'eyes';
+        ghost.name = 'eyes';
         ghost.scared = false;
         ghost.target = { x: 26, y: 3 };
         store.pacman.points += 10;
