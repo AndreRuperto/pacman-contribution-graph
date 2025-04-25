@@ -78,8 +78,8 @@ const buildWalls = () => {
 	setSymmetricWall(23, 6, 'horizontal', 'x', 'L16');
 	setSymmetricWall(24, 6, 'horizontal', 'x', 'L16');
 	setSymmetricWall(25, 6, 'horizontal', 'x', 'L16');
-	setSymmetricWall(26, 0, 'vertical', 'x', 'L17');
-	setSymmetricWall(24, 1, 'vertical', 'x', 'L18');
+	// setSymmetricWall(26, 0, 'vertical', 'x', 'L17');
+	// setSymmetricWall(24, 1, 'vertical', 'x', 'L18');
 	setSymmetricWall(23, 1, 'horizontal', 'x', 'L18');
 	setSymmetricWall(22, 1, 'horizontal', 'x', 'L18');
 	setSymmetricWall(21, 1, 'horizontal', 'x', 'L18');

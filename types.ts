@@ -46,6 +46,9 @@ export interface Ghost {
   inHouse?: boolean;
   isRespawning?: boolean;
   respawnCounter?: number;
+  initialWanderFrames?: number;
+  justReleasedFromHouse?: boolean;
+  confusionFrames?: number;
 }
 
 /* ───────────────────────── Grid & Store ───────────────────────────── */
@@ -72,7 +75,7 @@ export interface StoreType {
 	config: Config;
 	useGithubThemeColor: boolean;
   __loggedGhosts?: Set<string>;
-  }  
+}  
 
 /* ───────────────────────── Configuração ───────────────────────────── */
 export interface Config {
@@ -89,6 +92,8 @@ export interface Config {
   githubSettings?: {
     accessToken: string;      // necessário para GraphQL
   };
+  maxFrames?: number;          // Limite máximo de frames para o jogo
+  maxHistorySize?: number;
 }
 
 /* ───────────────────────── Temas ──────────────────────────────────── */

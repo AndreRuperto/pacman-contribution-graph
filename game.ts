@@ -13,6 +13,8 @@ import { Utils } from './utils.js';
 
 let frame = 0;
 
+/* ---------- helpers de posicionamento ---------- */
+
 const placePacman = (store: StoreType) => {
   store.pacman = {
     x: 0,
@@ -27,83 +29,96 @@ const placePacman = (store: StoreType) => {
 };
 
 const placeGhosts = (store: StoreType) => {
-	store.ghosts = [
-		{ x: 26, y: 2, name: 'blinky', direction: 'left', scared: false, target: undefined, inHouse: false }, // fora
-		{ x: 25, y: 3, name: 'inky', direction: 'up', scared: false, target: undefined, inHouse: true },
-		{ x: 26, y: 3, name: 'pinky', direction: 'up', scared: false, target: undefined, inHouse: true },
-		{ x: 27, y: 3, name: 'clyde', direction: 'up', scared: false, target: undefined, inHouse: true }
-	];
+  store.ghosts = [
+    { x: 26, y: 2, name: 'blinky', direction: 'left', scared: false, target: undefined, inHouse: false,  initialWanderFrames: 15},
+    { x: 25, y: 3, name: 'inky',   direction: 'up',   scared: false, target: undefined, inHouse: true, initialWanderFrames: 15},
+    { x: 26, y: 3, name: 'pinky',  direction: 'up',   scared: false, target: undefined, inHouse: true, initialWanderFrames: 15},
+    { x: 27, y: 3, name: 'clyde',  direction: 'up',   scared: false, target: undefined, inHouse: true, initialWanderFrames: 15  }
+  ];
+
+  // reset extras
+  store.ghosts.forEach(g => {
+    g.confusionFrames       = 0;
+    g.justReleasedFromHouse = false;
+    g.respawnCounter        = 0;
+    g.isRespawning          = false;
+  });
 };
+
+/* ---------- ciclo principal ---------- */
 
 const stopGame = async (store: StoreType) => {
   clearInterval(store.gameInterval as number);
 };
 
 const startGame = async (store: StoreType) => {
-  store.frameCount = 0;
-  store.ghosts.forEach((ghost) => (ghost.scared = false));
+  store.frameCount   = 0;
+  store.gameHistory  = [];             // mantém limpeza
+  store.ghosts.forEach(g => (g.scared = false));
 
   store.grid = Utils.createGridFromData(store);
 
   const remainingCells = () =>
-    store.grid.some((row) => row.some((cell) => cell.commitsCount > 0));
+    store.grid.some(row => row.some(cell => cell.commitsCount > 0));
 
   if (remainingCells()) {
     placePacman(store);
     placeGhosts(store);
-  }  
+  }
 
   if (store.config.outputFormat === 'svg') {
     while (remainingCells()) {
-      // Liberar fantasmas em frames específicos
-      if (frame === 10) releaseGhostFromHouse(store, 'pinky');  // ~3000ms com DELTA_TIME
-      if (frame === 20) releaseGhostFromHouse(store, 'inky');   // ~6000ms
-      if (frame === 30) releaseGhostFromHouse(store, 'clyde');  // ~9000ms
-      
+      // libera fantasmas
+      if (frame === 10) releaseGhostFromHouse(store, 'pinky');
+      if (frame === 20) releaseGhostFromHouse(store, 'inky');
+      if (frame === 30) releaseGhostFromHouse(store, 'clyde');
+
       await updateGame(store);
       frame++;
     }
-    // Uma atualização final após todos os pontos serem coletados
+    // snapshot final
     await updateGame(store);
   } else {
-    // Para o modo canvas, usar setTimeout
+    // canvas
     setTimeout(() => releaseGhostFromHouse(store, 'pinky'), 3000);
-    setTimeout(() => releaseGhostFromHouse(store, 'inky'), 6000);
+    setTimeout(() => releaseGhostFromHouse(store, 'inky'),  6000);
     setTimeout(() => releaseGhostFromHouse(store, 'clyde'), 9000);
-    
+
     clearInterval(store.gameInterval as number);
     store.gameInterval = setInterval(() => updateGame(store), DELTA_TIME) as unknown as number;
   }
 };
 
-// Adicionando uma nova função para reiniciar o Pacman
+/* ---------- utilidades ---------- */
+
 const resetPacman = (store: StoreType) => {
   store.pacman.x = 27;
   store.pacman.y = 7;
   store.pacman.direction = 'right';
   store.pacman.recentPositions = [];
-  // Qualquer outra propriedade que você queira redefinir
 };
+
+export const determineGhostName = (index: number): GhostName => {
+  const names: GhostName[] = ['blinky', 'inky', 'pinky', 'clyde'];
+  return names[index % names.length];
+};
+
+/* ---------- update por frame ---------- */
 
 const updateGame = async (store: StoreType) => {
   store.frameCount++;
 
+  /* ---- FRAME-SKIP restaurado ---- */
   if (store.frameCount % store.config.gameSpeed !== 0) {
-    store.gameHistory.push({
-      pacman: { ...store.pacman },
-      ghosts: store.ghosts.map((g) => ({ ...g })),
-      grid: store.grid.map((row) => row.map((col) => ({ ...col })))
-    });
+    pushSnapshot(store);
     return;
   }
 
+  /* -------- timers pacman -------- */
   if (store.pacman.deadRemainingDuration > 0) {
     store.pacman.deadRemainingDuration--;
     if (store.pacman.deadRemainingDuration === 0) {
-      // Usar a função de reset para o Pacman
       resetPacman(store);
-      
-      // Reposicionar os fantasmas
       placeGhosts(store);
       frame = 0;
     }
@@ -112,30 +127,46 @@ const updateGame = async (store: StoreType) => {
   if (store.pacman.powerupRemainingDuration > 0) {
     store.pacman.powerupRemainingDuration--;
     if (store.pacman.powerupRemainingDuration === 0) {
-      store.ghosts.forEach((g) => (g.scared = false));
+      store.ghosts.forEach(g => { if (g.name !== 'eyes') g.scared = false; });
       store.pacman.points = 0;
     }
   }
 
-  const remaining = store.grid.some((row) => row.some((c) => c.commitsCount > 0));
+  /* -- respawn fantasmas (sem mudanças) -- */
+  store.ghosts.forEach(ghost => {
+    if (ghost.inHouse && ghost.respawnCounter && ghost.respawnCounter > 0) {
+      ghost.respawnCounter--;
+      if (ghost.respawnCounter === 0) {
+        ghost.name   = ghost.originalName || determineGhostName(store.ghosts.indexOf(ghost));
+        ghost.inHouse = false;
+        ghost.isRespawning = false;
+        ghost.scared = store.pacman.powerupRemainingDuration > 0;
+        ghost.justReleasedFromHouse = true;
+        ghost.confusionFrames = 30;
+      }
+    }
+  });
+
+  /* -------- fim de jogo -------- */
+  const remaining = store.grid.some(row => row.some(c => c.commitsCount > 0));
   if (!remaining) {
     if (store.config.outputFormat === 'svg') {
-      const animatedSVG = SVG.generateAnimatedSVG(store);
-      store.config.svgCallback(animatedSVG);
+      const svg = SVG.generateAnimatedSVG(store);
+      store.config.svgCallback(svg);
     }
-
     store.config.gameOverCallback();
     return;
   }
 
+  /* -------- movimentos -------- */
   PacmanMovement.movePacman(store);
-  const cell = store.grid[store.pacman.x]?.[store.pacman.y];
 
+  const cell = store.grid[store.pacman.x]?.[store.pacman.y];
   if (cell && cell.level === 'FOURTH_QUARTILE' && store.pacman.powerupRemainingDuration === 0) {
     store.pacman.powerupRemainingDuration = 30;
-    store.ghosts.forEach((g) => (g.scared = true));
+    store.ghosts.forEach(g => { if (g.name !== 'eyes') g.scared = true; });
   }
-  
+
   checkCollisions(store);
 
   if (store.pacman.deadRemainingDuration === 0) {
@@ -145,37 +176,31 @@ const updateGame = async (store: StoreType) => {
 
   store.pacmanMouthOpen = !store.pacmanMouthOpen;
 
+  /* ---- único snapshot por frame ---- */
+  pushSnapshot(store);
+};
+
+/* ---------- snapshot helper ---------- */
+const pushSnapshot = (store: StoreType) => {
   store.gameHistory.push({
     pacman: { ...store.pacman },
-    ghosts: store.ghosts.map((g) => ({ ...g })),
-    grid: store.grid.map((row) => row.map((col) => ({ ...col })))
+    ghosts: store.ghosts.map(g => ({ ...g })),
+    grid:   store.grid.map(row => row.map(col => ({ ...col })))
   });
 };
 
-export const determineGhostName = (index: number): GhostName => {
-  const ghostNames: GhostName[] = ['blinky', 'inky', 'pinky', 'clyde'];
-  return ghostNames[index % ghostNames.length];
-};
+/* ---------- colisões & house ---------- */
 
 const checkCollisions = (store: StoreType) => {
   if (store.pacman.deadRemainingDuration) return;
 
-  store.ghosts.forEach((ghost, i) => {
-    if (ghost.x === store.pacman.x && ghost.y === store.pacman.y) {
-      // Ignore colisões com fantasmas que já estão em modo de olhos
-      if (ghost.name === 'eyes') return;
-      
+  store.ghosts.forEach(ghost => {
+    if (ghost.x === store.pacman.x && ghost.y === store.pacman.y && ghost.name !== 'eyes') {
       if (store.pacman.powerupRemainingDuration && ghost.scared) {
-        // Salvar o nome original do fantasma antes de transformá-lo em olhos
         ghost.originalName = ghost.name;
-        
-        // Transformar em olhos e definir comportamento de respawn
-        ghost.name = 'eyes';
+        ghost.name   = 'eyes';
         ghost.scared = false;
-        
-        // Definir destino como a casa dos fantasmas
         ghost.target = { x: 26, y: 3 };
-        
         store.pacman.points += 10;
       } else {
         store.pacman.points = 0;
@@ -186,37 +211,15 @@ const checkCollisions = (store: StoreType) => {
   });
 };
 
-const respawnGhost = (store: StoreType, ghostIndex: number) => {
-  const ghost = store.ghosts[ghostIndex];
-  
-  // Transformar o fantasma em olhos
-  ghost.name = 'eyes';
-  ghost.scared = false;
-  
-  // Definir a posição de respawn (casa dos fantasmas)
-  const respawnPosition = { x: 26, y: 3 }; // Centro da casa dos fantasmas
-  
-  // Definir o target do fantasma como a posição de respawn
-  ghost.target = respawnPosition;
-  
-  // Quando chegar à posição de respawn, voltar à forma original
-  store.ghosts[ghostIndex].isRespawning = true;
-  
-  // Aumento na pontuação por comer um fantasma
-  store.pacman.points += 10;
-};
-
 const releaseGhostFromHouse = (store: StoreType, name: GhostName) => {
-  const ghost = store.ghosts.find((g) => g.name === name && g.inHouse);
+  const ghost = store.ghosts.find(g => g.name === name && g.inHouse);
   if (ghost) {
-      ghost.inHouse = false;
-      ghost.y = 2; // posição fora da casa
-      ghost.direction = 'up'; // direção inicial explícita
-      console.log(`Released ghost ${name} with direction ${ghost.direction}`);
+    ghost.inHouse = false;
+    ghost.y = 2;
+    ghost.direction = 'up';
+    ghost.justReleasedFromHouse = true;
+    ghost.confusionFrames = 30;
   }
 };
 
-export const Game = {
-  startGame,
-  stopGame
-};
+export const Game = { startGame, stopGame };
