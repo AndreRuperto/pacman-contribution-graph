@@ -120,12 +120,11 @@ Esta versão inclui várias melhorias em relação à implementação original:
 Cada fantasma ganhou novas imagens e personalidades fiéis aos do jogo.
 
 | Fantasma | Pré-visualização |
-|----------|-----------------|
-| **Blinky** (vermelho) | <img src="src/assets/gifs/red_flip.gif"   height="40" alt="Blinky"> |
-| **Pinky**  (rosa)    | <img src="src/assets/gifs/pink_flip.gif"  height="40" alt="Pinky"> |
-| **Inky**   (ciano)   | <img src="src/assets/gifs/cyan_flip.gif"  height="40" alt="Inky"> |
-| **Clyde**  (laranja) | <img src="src/assets/gifs/orange_flip.gif" height="40" alt="Clyde"> |
-
+|:--------:|:----------------:|
+| **Blinky** (vermelho) | <p align="center"><img src="src/assets/gifs/red_flip.gif" height="40" alt="Blinky"></p> |
+| **Pinky** (rosa)      | <p align="center"><img src="src/assets/gifs/pink_flip.gif" height="40" alt="Pinky"></p> |
+| **Inky** (ciano)      | <p align="center"><img src="src/assets/gifs/cyan_flip.gif" height="40" alt="Inky"></p> |
+| **Clyde** (laranja)   | <p align="center"><img src="src/assets/gifs/orange_flip.gif" height="40" alt="Clyde"></p> |
 
 ## 🔧 Desenvolvimento
 
@@ -153,6 +152,6 @@ Se tiver dúvidas, abra uma _issue_. 👊
 ---
 
 <p align="center">
-  Esses fantasmas trabalham muito! Deixe um cafuné antes de sair. 👻<br>
-  <img src="src/assets/gifs/pink_pet_cafune.gif" alt="Fantasma sendo acariciado" height="120">
+  Esses fantasmas trabalham muito! Deixe um cafuné antes de sair.<br>
+  <img src="src/assets/gifs/pink_pet_cafune.gif" alt="Fantasma sendo acariciado" height="80">
 </p>
