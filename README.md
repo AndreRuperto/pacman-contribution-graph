@@ -1,10 +1,4 @@
-<h1 align="left">
-  <img src="src/assets/gifs/red_flip.gif"   height="38" alt="Blinky"/>
-  <img src="src/assets/gifs/pink_flip.gif"  height="38" alt="Pinky"/>
-  <strong>SVG-Pacman-Contributions</strong>
-  <img src="src/assets/gifs/cyan_flip.gif"  height="38" alt="Inky"/>
-  <img src="src/assets/gifs/orange_flip.gif" height="38" alt="Clyde"/>
-</h1>
+# 👻 SVG-Pacman-Contributions
 
 Transforme seu gráfico de contribuições do GitHub em um jogo animado de Pac-Man! Veja como o Pac-Man devora suas contribuições enquanto desvia dos fantasmas em uma experiência nostálgica de arcade.
 
@@ -122,6 +116,17 @@ Esta versão inclui várias melhorias em relação à implementação original:
 - **Casa dos Fantasmas**: Design melhorado para a área inicial dos fantasmas
 - **Otimização SVG**: Geração de SVG mais eficiente e com animações mais suaves
 
+## 👻 Fantasmas atualizados
+Cada fantasma ganhou novas imagens e personalidades fiéis aos do jogo.
+
+| Fantasma | Pré-visualização |
+|----------|-----------------|
+| **Blinky** (vermelho) | <img src="src/assets/gifs/red_flip.gif"   height="40" alt="Blinky"> |
+| **Pinky**  (rosa)    | <img src="src/assets/gifs/pink_flip.gif"  height="40" alt="Pinky"> |
+| **Inky**   (ciano)   | <img src="src/assets/gifs/cyan_flip.gif"  height="40" alt="Inky"> |
+| **Clyde**  (laranja) | <img src="src/assets/gifs/orange_flip.gif" height="40" alt="Clyde"> |
+
+
 ## 🔧 Desenvolvimento
 
 Construído com TypeScript e Node.js, o projeto consiste em:
@@ -133,3 +138,21 @@ Construído com TypeScript e Node.js, o projeto consiste em:
 ## 🙏 Créditos
 
 Este projeto é uma versão especializada baseada no [Pac-Man Contribution Graph](https://github.com/abozanona/pacman-contribution-graph) criado por [abozanona](https://github.com/abozanona). Enquanto o projeto original oferece tanto visualizações SVG quanto Canvas, esta versão foca exclusivamente em melhorias à renderização SVG e na experiência de jogabilidade automatizada.
+
+## 🤝 Como contribuir
+Ficou com vontade de adicionar um novo tema, melhorar a IA dos fantasmas ou otimizar o SVG?  
+Pull requests são **muito** bem-vindos!  
+
+1. **Fork** o repositório  
+2. Crie sua branch: `git checkout -b feat/minha-melhoria`  
+3. Faça commits claros e concisos  
+4. Abra um PR explicando o que mudou e _por quê_  
+
+Se tiver dúvidas, abra uma _issue_. 👊
+
+---
+
+<p align="center">
+  Esses fantasmas trabalham muito! Deixe um cafuné antes de sair. 👻<br>
+  <img src="src/assets/gifs/pink_pet_cafune.gif" alt="Fantasma sendo acariciado" height="120">
+</p>
