@@ -21,7 +21,7 @@ inputs:
 
 runs:
   using: node20               # **JavaScript Action**
-  main:  github-action/dist/index.js   # <- bundle que o webpack gerou
+  main:  'bundle/index.js'
 
 branding:
   icon: activity
