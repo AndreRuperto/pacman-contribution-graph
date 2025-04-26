@@ -1,7 +1,6 @@
-import { GRID_HEIGHT, GRID_WIDTH } from '../constants.js';
+import { GRID_HEIGHT, GRID_WIDTH } from '../core/constants.js';
 import { Ghost, Point2d, StoreType } from '../types.js';
 import { MovementUtils } from './movement-utils.js';
-import { determineGhostName } from '../game.js';
 
 // Constantes para o comportamento dos fantasmas
 const SCATTER_MODE_DURATION = 7; // Duração do modo "scatter" em segundos (frames)

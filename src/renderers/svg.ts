@@ -9,9 +9,9 @@ import {
 	PACMAN_COLOR_DEAD,
 	PACMAN_COLOR_POWERUP,
 	WALLS
-} from './constants.js';
-import { AnimationData, GhostName, StoreType } from './types.js';
-import { Utils } from './utils.js';
+} from '../core/constants.js';
+import { AnimationData, GhostName, StoreType } from '../types.js';
+import { Utils } from '../utils/utils.js';
 
 const generateAnimatedSVG = (store: StoreType) => {
 	// Reduzir logs para apenas informações essenciais

@@ -1,5 +1,5 @@
 // store.ts
-import type { Config, StoreType } from './types.js';
+import type { Config, StoreType } from '../types.js';
 
 export const Store: StoreType = {
 	frameCount: 0,

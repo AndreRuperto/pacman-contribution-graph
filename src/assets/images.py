@@ -1,6 +1,7 @@
 import base64
 import os
 import json
+import tempfile
 
 # Lista de imagens para converter
 ghost_images = {
@@ -8,6 +9,7 @@ ghost_images = {
     'pinky': ['pink_up.png', 'pink_down.png', 'pink_left.png', 'pink_right.png'],
     'inky': ['cyan_up.png', 'cyan_down.png', 'cyan_left.png', 'cyan_right.png'],
     'clyde': ['orange_up.png', 'orange_down.png', 'orange_left.png', 'orange_right.png'],
+    'eyes': ['eyes_up.png', 'eyes_down.png', 'eyes_left.png', 'eyes_right.png'],
     'scared': ['scared.png']
 }
 
@@ -43,10 +45,10 @@ for ghost, images in ghost_images.items():
                 print(f"Arquivo não encontrado: {image_folder}{image}")
                 base64_data[ghost][direction] = "" # Placeholder vazio
 
-# Salvar resultado em JSON (para referência)
-with open("ghost_images_base64.json", "w") as json_file:
-    json.dump(base64_data, json_file, indent=2)
-    print("JSON salvo em ghost_images_base64.json")
+# Usar um arquivo temporário para o JSON intermediário
+with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False) as temp_json:
+    json.dump(base64_data, temp_json, indent=2)
+    temp_file_path = temp_json.name
 
 # Gerar código TypeScript para constants.ts
 ts_code = """
@@ -70,8 +72,11 @@ for ghost, data in base64_data.items():
 ts_code += "};"
 
 # Salvar o código TypeScript
-with open("ghosts_constants.ts", "w") as ts_file:
+with open("ghosts_constants.txt", "w") as ts_file:
     ts_file.write(ts_code)
-    print("Código TypeScript salvo em ghosts_constants.ts")
+    print("Código TypeScript salvo em ghosts_constants.txt")
+
+# Remover o arquivo temporário após o uso
+os.unlink(temp_file_path)
 
 print("Concluído!")

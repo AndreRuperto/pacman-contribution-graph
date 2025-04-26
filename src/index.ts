@@ -1,20 +1,51 @@
-// src/index.ts
-import * as core from '@actions/core';
+// index.ts
+import { Game } from './core/game.js';
+import { Grid } from './utils/grid.js';
+import { Store } from './core/store.js';
+import { Config, StoreType } from './types.js';
+import { Utils } from './utils/utils.js';
 
-// ⬇️  troque .js por .ts  (ou tire a extensão)  ------------------
-import { generateSvg } from '../scripts/generate-svg';      // <- aqui
+export class PacmanRenderer {
+	store: StoreType;
+	conf: Config;
 
-import type { ThemeKeys } from '../types.js';
+	constructor(conf: Config) {
+		this.store = structuredClone(Store);
+		this.conf = { ...conf };
+		Grid.buildWalls();
+	}
 
-(async () => {
-  try {
-    await generateSvg({
-      username:  core.getInput('github_user_name', { required: true }),
-      token:     core.getInput('github_token'),
-      theme:     core.getInput('theme') as ThemeKeys,
-      outputDir: core.getInput('output_directory')
-    });
-  } catch (err) {
-    core.setFailed((err as Error).message);
-  }
-})();
+	public async start() {
+		const defaultConfig: Config = {
+			platform: 'github',
+			username: '',
+			canvas: undefined as unknown as HTMLCanvasElement,
+			outputFormat: 'svg',
+			svgCallback: (_: string) => {},
+			gameOverCallback: () => () => {},
+			gameTheme: 'github',
+			gameSpeed: 1,
+			enableSounds: false,
+			pointsIncreasedCallback: (_: number) => {},
+			githubSettings: { accessToken: '' } // caso necessário
+		};
+
+		this.store.config = { ...defaultConfig, ...this.conf };
+
+		switch (this.store.config.platform) {
+			case 'gitlab':
+				this.store.contributions = await Utils.getGitlabContribution(this.store);
+				break;
+
+			case 'github':
+				this.store.contributions = await Utils.getGithubContribution(this.store);
+				break;
+		}
+
+		Game.startGame(this.store);
+	}
+
+	public stop() {
+		Game.stopGame(this.store);
+	}
+}

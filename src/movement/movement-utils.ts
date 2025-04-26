@@ -1,4 +1,4 @@
-import { GRID_HEIGHT, GRID_WIDTH, WALLS } from '../constants.js';
+import { GRID_HEIGHT, GRID_WIDTH, WALLS } from '../core/constants.js';
 import { Point2d } from '../types.js';
 
 // Check for walls and grid edges

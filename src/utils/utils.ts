@@ -1,6 +1,6 @@
 // src/utils.ts
-import { GAME_THEMES, GRID_HEIGHT, GRID_WIDTH } from './constants.js';
-import type { StoreType, GameTheme, ContributionLevel, Contribution } from './types.js';
+import { GAME_THEMES, GRID_HEIGHT, GRID_WIDTH } from '../core/constants.js';
+import type { StoreType, GameTheme, ContributionLevel, Contribution } from '../types.js';
 import { writeFileSync } from 'fs';
 
 /* ─────────────────────────── Helpers ─────────────────────────── */

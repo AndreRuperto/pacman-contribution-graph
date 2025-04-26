@@ -1,7 +1,6 @@
 import fetch from 'node-fetch';
-import { ContributionLevel, Contribution, StoreType } from './types.js';
-import { getCurrentTheme } from './utils.js'; // já está importado no seu projeto
-import { levelToIndex } from './utils.js';    // certifique-se que essa função está exportada
+import { ContributionLevel, Contribution, StoreType } from '../types.js';
+import { getCurrentTheme, levelToIndex } from '../utils/utils.js'; // já está importado no seu projeto
 
 /* ────────────────────────── Tipagens ────────────────────────── */
 interface ContributionDay {

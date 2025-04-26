@@ -3,13 +3,13 @@ import { mkdir, writeFile } from 'fs/promises';
 import * as path from 'node:path';
 import 'dotenv/config';
 
-import { Store } from '../store.js';
-import { Grid }  from '../grid.js';
-import { Game }  from '../game.js';
-import { fetchGithubContributionsGraphQL } from '../github-contributions.js';
+import { Store } from '../src/core/store.js';
+import { Grid }  from '../src/utils/grid.js';
+import { Game }  from '../src/core/game.js';
+import { fetchGithubContributionsGraphQL } from '../src/providers/github-contributions.js';
 
-import { GAME_THEMES } from '../constants.js';
-import type { ThemeKeys } from '../types.js';
+import { GAME_THEMES } from '../src/core/constants.js';
+import type { ThemeKeys } from '../src/types.js';
 
 /* -------------------------------------------------------------------------- */
 /* Tipagem da função pública                                                  */

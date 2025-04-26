@@ -1,4 +1,4 @@
-import { GRID_HEIGHT, GRID_WIDTH, GHOST_HOUSE_COLOR, setWall } from './constants.js';
+import { GRID_HEIGHT, GRID_WIDTH, GHOST_HOUSE_COLOR, setWall } from '../core/constants.js';
 
 const setSymmetricWall = (x: number, y: number, direction: 'horizontal' | 'vertical', sym: '' | 'x' | 'y' | 'xy', lineId: string) => {
 	if (direction == 'horizontal') {

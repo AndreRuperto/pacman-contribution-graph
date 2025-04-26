@@ -1,5 +1,5 @@
-import { SVG } from './svg.js';
-import { StoreType, GhostName } from './types.js';
+import { SVG } from '../renderers/svg.js';
+import { StoreType, GhostName } from '../types.js';
 import {
   DELTA_TIME,
   GHOST_NAMES,
@@ -7,9 +7,9 @@ import {
   GRID_WIDTH,
   PACMAN_DEATH_DURATION
 } from './constants.js';
-import { GhostsMovement } from './movement/ghosts-movement.js';
-import { PacmanMovement } from './movement/pacman-movement.js';
-import { Utils } from './utils.js';
+import { GhostsMovement } from '../movement/ghosts-movement.js';
+import { PacmanMovement } from '../movement/pacman-movement.js';
+import { Utils } from '../utils/utils.js';
 
 let frame = 0;
 
