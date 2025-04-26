@@ -1,6 +1,5 @@
 # Node.js
 node_modules/
-dist/
 .env
 
 # TypeScript
@@ -29,3 +28,8 @@ dist/
 .gitignore
 
 output.txt
+
+!github-action/dist/
+!github-action/dist/**
+!github-action/package.json
+!github-action/index.js
