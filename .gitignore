@@ -26,3 +26,5 @@ Thumbs.db
 output.txt
 
 !github-action
+
+package-lock.json
