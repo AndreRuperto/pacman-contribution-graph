@@ -1,68 +1,80 @@
-// src/scripts/generate-svg.ts
-import { Store } from '../store.js';
-import { Game } from '../game.js';
-import { Grid } from '../grid.js';
-import { fetchGithubContributionsGraphQL } from '../github-contributions.js';
-
-import { writeFileSync, mkdirSync } from 'fs';
-import * as path from 'path';
+// scripts/generate-svg.ts
+import { mkdir, writeFile } from 'fs/promises';
+import * as path from 'node:path';
 import 'dotenv/config';
 
-/* -------------------------------------------------------------------------- */
-/* 1. Configurações básicas                                                   */
-/* -------------------------------------------------------------------------- */
+import { Store } from '../store.js';
+import { Grid }  from '../grid.js';
+import { Game }  from '../game.js';
+import { fetchGithubContributionsGraphQL } from '../github-contributions.js';
 
-const username = process.env.GITHUB_USERNAME!;
-const accessToken = process.env.GITHUB_TOKEN!;
+import { GAME_THEMES } from '../constants.js';
+import type { ThemeKeys } from '../types.js';
 
-if (!username || !accessToken) {
-  throw new Error('Variáveis GITHUB_USERNAME e GITHUB_TOKEN não estão definidas no .env');
+/* -------------------------------------------------------------------------- */
+/* Tipagem da função pública                                                  */
+/* -------------------------------------------------------------------------- */
+export interface GenerateSvgOptions {
+  /** Usuário do GitHub – **obrigatório** */
+  username: string;
+  /** Token pessoal (opcional) */
+  token?: string;
+  /** Tema de cores (default: `'github-dark'`) */
+  theme?: ThemeKeys;
+  /** Diretório de saída (default: `'dist'`) */
+  outputDir?: string;
 }
 
 /* -------------------------------------------------------------------------- */
-/* 2. Store.config                                                            */
+/* Função principal                                                           */
 /* -------------------------------------------------------------------------- */
-Store.config = {
-  platform: 'github',
+export async function generateSvg({
   username,
-  outputFormat: 'svg',
-  gameSpeed: 1,
-  gameTheme: 'github-dark',
-  enableSounds: false,
-  canvas: {} as HTMLCanvasElement,     // não usado para SVG
-  pointsIncreasedCallback: () => {},
-  githubSettings: { accessToken },
-  svgCallback: (svg) => {
-    const dist = path.resolve('dist');
-    mkdirSync(dist, { recursive: true });
-    const out = path.join(dist, 'pacman.svg');
-    writeFileSync(out, svg, 'utf-8');
-    console.log(`✅  SVG animado salvo em ${out}`);
-  },
-  gameOverCallback: () => console.log('🎮  Game over – SVG pronto!'),
-} as const;
+  token     = '',
+  theme     = 'github-dark',
+  outputDir = 'dist'
+}: GenerateSvgOptions): Promise<void> {
 
-console.log("🎨 Tema selecionado:", Store.config.gameTheme);
-
-/* -------------------------------------------------------------------------- */
-/* 3. Pipeline principal                                                      */
-/* -------------------------------------------------------------------------- */
-(async () => {
-  // 3.1 – baixa contribuições
-  Store.contributions = await fetchGithubContributionsGraphQL(Store, username, accessToken);
-
-  // 3.2 – monta paredes
-  Grid.buildWalls();
-
-  // 3.3 – inicia jogo e gera SVG internamente
-  await Game.startGame(Store);
-
-  // ✅ Log para debug: Verifica se fantasmas estão sendo colocados
-  console.log("👻 Fantasmas no final:", Store.ghosts);
-  if (!Store.ghosts.length) {
-    console.warn("⚠️ Nenhum fantasma foi encontrado após startGame!");
+  if (!username) {
+    throw new Error('GITHUB_USERNAME não definido');
   }
-})().catch((err) => {
-  console.error('❌  Erro ao gerar SVG:', err);
-  process.exit(1);
-});
+
+  /* ── normaliza o tema ───────────────────────────────────────────── */
+  const allowedThemes = Object.keys(GAME_THEMES) as ThemeKeys[];
+  const safeTheme: ThemeKeys = allowedThemes.includes(theme) ? theme : 'github-dark';
+
+  /* ── configura o Store ──────────────────────────────────────────── */
+  Store.config = {
+    platform: 'github',
+    username,
+    outputFormat: 'svg',
+    gameSpeed: 1,
+    gameTheme: safeTheme,
+    enableSounds: false,
+    canvas: {} as unknown as HTMLCanvasElement,   // não usado em SVG
+    pointsIncreasedCallback: () => {},
+    githubSettings: { accessToken: token },
+    svgCallback: async (svg: string) => {
+      await mkdir(outputDir, { recursive: true }).catch(() => {});
+      const mainPath = path.join(outputDir, 'pacman-contribution-graph.svg');
+      await writeFile(mainPath, svg, 'utf-8');
+
+      // se for tema dark, gera arquivo alternativo
+      if (safeTheme.includes('dark')) {
+        const altPath = path.join(outputDir, 'pacman-contribution-graph-dark.svg');
+        await writeFile(altPath, svg, 'utf-8');
+      }
+    },
+    gameOverCallback: () => {}
+  };
+
+  /* ── pipeline ───────────────────────────────────────────────────── */
+  Store.contributions = await fetchGithubContributionsGraphQL(
+    Store,
+    username,
+    token
+  );
+
+  Grid.buildWalls();
+  await Game.startGame(Store);      // o SVG é salvo via svgCallback
+}

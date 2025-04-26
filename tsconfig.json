@@ -1,15 +1,19 @@
 {
-    "compilerOptions": {
-      "target": "es2017",
-      "module": "ESNext",
-      "moduleResolution": "node",
-      "esModuleInterop": true,
-      "downlevelIteration": true,
-      "outDir": "dist",
-      "strict": true,
-      "skipLibCheck": true,
-      "forceConsistentCasingInFileNames": true
-    },
-    "include": ["**/*.ts"],
-    "exclude": ["node_modules", "dist"]
-  }  
+  "compilerOptions": {
+    "target": "es2020",
+    "module": "ES2020",
+    "moduleResolution": "node",
+    "lib": [               // ⬅️  ADICIONE
+      "ES2020",            //     mantém recursos modernos
+      "DOM"                //     habilita tipos do navegador
+    ],
+    "types": ["node"],     // mantém declarações do Node
+    "sourceMap": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "dist"
+  },
+  "include": ["src", "scripts"],
+  "exclude": ["node_modules", "build", "github-action/dist"]
+}

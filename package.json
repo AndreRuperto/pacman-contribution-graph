@@ -1,24 +1,32 @@
 {
-    "name": "pacman-contribution-graph",
-    "version": "1.0.0",
-    "type": "module",
-    "scripts": {
-        "build": "webpack --config webpack.prod.js",
-        "dev": "webpack --progress --config webpack.dev.js",
-        "prepublishOnly": "npm run build",
-        "build-action": "pnpm run --prefix ./github-action build",
-        "generate:svg": "pnpm exec tsc --project tsconfig.json && node dist/scripts/generate-svg.js",
-        "svg": "pnpm run generate:svg > logs/output.txt 2>&1"
-    },
-    "devDependencies": {
-        "@types/node": "^22.14.0",
-        "@types/node-fetch": "^2.6.12",
-        "tsx": "^4.6.2",
-        "typescript": "^5.3.3"
-    },
-    "dependencies": {
-        "canvas": "^3.1.0",
-        "dotenv": "^16.5.0",
-        "node-fetch": "^3.3.2"
-    }
+  "name": "pacman-contribution-graph",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "webpack --config webpack.prod.js",
+    "dev": "webpack --progress --config webpack.dev.js",
+    "build:action": "ncc build src/index.ts -o dist",
+    "prepare": "npm run build:action",
+    "prepublishOnly": "npm run build",
+    "generate:svg": "pnpm exec tsc -p tsconfig.json && node dist/scripts/generate-svg.js",
+    "svg": "pnpm run generate:svg > logs/output.txt 2>&1"
+  },
+  "dependencies": {
+    "@actions/core": "^1.11.1",
+    "canvas": "^3.1.0",
+    "dotenv": "^16.5.0",
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.0",
+    "@types/node-fetch": "^2.6.12",
+    "@vercel/ncc": "^0.38.3",
+    "ts-loader": "^9.5.2",
+    "tsx": "^4.6.2",
+    "typescript": "^5.8.3",
+    "webpack": "^5.99.7",
+    "webpack-cli": "^6.0.1",
+    "webpack-node-externals": "^3.0.0"
+  }
 }

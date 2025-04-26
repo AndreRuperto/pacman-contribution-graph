@@ -1,5 +1,5 @@
 import { SVG } from './svg.js';
-import { StoreType, GhostName } from './types';
+import { StoreType, GhostName } from './types.js';
 import {
   DELTA_TIME,
   GHOST_NAMES,
