@@ -55,6 +55,92 @@ jobs:
           git push
 ```
 
+## ⚠️ Token do GitHub (OBRIGATÓRIO)
+
+Apesar de ser marcado como "opcional" em alguns arquivos de configuração, **o token de acesso pessoal do GitHub é absolutamente necessário** para o funcionamento correto da aplicação. Este token é usado para acessar a API GraphQL do GitHub, que fornece os dados detalhados das suas contribuições.
+
+### Por que é necessário?
+- A API GraphQL do GitHub exige autenticação
+- O token automático do GitHub Actions (`GITHUB_TOKEN`) tem limitações de taxa (apenas 1.000 pontos/hora vs. 5.000 pontos/hora para PATs)
+- Alguns tipos de tokens (como os de acesso refinado) não funcionam com a API GraphQL
+- Sem o token adequado, não é possível buscar o histórico de contribuições completo
+
+### Como configurar (passo a passo):
+
+#### 1. Criar o token no GitHub
+
+1. Acesse suas configurações no GitHub → Developer settings → Personal access tokens → Tokens (classic)
+   - Ou acesse diretamente: https://github.com/settings/tokens
+   
+2. Clique em "Generate new token (classic)"
+   
+3. Dê um nome descritivo ao token, como "pacman-contributions"
+   
+4. Defina uma data de expiração adequada (sugiro pelo menos 30 dias)
+   
+5. Para escopo, selecione apenas:
+   - `repo` (para acesso às contribuições em repositórios privados)
+   - `read:user` (para informações básicas do perfil)
+   
+6. Clique em "Generate token"
+   
+7. **IMPORTANTE**: Copie o token gerado imediatamente e salve-o em local seguro. Você não poderá vê-lo novamente!
+
+#### 2. Adicionar o token como Secret no repositório
+
+1. No repositório onde você usará a GitHub Action, vá para Settings → Secrets and variables → Actions
+   
+2. Clique em "New repository secret"
+   
+3. Configure o secret:
+   - **Name**: `PAT_TOKEN` (ou outro nome de sua preferência)
+   - **Value**: Cole o token que você gerou e copiou anteriormente
+   
+4. Clique em "Add secret"
+
+#### 3. Referência no arquivo de workflow
+
+No arquivo YAML do seu workflow (geralmente em `.github/workflows/pacman.yml`), faça referência ao secret:
+
+```yaml
+name: Atualizar Pac-Man Contribution
+
+on:
+  schedule:
+    - cron: "0 0 * * *"  # Atualiza diariamente à meia-noite
+  workflow_dispatch:     # Ou execute manualmente
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Gerar Gráfico de Contribuição Pac-Man
+        uses: AndreRuperto/pacman-contribution-graph@v1
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          github_token: ${{ secrets.PAT_TOKEN }}  # Usando o secret que criamos
+          theme: github-dark
+          
+      - name: Commit e Push
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add dist/pacman-contribution-graph.svg
+          git commit -m "Atualizar gráfico de contribuição Pac-Man"
+          git push
+```
+
+### Resolução de problemas comuns
+
+- **Erro 401 Unauthorized**: Verifique se o token foi criado corretamente e se tem os escopos necessários.
+- **Erro de permissão**: Certifique-se de que o nome do secret no workflow corresponde exatamente ao nome que você definiu (ex: `PAT_TOKEN`).
+- **Limitações de taxa**: Se você estiver executando muitas actions, pode encontrar limitações de taxa. Considere reduzir a frequência das execuções.
+- **Tokens expirados**: Os tokens têm data de expiração. Configure um lembrete para renovar seu token antes que expire.
+
+> **LEMBRE-SE**: Nunca compartilhe seu token pessoal ou o adicione diretamente no código. Sempre use o sistema de secrets do GitHub para manter seus tokens seguros.
+
 ### Desenvolvimento Local
 
 1. Clone o repositório:
@@ -72,7 +158,7 @@ jobs:
 
 3. Gere um SVG para um nome de usuário do GitHub:
    ```bash
-   # Crie um arquivo .env com GITHUB_TOKEN=seu_token_aqui (opcional)
+   # Crie um arquivo .env com GITHUB_TOKEN=seu_token_aqui (OBRIGATÓRIO)
    pnpm run svg
    ```
 
@@ -104,7 +190,7 @@ Esses níveis são relativos ao padrão de contribuições de cada usuário e ca
 | `username` | Nome de usuário do GitHub | (obrigatório) |
 | `theme` | Tema de cores | `github-dark` |
 | `outputDirectory` | Pasta de saída do SVG | `dist` |
-| `githubToken` | Token do GitHub para acesso à API | (opcional) |
+| `githubToken` | Token do GitHub para acesso à API | (obrigatório) |
 
 ## 🧩 Melhorias Implementadas
 
