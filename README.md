@@ -1,4 +1,10 @@
-# SVG-Pacman-Contributions
+<h1 align="left">
+  <img src="src/assets/gifs/red_flip.gif"   height="38" alt="Blinky"/>
+  <img src="src/assets/gifs/pink_flip.gif"  height="38" alt="Pinky"/>
+  <strong>SVG-Pacman-Contributions</strong>
+  <img src="src/assets/gifs/cyan_flip.gif"  height="38" alt="Inky"/>
+  <img src="src/assets/gifs/orange_flip.gif" height="38" alt="Clyde"/>
+</h1>
 
 Transforme seu gráfico de contribuições do GitHub em um jogo animado de Pac-Man! Veja como o Pac-Man devora suas contribuições enquanto desvia dos fantasmas em uma experiência nostálgica de arcade.
 
@@ -59,8 +65,8 @@ jobs:
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/AndreRuperto/pacman-contribution-graph.git
-   cd pacman-contribution-graph
+   git clone https://github.com/AndreRuperto/svg-pacman-contributions.git
+   cd svg-pacman-contributions
    ```
 
 2. Instale as dependências:
