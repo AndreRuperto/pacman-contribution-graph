@@ -1,0 +1,28 @@
+name: 'Pac-Man Contribution Graph'
+description: 'Gera uma animação SVG de Pac-Man a partir do contribution graph do GitHub'
+author: 'Seu Nome'
+
+inputs:
+  github_user_name:
+    description: 'Usuário GitHub'
+    required: true
+  github_token:
+    description: 'Token GitHub (opcional)'
+    required: false
+    default: ''
+  theme:
+    description: 'Tema (github, github-dark, gitlab, gitlab-dark)'
+    required: false
+    default: 'github-dark'
+  output_directory:
+    description: 'Pasta de saída dos SVGs'
+    required: false
+    default: 'dist'
+
+runs:
+  using: node20               # **JavaScript Action**
+  main:  github-action/dist/index.js   # <- bundle que o webpack gerou
+
+branding:
+  icon: activity
+  color: yellow
