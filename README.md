@@ -57,7 +57,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-## ⚠️ Token do GitHub (OBRIGATÓRIO)
+## ⚠️ Token do GitHub (PAT_TOKEN)
 
 O token de acesso pessoal do GitHub é necessário para o funcionamento correto da aplicação. Este token é usado para acessar a API GraphQL do GitHub, que fornece os dados detalhados das suas contribuições.
 
