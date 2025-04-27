@@ -57,16 +57,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-Adicione ao README do seu perfil GitHub:
-
-```markdown
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/AndreRuperto/AndreRuperto/output/pacman-contribution-graph-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/AndreRuperto/AndreRuperto/output/pacman-contribution-graph.svg">
-  <img alt="Pac-Man contribution graph" src="https://raw.githubusercontent.com/AndreRuperto/AndreRuperto/output/pacman-contribution-graph.svg">
-</picture>
-```
-
 ## ⚠️ Token do GitHub (OBRIGATÓRIO)
 
 O token de acesso pessoal do GitHub é necessário para o funcionamento correto da aplicação. Este token é usado para acessar a API GraphQL do GitHub, que fornece os dados detalhados das suas contribuições.
@@ -112,7 +102,7 @@ O token de acesso pessoal do GitHub é necessário para o funcionamento correto 
 
 > **LEMBRE-SE**: Nunca compartilhe seu token pessoal ou o adicione diretamente no código. Sempre use o sistema de secrets do GitHub para manter seus tokens seguros.
 
-5. Executar o Workflow Manualmente
+## ⏳ Executar o Workflow Manualmente
 Depois de configurar tudo:
 
 Vá para a aba "Actions" no seu repositório
@@ -121,6 +111,17 @@ Clique em "Run workflow" > "Run workflow"
 
 Isso iniciará o processo de geração do SVG e depois você poderá ver a animação funcionando no seu README!
 Essa implementação permitirá que seu gráfico de contribuições do Pac-Man seja atualizado automaticamente todos os dias, mantendo-o sempre atual com suas contribuições mais recentes.
+
+
+## 📄 Adicionando o SVG ao README
+
+```markdown
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/AndreRuperto/AndreRuperto/output/pacman-contribution-graph-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/AndreRuperto/AndreRuperto/output/pacman-contribution-graph.svg">
+  <img alt="Pac-Man contribution graph" src="https://raw.githubusercontent.com/AndreRuperto/AndreRuperto/output/pacman-contribution-graph.svg">
+</picture>
+```
 
 ### Desenvolvimento Local
 
