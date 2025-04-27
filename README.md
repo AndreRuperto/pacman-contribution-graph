@@ -23,41 +23,53 @@ Esta versão se concentra especificamente na geração de animações SVG otimiz
 
 ### GitHub Action
 
-Adicione ao README do seu perfil GitHub:
+- O arquivo YAML deve ser criado no caminho .github/workflows/pacman.yml
+- Você deve criar uma branch chamada output para o GitHub armazenar os SVGs gerados
 
 ```yaml
 name: Atualizar Pac-Man Contribution
-
 on:
   schedule:
-    - cron: "0 0 * * *"  # Atualiza diariamente à meia-noite
-  workflow_dispatch:     # Ou execute manualmente
-
+    - cron: "0 0 * * *"  # Executa diariamente à meia-noite
+  workflow_dispatch:     # Permite execução manual
 jobs:
   build:
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v3
       
       - name: Gerar Gráfico de Contribuição Pac-Man
-        uses: AndreRuperto/pacman-contribution-graph@v1
+        uses: AndreRuperto/pacman-contribution-graph@main
         with:
           github_user_name: ${{ github.repository_owner }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          theme: github-dark  # Opções: github, github-dark, gitlab, gitlab-dark
+          github_token: ${{ secrets.PAT_TOKEN }}
+          theme: github-dark
           
-      - name: Commit e Push
-        run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git add dist/pacman-contribution-graph.svg
-          git commit -m "Atualizar gráfico de contribuição Pac-Man"
-          git push
+      - name: Publicar pacman-contribution-graph.svg na branch output
+        uses: crazy-max/ghaction-github-pages@v3.1.0
+        with:
+          target_branch: output
+          build_dir: dist
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```
+
+Adicione ao README do seu perfil GitHub:
+
+```markdown
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/AndreRuperto/AndreRuperto/output/pacman-contribution-graph-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/AndreRuperto/AndreRuperto/output/pacman-contribution-graph.svg">
+  <img alt="Pac-Man contribution graph" src="https://raw.githubusercontent.com/AndreRuperto/AndreRuperto/output/pacman-contribution-graph.svg">
+</picture>
 ```
 
 ## ⚠️ Token do GitHub (OBRIGATÓRIO)
 
-Apesar de ser marcado como "opcional" em alguns arquivos de configuração, **o token de acesso pessoal do GitHub é absolutamente necessário** para o funcionamento correto da aplicação. Este token é usado para acessar a API GraphQL do GitHub, que fornece os dados detalhados das suas contribuições.
+O token de acesso pessoal do GitHub é necessário para o funcionamento correto da aplicação. Este token é usado para acessar a API GraphQL do GitHub, que fornece os dados detalhados das suas contribuições.
 
 ### Por que é necessário?
 - A API GraphQL do GitHub exige autenticação
@@ -98,48 +110,17 @@ Apesar de ser marcado como "opcional" em alguns arquivos de configuração, **o 
    
 4. Clique em "Add secret"
 
-#### 3. Referência no arquivo de workflow
-
-No arquivo YAML do seu workflow (geralmente em `.github/workflows/pacman.yml`), faça referência ao secret:
-
-```yaml
-name: Atualizar Pac-Man Contribution
-
-on:
-  schedule:
-    - cron: "0 0 * * *"  # Atualiza diariamente à meia-noite
-  workflow_dispatch:     # Ou execute manualmente
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      
-      - name: Gerar Gráfico de Contribuição Pac-Man
-        uses: AndreRuperto/pacman-contribution-graph@v1
-        with:
-          github_user_name: ${{ github.repository_owner }}
-          github_token: ${{ secrets.PAT_TOKEN }}  # Usando o secret que criamos
-          theme: github-dark
-          
-      - name: Commit e Push
-        run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git add dist/pacman-contribution-graph.svg
-          git commit -m "Atualizar gráfico de contribuição Pac-Man"
-          git push
-```
-
-### Resolução de problemas comuns
-
-- **Erro 401 Unauthorized**: Verifique se o token foi criado corretamente e se tem os escopos necessários.
-- **Erro de permissão**: Certifique-se de que o nome do secret no workflow corresponde exatamente ao nome que você definiu (ex: `PAT_TOKEN`).
-- **Limitações de taxa**: Se você estiver executando muitas actions, pode encontrar limitações de taxa. Considere reduzir a frequência das execuções.
-- **Tokens expirados**: Os tokens têm data de expiração. Configure um lembrete para renovar seu token antes que expire.
-
 > **LEMBRE-SE**: Nunca compartilhe seu token pessoal ou o adicione diretamente no código. Sempre use o sistema de secrets do GitHub para manter seus tokens seguros.
+
+5. Executar o Workflow Manualmente
+Depois de configurar tudo:
+
+Vá para a aba "Actions" no seu repositório
+Clique em "Atualizar Pac-Man Contribution"
+Clique em "Run workflow" > "Run workflow"
+
+Isso iniciará o processo de geração do SVG e depois você poderá ver a animação funcionando no seu README!
+Essa implementação permitirá que seu gráfico de contribuições do Pac-Man seja atualizado automaticamente todos os dias, mantendo-o sempre atual com suas contribuições mais recentes.
 
 ### Desenvolvimento Local
 
