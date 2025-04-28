@@ -5,25 +5,27 @@ import nodeExternals from 'webpack-node-externals';
 export default {
   mode: 'production',
 
-  // ponto de entrada da Action (em TypeScript)
   entry: './src/index.ts',
-
-  // garante runtime Node 20 (mesma versão dos runners mais novos)
   target: 'node20',
 
   output: {
-    filename: 'index.js',                // arquivo que o GitHub Action vai executar
+    filename: 'index.js',
     path: path.resolve('github-action/dist'),
-    libraryTarget: 'commonjs2',          // formato que a runtime do GitHub entende
-    clean: true                          // apaga build anterior
+    clean: true,
+    module: true, // ← ATIVA saída ESModule
+    library: {
+      type: 'module'
+    }
   },
 
-  // não empacotar dependências nativas ou node‑modules
+  experiments: {
+    outputModule: true // ← IMPORTANTE: permite gerar como ESModule
+  },
+
   externalsPresets: { node: true },
   externals: [nodeExternals()],
 
   resolve: {
-    // quando encontrar `import './foo.js'`, tente primeiro ./foo.ts ➜ ./foo.js
     extensionAlias: {
       '.js': ['.ts', '.js']
     },
@@ -40,6 +42,5 @@ export default {
     ]
   },
 
-  // log mais enxuto
   stats: 'minimal'
 };
