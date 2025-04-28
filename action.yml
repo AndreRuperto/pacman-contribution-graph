@@ -21,7 +21,7 @@ inputs:
 
 runs:
   using: node20               # **JavaScript Action**
-  main: github-action/bundle/index.js
+  main: github-action/dist/index.js
 
 branding:
   icon: activity

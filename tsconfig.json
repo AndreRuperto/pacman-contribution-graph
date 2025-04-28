@@ -15,5 +15,12 @@
     "outDir": "dist"
   },
   "include": ["src", "scripts"],
-  "exclude": ["node_modules", "build", "github-action/dist"]
+  "exclude": [
+    "node_modules",
+    "build",
+    "github-action/dist",
+    "scripts",            // <--- ESSA linha ignora o seu problema
+    "**/*.test.ts",
+    "**/*.spec.ts"
+  ]
 }

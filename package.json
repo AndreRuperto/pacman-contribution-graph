@@ -6,11 +6,9 @@
   "scripts": {
     "build": "webpack --config webpack.prod.js",
     "dev": "webpack --progress --config webpack.dev.js",
-    "prepare": "npm run build:action",
     "prepublishOnly": "npm run build",
     "generate:svg": "pnpm exec tsc -p tsconfig.json && node dist/scripts/generate-svg.js",
-    "svg": "pnpm run generate:svg > logs/output.txt 2>&1",
-    "build:action": "ncc build github-action/dist/index.js -o github-action/bundle --target es2022"
+    "svg": "pnpm run generate:svg > logs/output.txt 2>&1"
   },
   "dependencies": {
     "@actions/core": "^1.11.1",
