@@ -11,37 +11,30 @@ enum PlayerStyle {
 	OPPORTUNISTIC = 'oportunista'
 };
 
-  function logPacmanBehavior(
-	dangerNearby: boolean,    // Se há fantasmas próximos
-	chosenPath: Point2d[],    // Caminho escolhido
-	safetyScore: number,      // Pontuação de segurança
-	pointScore: number,       // Pontuação de pontos
-	playerStyle: PlayerStyle  // Estilo configurado
+function logPacmanBehavior(
+	dangerNearby: boolean,
+	chosenPath: Point2d[],
+	safetyScore: number,
+	pointScore: number,
+	playerStyle: PlayerStyle
   ) {
-	
-	// Determinar o comportamento real com base nas decisões tomadas
+	// Como safetyScore é negativo (penalidade), precisamos inverter a comparação
 	if (dangerNearby) {
-	  // Fantasma próximo - observe se ele prioriza segurança ou pontos
-	  if (safetyScore > pointScore) {
+	  if (Math.abs(safetyScore) > pointScore) {
 		console.log('🟢 Pac-Man agiu como Conservador: fugiu do perigo');
 	  } else {
 		console.log('🔴 Pac-Man agiu como Agressivo: arriscou perto de fantasma!');
 	  }
 	} else {
-	  // Área relativamente segura
-	  if (pointScore > safetyScore * 2) {
+	  if (pointScore > Math.abs(safetyScore) * 2) {
 		console.log('🟠 Pac-Man agiu como Oportunista: buscou pontos em área segura');
-	  } else if (safetyScore > pointScore * 2) {
+	  } else if (Math.abs(safetyScore) > pointScore * 2) {
 		console.log('🟢 Pac-Man agiu como Conservador: jogou com cautela mesmo sem perigo');
 	  } else {
 		console.log('🟠 Pac-Man equilibrando segurança e pontuação (comportamento padrão)');
 	  }
 	}
-	
-	// Comparar comportamento real vs. configurado (apenas para debugging)
-	const configuredStyle = playerStyle.toString();
-	console.log(`   → Estilo configurado: ${configuredStyle}`);
-};
+  };
 
 const movePacman = (store: StoreType) => {
 	if (store.pacman.deadRemainingDuration) return;
@@ -109,32 +102,33 @@ const calculateOptimalPath = (store: StoreType, target: Point2d) => {
 	];
 	const visited = new Set<string>([`${store.pacman.x},${store.pacman.y}`]);
 	const dangerMap = createDangerMap(store);
-  
-	// Obter o estilo do jogador
+	
+	// Obter o estilo do jogador e logar para debug
 	const playerStyle = getPlayerStyle();
+	console.log(`🎮 Usando estilo: ${playerStyle}`); // Debug para confirmar o estilo
 	const maxDangerValue = 15;
-  
-	// Definir os pesos de acordo com o estilo do jogador
+	
+	// Definir os pesos de acordo com o estilo do jogador - valores mais extremos
 	let safetyWeight = 0.5; // peso padrão para segurança
 	let pointWeight = 0.5;  // peso padrão para pontos
-  
+	
 	switch (playerStyle) {
 	  case PlayerStyle.CONSERVATIVE:
-		safetyWeight = 0.9;
+		safetyWeight = 3.0; // Valores muito mais altos para garantir comportamento conservador
 		pointWeight = 0.1;
 		break;
 	  case PlayerStyle.AGGRESSIVE:
 		safetyWeight = 0.3;
-		pointWeight = 0.7;
+		pointWeight = 2.0;
 		break;
 	  case PlayerStyle.OPPORTUNISTIC:
 	  default:
-		safetyWeight = 0.5;
-		pointWeight = 0.5;
+		safetyWeight = 0.8;
+		pointWeight = 0.8;
 		break;
 	}
-  
-	// ➔ Calcular a distância do fantasma mais próximo
+	
+	// Calcular a distância do fantasma mais próximo
 	let closestGhostDistance = Infinity;
 	store.ghosts.forEach((ghost) => {
 	  if (!ghost.scared) {
@@ -144,29 +138,36 @@ const calculateOptimalPath = (store: StoreType, target: Point2d) => {
 		closestGhostDistance = Math.min(closestGhostDistance, dist);
 	  }
 	});
-  
-	const dangerNearby = closestGhostDistance < 7; // Fantasma a menos de 5 células = perigo próximo
-  
+	
+	// Limiar de perigo mais restrito para conservador
+	const dangerThreshold = playerStyle === PlayerStyle.CONSERVATIVE ? 5 : 7;
+	const dangerNearby = closestGhostDistance < dangerThreshold;
+	
+	// Ajustar pesos ainda mais se houver perigo e for conservador
+	if (playerStyle === PlayerStyle.CONSERVATIVE && dangerNearby) {
+	  safetyWeight *= 5; // Aumentar drasticamente o peso de segurança em situações perigosas
+	}
+	
 	while (queue.length > 0) {
 	  queue.sort((a, b) => b.score - a.score);
 	  const current = queue.shift()!;
 	  const { x, y, path } = current;
-  
+	
 	  if (x === target.x && y === target.y) {
 		// Ao chegar no destino, analisar o comportamento
 		if (path.length > 0) {
 		  let totalSafetyScore = 0;
 		  let totalPointScore = 0;
-  
+	
 		  path.forEach((point) => {
 			const key = `${point.x},${point.y}`;
 			const danger = dangerMap.get(key) || 0;
 			const points = store.grid[point.x][point.y].commitsCount;
-  
+	
 			totalSafetyScore -= danger * safetyWeight;
 			totalPointScore += points * pointWeight;
 		  });
-  
+	
 		  logPacmanBehavior(
 			dangerNearby,
 			path,
@@ -174,52 +175,73 @@ const calculateOptimalPath = (store: StoreType, target: Point2d) => {
 			totalPointScore,
 			playerStyle
 		  );
-  
+	
 		  // Loga a cada 10 movimentos para não poluir o console
 		  store.moveCounter = (store.moveCounter || 0) + 1;
 		  if (store.moveCounter % 10 === 0) {
 			console.log(`🎮 Movimento #${store.moveCounter}: ${playerStyle} - ${path.length} passos`);
 		  }
-  
+	
 		  return path[0];
 		}
 		return null;
 	  }
-  
+	
 	  for (const [dx, dy] of MovementUtils.getValidMoves(x, y)) {
 		const newX = x + dx;
 		const newY = y + dy;
 		const key = `${newX},${newY}`;
-  
+	
 		if (!visited.has(key)) {
 		  const newPath = [...path, { x: newX, y: newY }];
 		  const danger = dangerMap.get(key) || 0;
 		  const pointValue = store.grid[newX][newY].commitsCount;
 		  const distanceToTarget = MovementUtils.calculateDistance(newX, newY, target.x, target.y);
 		  const revisitPenalty = store.pacman.recentPositions?.includes(key) ? 100 : 0;
-  
-		  let safetyScore = (maxDangerValue - danger) * safetyWeight;
-		  let pointScore = pointValue * pointWeight;
-		  const distanceScore = -distanceToTarget / 10;
-
-		  if (playerStyle === PlayerStyle.CONSERVATIVE && danger >= 5) {
-			safetyScore -= 10;
-		  }		  
-  
+	
+		  let safetyScore, pointScore, finalScore;
+	
+		  // Lógica de pontuação completamente invertida para estilo conservador
+		  if (playerStyle === PlayerStyle.CONSERVATIVE) {
+			// Para conservador: perigo é MUITO mais importante que pontos
+			safetyScore = (maxDangerValue - danger) * safetyWeight;
+			
+			// Penalidades severas para células perigosas
+			if (danger >= 5) {
+			  safetyScore -= 100; // Penalidade severa para células perigosas
+			} else {
+			  // Bônus para células seguras
+			  safetyScore += 50;
+			}
+			
+			pointScore = pointValue * pointWeight;
+			const distanceScore = -distanceToTarget / 10;
+			
+			// Componentes de score são diferentes para conservador
+			finalScore = safetyScore * 5 + pointScore + distanceScore - revisitPenalty;
+		  } else {
+			// Lógica padrão para outros estilos
+			safetyScore = (maxDangerValue - danger) * safetyWeight;
+			pointScore = pointValue * pointWeight;
+			const distanceScore = -distanceToTarget / 10;
+			
+			finalScore = safetyScore + pointScore + distanceScore - revisitPenalty;
+		  }
+		//   console.log(`DEBUG: Estilo=${playerStyle}, danger=${danger}, safetyScore=${safetyScore}, pointScore=${pointScore}, finalScore=${finalScore}`);
 		  queue.push({
 			x: newX,
 			y: newY,
 			path: newPath,
-			score: safetyScore + pointScore + distanceScore - revisitPenalty
+			score: finalScore
 		  });
-  
+	
 		  visited.add(key);
 		}
 	  }
 	}
-  
+	
 	return null;
-  };  
+};
 
 const createDangerMap = (store: StoreType) => {
 	const map = new Map<string, number>();
