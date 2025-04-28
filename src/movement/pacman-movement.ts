@@ -5,6 +5,44 @@ import { Utils } from '../utils/utils.js';
 
 const RECENT_POSITIONS_LIMIT = 5;
 
+enum PlayerStyle {
+	CONSERVATIVE = 'conservador',
+	AGGRESSIVE = 'agressivo',
+	OPPORTUNISTIC = 'oportunista'
+};
+
+  function logPacmanBehavior(
+	dangerNearby: boolean,    // Se há fantasmas próximos
+	chosenPath: Point2d[],    // Caminho escolhido
+	safetyScore: number,      // Pontuação de segurança
+	pointScore: number,       // Pontuação de pontos
+	playerStyle: PlayerStyle  // Estilo configurado
+  ) {
+	
+	// Determinar o comportamento real com base nas decisões tomadas
+	if (dangerNearby) {
+	  // Fantasma próximo - observe se ele prioriza segurança ou pontos
+	  if (safetyScore > pointScore) {
+		console.log('🟢 Pac-Man agiu como Conservador: fugiu do perigo');
+	  } else {
+		console.log('🔴 Pac-Man agiu como Agressivo: arriscou perto de fantasma!');
+	  }
+	} else {
+	  // Área relativamente segura
+	  if (pointScore > safetyScore * 2) {
+		console.log('🟠 Pac-Man agiu como Oportunista: buscou pontos em área segura');
+	  } else if (safetyScore > pointScore * 2) {
+		console.log('🟢 Pac-Man agiu como Conservador: jogou com cautela mesmo sem perigo');
+	  } else {
+		console.log('🟠 Pac-Man equilibrando segurança e pontuação (comportamento padrão)');
+	  }
+	}
+	
+	// Comparar comportamento real vs. configurado (apenas para debugging)
+	const configuredStyle = playerStyle.toString();
+	console.log(`   → Estilo configurado: ${configuredStyle}`);
+};
+
 const movePacman = (store: StoreType) => {
 	if (store.pacman.deadRemainingDuration) return;
 
@@ -67,45 +105,121 @@ const findOptimalTarget = (store: StoreType) => {
 
 const calculateOptimalPath = (store: StoreType, target: Point2d) => {
 	const queue: { x: number; y: number; path: Point2d[]; score: number }[] = [
-		{ x: store.pacman.x, y: store.pacman.y, path: [], score: 0 }
+	  { x: store.pacman.x, y: store.pacman.y, path: [], score: 0 }
 	];
 	const visited = new Set<string>([`${store.pacman.x},${store.pacman.y}`]);
 	const dangerMap = createDangerMap(store);
-
-	while (queue.length > 0) {
-		queue.sort((a, b) => b.score - a.score);
-		const current = queue.shift()!;
-		const { x, y, path } = current;
-
-		if (x === target.x && y === target.y) {
-			return path.length > 0 ? path[0] : null;
-		}
-
-		for (const [dx, dy] of MovementUtils.getValidMoves(x, y)) {
-			const newX = x + dx;
-			const newY = y + dy;
-			const key = `${newX},${newY}`;
-
-			if (!visited.has(key)) {
-				const newPath = [...path, { x: newX, y: newY }];
-				const danger = dangerMap.get(key) || 0;
-				const pointValue = store.grid[newX][newY].commitsCount;
-				const distanceToTarget = MovementUtils.calculateDistance(newX, newY, target.x, target.y);
-				const revisitPenalty = store.pacman.recentPositions?.includes(key) ? 100 : 0;
-
-				queue.push({
-					x: newX,
-					y: newY,
-					path: newPath,
-					score: pointValue - danger - distanceToTarget / 10 - revisitPenalty
-				});
-				visited.add(key);
-			}
-		}
+  
+	// Obter o estilo do jogador
+	const playerStyle = getPlayerStyle();
+	const maxDangerValue = 15;
+  
+	// Definir os pesos de acordo com o estilo do jogador
+	let safetyWeight = 0.5; // peso padrão para segurança
+	let pointWeight = 0.5;  // peso padrão para pontos
+  
+	switch (playerStyle) {
+	  case PlayerStyle.CONSERVATIVE:
+		safetyWeight = 0.9;
+		pointWeight = 0.1;
+		break;
+	  case PlayerStyle.AGGRESSIVE:
+		safetyWeight = 0.3;
+		pointWeight = 0.7;
+		break;
+	  case PlayerStyle.OPPORTUNISTIC:
+	  default:
+		safetyWeight = 0.5;
+		pointWeight = 0.5;
+		break;
 	}
+  
+	// ➔ Calcular a distância do fantasma mais próximo
+	let closestGhostDistance = Infinity;
+	store.ghosts.forEach((ghost) => {
+	  if (!ghost.scared) {
+		const dist = MovementUtils.calculateDistance(
+		  store.pacman.x, store.pacman.y, ghost.x, ghost.y
+		);
+		closestGhostDistance = Math.min(closestGhostDistance, dist);
+	  }
+	});
+  
+	const dangerNearby = closestGhostDistance < 7; // Fantasma a menos de 5 células = perigo próximo
+  
+	while (queue.length > 0) {
+	  queue.sort((a, b) => b.score - a.score);
+	  const current = queue.shift()!;
+	  const { x, y, path } = current;
+  
+	  if (x === target.x && y === target.y) {
+		// Ao chegar no destino, analisar o comportamento
+		if (path.length > 0) {
+		  let totalSafetyScore = 0;
+		  let totalPointScore = 0;
+  
+		  path.forEach((point) => {
+			const key = `${point.x},${point.y}`;
+			const danger = dangerMap.get(key) || 0;
+			const points = store.grid[point.x][point.y].commitsCount;
+  
+			totalSafetyScore -= danger * safetyWeight;
+			totalPointScore += points * pointWeight;
+		  });
+  
+		  logPacmanBehavior(
+			dangerNearby,
+			path,
+			totalSafetyScore,
+			totalPointScore,
+			playerStyle
+		  );
+  
+		  // Loga a cada 10 movimentos para não poluir o console
+		  store.moveCounter = (store.moveCounter || 0) + 1;
+		  if (store.moveCounter % 10 === 0) {
+			console.log(`🎮 Movimento #${store.moveCounter}: ${playerStyle} - ${path.length} passos`);
+		  }
+  
+		  return path[0];
+		}
+		return null;
+	  }
+  
+	  for (const [dx, dy] of MovementUtils.getValidMoves(x, y)) {
+		const newX = x + dx;
+		const newY = y + dy;
+		const key = `${newX},${newY}`;
+  
+		if (!visited.has(key)) {
+		  const newPath = [...path, { x: newX, y: newY }];
+		  const danger = dangerMap.get(key) || 0;
+		  const pointValue = store.grid[newX][newY].commitsCount;
+		  const distanceToTarget = MovementUtils.calculateDistance(newX, newY, target.x, target.y);
+		  const revisitPenalty = store.pacman.recentPositions?.includes(key) ? 100 : 0;
+  
+		  let safetyScore = (maxDangerValue - danger) * safetyWeight;
+		  let pointScore = pointValue * pointWeight;
+		  const distanceScore = -distanceToTarget / 10;
 
+		  if (playerStyle === PlayerStyle.CONSERVATIVE && danger >= 5) {
+			safetyScore -= 10;
+		  }		  
+  
+		  queue.push({
+			x: newX,
+			y: newY,
+			path: newPath,
+			score: safetyScore + pointScore + distanceScore - revisitPenalty
+		  });
+  
+		  visited.add(key);
+		}
+	  }
+	}
+  
 	return null;
-};
+  };  
 
 const createDangerMap = (store: StoreType) => {
 	const map = new Map<string, number>();
@@ -213,6 +327,17 @@ const checkAndEatPoint = (store: StoreType) => {
 const activatePowerUp = (store: StoreType) => {
 	store.pacman.powerupRemainingDuration = PACMAN_POWERUP_DURATION;
 	store.ghosts.forEach((g) => (g.scared = true));
+};
+
+function getPlayerStyle(): PlayerStyle {
+	const style = process.env.PLAYER_STYLE?.toLowerCase();
+	const map: Record<string, PlayerStyle> = {
+		conservador: PlayerStyle.CONSERVATIVE,
+		agressivo: PlayerStyle.AGGRESSIVE,
+		oportunista: PlayerStyle.OPPORTUNISTIC,
+	};
+
+	return map[style ?? ''] ?? PlayerStyle.OPPORTUNISTIC;
 };
 
 export const PacmanMovement = {

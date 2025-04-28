@@ -31,7 +31,7 @@ const buildWalls = () => {
 	// L1 até L21 como estavam antes...
 	setSymmetricWall(0, 2, 'horizontal', 'xy', 'L1');
 	setSymmetricWall(1, 2, 'horizontal', 'xy', 'L1');
-	setSymmetricWall(4, 0, 'vertical', 'x', 'L2');
+	//setSymmetricWall(4, 0, 'vertical', 'x', 'L2');
 	setSymmetricWall(4, 1, 'vertical', 'x', 'L2');
 	setSymmetricWall(4, 2, 'vertical', 'x', 'L2');
 	setSymmetricWall(4, 3, 'vertical', 'x', 'L2');
@@ -65,7 +65,7 @@ const buildWalls = () => {
 	setSymmetricWall(8, 4, 'horizontal', 'x', 'L11');
 	setSymmetricWall(8, 4, 'vertical', 'x', 'L12');
 	setSymmetricWall(8, 5, 'vertical', 'x', 'L12');
-	setSymmetricWall(8, 6, 'vertical', 'x', 'L12');
+	//setSymmetricWall(8, 6, 'vertical', 'x', 'L12');
 	// setSymmetricWall(23, 2, 'horizontal', 'x', 'L13');
 	// setSymmetricWall(24, 2, 'horizontal', 'x', 'L13');
 	// setSymmetricWall(23, 4, 'horizontal', 'x', 'L13');
@@ -96,7 +96,7 @@ const buildWalls = () => {
 	setSymmetricWall(20, 5, 'vertical', 'x', 'L19');
 	setSymmetricWall(1, 6, 'horizontal', 'x', 'L20');
 	setSymmetricWall(2, 6, 'horizontal', 'x', 'L20');
-	setSymmetricWall(3, 5, 'vertical', 'x', 'L20');
+	//setSymmetricWall(3, 5, 'vertical', 'x', 'L20');
 	setSymmetricWall(3, 4, 'vertical', 'x', 'L20');
 	setSymmetricWall(5, 6, 'horizontal', 'x', 'L21');
 	setSymmetricWall(6, 6, 'horizontal', 'x', 'L21');

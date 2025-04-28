@@ -19,7 +19,6 @@
     "node_modules",
     "build",
     "github-action/dist",
-    "scripts",            // <--- ESSA linha ignora o seu problema
     "**/*.test.ts",
     "**/*.spec.ts"
   ]

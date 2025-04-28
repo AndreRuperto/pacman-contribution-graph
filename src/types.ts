@@ -75,6 +75,7 @@ export interface StoreType {
 	config: Config;
 	useGithubThemeColor: boolean;
   __loggedGhosts?: Set<string>;
+  moveCounter?: number;
 }  
 
 /* ───────────────────────── Configuração ───────────────────────────── */

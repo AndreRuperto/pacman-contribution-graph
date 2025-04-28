@@ -133,11 +133,19 @@ export const buildMonthLabels = (store: StoreType) => {
   const realWidth = weeksBetween(startDate, endDate) + 1;
   const labels = Array(realWidth).fill('');
 
+  let lastMonth = '';
+
   for (let week = 0; week < realWidth; week++) {
     const date = new Date(startDate);
-    date.setUTCDate(startDate.getUTCDate() + week * 7);
-    const month = date.toLocaleString('default', { month: 'short' });
-    if (week === 0 || labels[week - 1] !== month) labels[week] = month;
+    date.setUTCDate(date.getUTCDate() + week * 7); // ✅ corrigido: avanço correto
+
+    const currentMonth = date.toLocaleString('default', { month: 'short' });
+
+    // Só coloca o nome se mudou de mês em relação ao último
+    if (currentMonth !== lastMonth) {
+      labels[week] = currentMonth;
+      lastMonth = currentMonth;
+    }
   }
 
   store.monthLabels = realWidth > GRID_WIDTH
