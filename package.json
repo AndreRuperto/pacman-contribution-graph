@@ -10,7 +10,7 @@
     "prepublishOnly": "npm run build",
     "generate:svg": "pnpm exec tsc -p tsconfig.json && node dist/scripts/generate-svg.js",
     "svg": "pnpm run generate:svg > logs/output.txt 2>&1",
-    "build:action": "ncc build github-action/dist/index.js -o github-action/bundle"
+    "build:action": "ncc build github-action/dist/index.js -o github-action/bundle --target es2022"
   },
   "dependencies": {
     "@actions/core": "^1.11.1",
