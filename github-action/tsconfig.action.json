@@ -4,7 +4,7 @@
       "rootDir": "src",
       "outDir":  "dist",
       "declaration": false,
-      "module": "esnext"
+      "module": "CommonJS"
     },
     "include": ["src/**/*"]
   }  
