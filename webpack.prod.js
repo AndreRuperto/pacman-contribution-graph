@@ -1,5 +1,5 @@
 // webpack.prod.js
-import path from 'node:path';
+import * as path from 'path';
 import { fileURLToPath } from 'node:url';
 
 // Manualmente definir __dirname em ESM
