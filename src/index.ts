@@ -5,49 +5,57 @@ import { Store } from './core/store.js';
 import { Config, StoreType } from './types.js';
 import { Utils } from './utils/utils.js';
 
-class PacmanRenderer {
-	store: StoreType;
-	conf: Config;
+export class PacmanRenderer {
+  store: StoreType;
+  conf: Config;
 
-	constructor(conf: Config) {
-		this.store = structuredClone(Store);
-		this.conf = { ...conf };
-		Grid.buildWalls();
-	}
+  constructor(conf: Config) {
+    this.store = structuredClone(Store);
+    this.conf = { ...conf };
+    Grid.buildWalls();
+  }
 
-	public async start() {
-		const defaultConfig: Config = {
-			platform: 'github',
-			username: '',
-			canvas: undefined as unknown as HTMLCanvasElement,
-			outputFormat: 'svg',
-			svgCallback: (_: string) => {},
-			gameOverCallback: () => () => {},
-			gameTheme: 'github',
-			gameSpeed: 1,
-			enableSounds: false,
-			pointsIncreasedCallback: (_: number) => {},
-			githubSettings: { accessToken: '' } // caso necessário
-		};
+  public async start() {
+    const defaultConfig: Config = {
+      platform: 'github',
+      username: '',
+      canvas: undefined as unknown as HTMLCanvasElement,
+      outputFormat: 'svg',
+      svgCallback: (_: string) => {},
+      gameOverCallback: () => () => {},
+      gameTheme: 'github',
+      gameSpeed: 1,
+      enableSounds: false,
+      pointsIncreasedCallback: (_: number) => {},
+      githubSettings: { accessToken: '' }
+    };
 
-		this.store.config = { ...defaultConfig, ...this.conf };
+    this.store.config = { ...defaultConfig, ...this.conf };
 
-		switch (this.store.config.platform) {
-			case 'gitlab':
-				this.store.contributions = await Utils.getGitlabContribution(this.store);
-				break;
+    switch (this.store.config.platform) {
+      case 'gitlab':
+        this.store.contributions = await Utils.getGitlabContribution(this.store);
+        break;
 
-			case 'github':
-				this.store.contributions = await Utils.getGithubContribution(this.store);
-				break;
-		}
+      case 'github':
+        this.store.contributions = await Utils.getGithubContribution(this.store);
+        break;
+    }
 
-		Game.startGame(this.store);
-	}
+    Game.startGame(this.store);
+  }
 
-	public stop() {
-		Game.stopGame(this.store);
-	}
+  public stop() {
+    Game.stopGame(this.store);
+  }
 }
 
+// Para compatibilidade com módulos CommonJS
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = PacmanRenderer;
+  // Também adicione como propriedade default para compatibilidade com import ES Modules
+  module.exports.default = PacmanRenderer;
+}
+
+// Export default para compatibilidade com ES Modules
 export default PacmanRenderer;
