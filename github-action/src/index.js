@@ -1,5 +1,5 @@
 const core = require('@actions/core');
-const { PacmanRenderer } = require('pacman-contribution-graph');
+const { PacmanRenderer } = require('../../dist/pacman-contribution-graph.min.js');
 
 async function run() {
   try {
