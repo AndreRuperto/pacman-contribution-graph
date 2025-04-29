@@ -5,7 +5,7 @@ import { Store } from './core/store.js';
 import { Config, StoreType } from './types.js';
 import { Utils } from './utils/utils.js';
 
-export class PacmanRenderer {
+class PacmanRenderer {
 	store: StoreType;
 	conf: Config;
 
@@ -49,3 +49,5 @@ export class PacmanRenderer {
 		Game.stopGame(this.store);
 	}
 }
+
+export default PacmanRenderer;
