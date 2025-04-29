@@ -1,4 +1,3 @@
-// index.ts
 import { Game } from './core/game.js';
 import { Grid } from './utils/grid.js';
 import { Store } from './core/store.js';
@@ -50,12 +49,15 @@ export class PacmanRenderer {
   }
 }
 
-// Para compatibilidade com módulos CommonJS
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = PacmanRenderer;
-  // Também adicione como propriedade default para compatibilidade com import ES Modules
-  module.exports.default = PacmanRenderer;
-}
-
 // Export default para compatibilidade com ES Modules
 export default PacmanRenderer;
+
+// Para compatibilidade com módulos CommonJS
+if (typeof module !== 'undefined' && module.exports) {
+  // Exportar como o valor padrão do módulo
+  module.exports = PacmanRenderer;
+  // Exportar como uma propriedade nomeada para desestruturação
+  module.exports.PacmanRenderer = PacmanRenderer;
+  // Exportar como propriedade default para interoperabilidade
+  module.exports.default = PacmanRenderer;
+}
