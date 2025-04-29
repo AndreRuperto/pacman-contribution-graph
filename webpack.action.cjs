@@ -2,7 +2,7 @@
 const path = require('path');
 
 module.exports = {
-  mode: 'production',
+  mode: 'none',
   target: 'node20',
   entry: './github-action/src/index.ts',
   output: {
