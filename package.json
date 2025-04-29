@@ -6,7 +6,7 @@
   "scripts": {
     "clean:web": "rimraf dist",
     "clean:action": "rimraf github-action/dist",
-    "build:web": "npm run clean:web && webpack --config webpack.prod.js",
+    "build:web": "npm run clean:web && webpack --config webpack.prod.mjs",
     "build:action": "pnpm run clean:action && ncc build github-action/src/index.js -o github-action/dist",
     "build:all": "npm run build:web && npm run build:action",
     "build": "tsc && webpack --config webpack.config.js",
