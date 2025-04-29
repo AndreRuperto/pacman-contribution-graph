@@ -49,3 +49,5 @@ pnpm-lock.yaml
 
 /outputs/**/*.svg
 /outputs/**/*.json
+
+check_path.py
