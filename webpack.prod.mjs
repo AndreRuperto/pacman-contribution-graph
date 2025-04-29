@@ -17,7 +17,8 @@ export default {
     path: path.resolve(__dirname, 'dist'),
     clean: true,
     library: {
-      type: 'commonjs2'
+      type: 'commonjs2',
+      export: 'PacmanRenderer'
     }
   },
 
