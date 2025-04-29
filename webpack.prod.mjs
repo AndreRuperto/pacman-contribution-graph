@@ -15,15 +15,10 @@ export default {
   output: {
     filename: 'pacman-contribution-graph.min.js',
     path: path.resolve(__dirname, 'dist'),
-    module: true,
     clean: true,
     library: {
-      type: 'module'
+      type: 'commonjs2'
     }
-  },
-
-  experiments: {
-    outputModule: true
   },
 
   externalsPresets: { node: true },
