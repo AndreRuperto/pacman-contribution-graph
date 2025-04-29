@@ -23,3 +23,7 @@ export const Store: StoreType = {
 	config: undefined as unknown as Config,
 	useGithubThemeColor: true // ← nova flag para usar cor real da API
 };
+
+export function registerPacmanDeath(store: StoreType) {
+	store.deathCount = (store.deathCount || 0) + 1;
+}

@@ -505,7 +505,7 @@ const generateGhostPositions = (store: StoreType, ghostIndex: number): string[] 
 };
 
 const generateGhostsPredefinition = () => {
-	console.log("Definindo símbolos dos fantasmas");
+	// console.log("Definindo símbolos dos fantasmas");
     let defs = `<defs>`;
     
     // Para cada fantasma regular

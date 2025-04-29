@@ -10,6 +10,7 @@ import {
 import { GhostsMovement } from '../movement/ghosts-movement.js';
 import { PacmanMovement } from '../movement/pacman-movement.js';
 import { Utils } from '../utils/utils.js';
+import { registerPacmanDeath } from '../core/store.js';
 
 let frame = 0;
 
@@ -216,7 +217,10 @@ const checkCollisions = (store: StoreType) => {
       } else {
         store.pacman.points = 0;
         store.pacman.powerupRemainingDuration = 0;
-        store.pacman.deadRemainingDuration = PACMAN_DEATH_DURATION;
+        if (store.pacman.deadRemainingDuration === 0) {
+          store.pacman.deadRemainingDuration = PACMAN_DEATH_DURATION;
+          registerPacmanDeath(store); // ✅ conta corretamente as mortes
+        }
       }
     }
   });
@@ -232,5 +236,9 @@ const releaseGhostFromHouse = (store: StoreType, name: GhostName) => {
     ghost.confusionFrames = 30;
   }
 };
+
+export function resetFrame() {
+  frame = 0;
+}
 
 export const Game = { startGame, stopGame };

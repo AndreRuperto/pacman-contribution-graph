@@ -1,7 +1,11 @@
+// webpack.prod.js
 import path from 'node:path';
-import nodeExternals from 'webpack-node-externals';
+import { fileURLToPath } from 'node:url';
 
-/** @type {import('webpack').Configuration} */
+// Manualmente definir __dirname em ESM
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 export default {
   mode: 'production',
 
@@ -9,21 +13,21 @@ export default {
   target: 'node20',
 
   output: {
-    filename: 'index.js',
-    path: path.resolve('github-action/dist'),
+    filename: 'pacman-contribution-graph.min.js',
+    path: path.resolve(__dirname, 'dist'),
+    module: true,
     clean: true,
-    module: true, // ← ATIVA saída ESModule
     library: {
       type: 'module'
     }
   },
 
   experiments: {
-    outputModule: true // ← IMPORTANTE: permite gerar como ESModule
+    outputModule: true
   },
 
   externalsPresets: { node: true },
-  externals: [nodeExternals()],
+  externals: [],
 
   resolve: {
     extensionAlias: {

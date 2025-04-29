@@ -1,15 +1,14 @@
 name: 'Pac-Man Contribution Graph'
 description: 'Gera uma animação SVG de Pac-Man a partir do contribution graph do GitHub'
-author: 'Seu Nome'
+author: 'Andre Ruperto'
 
 inputs:
   github_user_name:
     description: 'Usuário GitHub'
     required: true
   github_token:
-    description: 'Token GitHub (opcional)'
-    required: false
-    default: ''
+    description: 'Token GitHub'
+    required: true
   theme:
     description: 'Tema (github, github-dark, gitlab, gitlab-dark)'
     required: false
@@ -20,7 +19,7 @@ inputs:
     default: 'dist'
 
 runs:
-  using: node20               # **JavaScript Action**
+  using: node20
   main: github-action/dist/index.js
 
 branding:

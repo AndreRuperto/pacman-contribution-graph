@@ -36,33 +36,45 @@ function logPacmanBehavior(
 	}
   };
 
-const movePacman = (store: StoreType) => {
-	if (store.pacman.deadRemainingDuration) return;
+  const movePacman = (store: StoreType) => {
+    if (store.pacman.deadRemainingDuration) return;
 
-	const hasPowerup = !!store.pacman.powerupRemainingDuration;
-	const scaredGhosts = store.ghosts.filter((ghost) => ghost.scared);
+    const hasPowerup = !!store.pacman.powerupRemainingDuration;
+    const scaredGhosts = store.ghosts.filter((ghost) => ghost.scared);
 
-	let targetPosition: Point2d;
+    let targetPosition: Point2d;
 
-	if (hasPowerup && scaredGhosts.length > 0) {
-		const ghostPosition = findClosestScaredGhost(store);
-		targetPosition = ghostPosition ?? findOptimalTarget(store);
-	} else if (store.pacman.target) {
-		if (store.pacman.x === store.pacman.target.x && store.pacman.y === store.pacman.target.y) {
-			targetPosition = findOptimalTarget(store);
-			store.pacman.target = targetPosition;
-		} else {
-			targetPosition = store.pacman.target;
-		}
-	} else {
-		targetPosition = findOptimalTarget(store);
-		store.pacman.target = targetPosition;
-	}
+    // Find a target position, ensuring it's never undefined
+    try {
+        if (hasPowerup && scaredGhosts.length > 0) {
+            const ghostPosition = findClosestScaredGhost(store);
+            targetPosition = ghostPosition ?? findOptimalTarget(store);
+        } else if (store.pacman.target) {
+            if (store.pacman.x === store.pacman.target.x && store.pacman.y === store.pacman.target.y) {
+                targetPosition = findOptimalTarget(store);
+                store.pacman.target = targetPosition;
+            } else {
+                targetPosition = store.pacman.target;
+            }
+        } else {
+            targetPosition = findOptimalTarget(store);
+            store.pacman.target = targetPosition;
+        }
 
-	const nextPosition = calculateOptimalPath(store, targetPosition);
-	nextPosition ? updatePacmanPosition(store, nextPosition) : makeDesperationMove(store);
+        // Safety check to ensure targetPosition is never undefined
+        if (!targetPosition) {
+            console.log('⚠️ No valid target found, using current position as target');
+            targetPosition = { x: store.pacman.x, y: store.pacman.y };
+        }
 
-	checkAndEatPoint(store);
+        const nextPosition = calculateOptimalPath(store, targetPosition);
+        nextPosition ? updatePacmanPosition(store, nextPosition) : makeDesperationMove(store);
+
+        checkAndEatPoint(store);
+    } catch (error) {
+        console.error('Error in movePacman:', error);
+        // If all else fails, don't move
+    }
 };
 
 const findClosestScaredGhost = (store: StoreType) => {
@@ -79,21 +91,28 @@ const findClosestScaredGhost = (store: StoreType) => {
 };
 
 const findOptimalTarget = (store: StoreType) => {
-	const pointCells: { x: number; y: number; value: number }[] = [];
+    const pointCells: { x: number; y: number; value: number }[] = [];
 
-	for (let x = 0; x < GRID_WIDTH; x++) {
-		for (let y = 0; y < GRID_HEIGHT; y++) {
-			const cell = store.grid[x][y];
-			if (cell.level !== 'NONE') {
-				const distance = MovementUtils.calculateDistance(x, y, store.pacman.x, store.pacman.y);
-				const value = cell.commitsCount / (distance + 1);
-				pointCells.push({ x, y, value });
-			}
-		}
-	}
+    for (let x = 0; x < GRID_WIDTH; x++) {
+        for (let y = 0; y < GRID_HEIGHT; y++) {
+            const cell = store.grid[x][y];
+            if (cell.level !== 'NONE') {
+                const distance = MovementUtils.calculateDistance(x, y, store.pacman.x, store.pacman.y);
+                const value = cell.commitsCount / (distance + 1);
+                pointCells.push({ x, y, value });
+            }
+        }
+    }
 
-	pointCells.sort((a, b) => b.value - a.value);
-	return pointCells[0];
+    pointCells.sort((a, b) => b.value - a.value);
+    
+    // Check if there are any cells with points left
+    if (pointCells.length === 0) {
+        // Return Pac-Man's current position as fallback
+        return { x: store.pacman.x, y: store.pacman.y, value: 0 };
+    }
+    
+    return pointCells[0];
 };
 
 const calculateOptimalPath = (store: StoreType, target: Point2d) => {
@@ -105,7 +124,7 @@ const calculateOptimalPath = (store: StoreType, target: Point2d) => {
 	
 	// Obter o estilo do jogador e logar para debug
 	const playerStyle = getPlayerStyle();
-	console.log(`🎮 Usando estilo: ${playerStyle}`); // Debug para confirmar o estilo
+	// console.log(`🎮 Usando estilo: ${playerStyle}`); // Debug para confirmar o estilo
 	const maxDangerValue = 15;
 	
 	// Definir os pesos de acordo com o estilo do jogador - valores mais extremos
@@ -168,18 +187,18 @@ const calculateOptimalPath = (store: StoreType, target: Point2d) => {
 			totalPointScore += points * pointWeight;
 		  });
 	
-		  logPacmanBehavior(
-			dangerNearby,
-			path,
-			totalSafetyScore,
-			totalPointScore,
-			playerStyle
-		  );
+		//   logPacmanBehavior(
+		// 	dangerNearby,
+		// 	path,
+		// 	totalSafetyScore,
+		// 	totalPointScore,
+		// 	playerStyle
+		//   );
 	
 		  // Loga a cada 10 movimentos para não poluir o console
 		  store.moveCounter = (store.moveCounter || 0) + 1;
 		  if (store.moveCounter % 10 === 0) {
-			console.log(`🎮 Movimento #${store.moveCounter}: ${playerStyle} - ${path.length} passos`);
+			// console.log(`🎮 Movimento #${store.moveCounter}: ${playerStyle} - ${path.length} passos`);
 		  }
 	
 		  return path[0];
@@ -335,7 +354,7 @@ const checkAndEatPoint = (store: StoreType) => {
   
 	  const theme = Utils.getCurrentTheme(store);
 	  if (cell.level === 'FOURTH_QUARTILE') {
-		console.log(`🔥 Power-up ativado na célula [${store.pacman.x}, ${store.pacman.y}] com nível ${cell.level}`);
+		// console.log(`🔥 Power-up ativado na célula [${store.pacman.x}, ${store.pacman.y}] com nível ${cell.level}`);
 		activatePowerUp(store);
 	  }
   

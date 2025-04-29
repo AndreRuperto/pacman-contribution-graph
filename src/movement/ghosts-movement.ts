@@ -31,7 +31,7 @@ const moveGhosts = (store: StoreType) => {
         store.__loggedGhosts = store.__loggedGhosts || new Set();
         const key = `${ghost.name}:${ghost.x},${ghost.y}:${ghost.direction}`;
         if (!store.__loggedGhosts.has(key)) {
-            console.log(`Ghost ${ghost.name} at (${ghost.x},${ghost.y}) moving ${ghost.direction}`);
+            // console.log(`Ghost ${ghost.name} at (${ghost.x},${ghost.y}) moving ${ghost.direction}`);
             store.__loggedGhosts.add(key);
         }
     });
@@ -51,7 +51,7 @@ const moveGhosts = (store: StoreType) => {
             ghost.immunityFrames--;
             if (ghost.immunityFrames === 0) {
                 ghost.scared = store.pacman.powerupRemainingDuration > 0;
-                console.log(`Ghost ${ghost.name} immunity ended, scared: ${ghost.scared}`);
+                // console.log(`Ghost ${ghost.name} immunity ended, scared: ${ghost.scared}`);
             }
         }
 
@@ -128,7 +128,7 @@ const moveGhostInHouse = (ghost: Ghost, store: StoreType) => {
             ghost.direction = 'up';
             ghost.inHouse = false;
             ghost.justReleasedFromHouse = false;
-            console.log(`Ghost ${ghost.name} released from house`);
+            // console.log(`Ghost ${ghost.name} released from house`);
         } else {
             // Se não estiver na posição da porta, mover em direção a ela
             if (ghost.x < 26) {
@@ -151,7 +151,7 @@ const moveGhostInHouse = (ghost: Ghost, store: StoreType) => {
                 ghost.name = ghost.originalName;
                 ghost.inHouse = false;
                 ghost.scared = store.pacman.powerupRemainingDuration > 0;
-                console.log(`Ghost respawned as ${ghost.name}`);
+                // console.log(`Ghost respawned as ${ghost.name}`);
             }
         }
         return;
@@ -187,7 +187,7 @@ const moveGhostInHouse = (ghost: Ghost, store: StoreType) => {
         ghost.direction = ghost.direction === 'up' ? 'down' : 'up';
     }
     
-    console.log(`Ghost ${ghost.name} moving in house to ${ghost.x},${ghost.y} direction ${ghost.direction}`);
+    // console.log(`Ghost ${ghost.name} moving in house to ${ghost.x},${ghost.y} direction ${ghost.direction}`);
 };
 
 // Movimento para o modo "scatter" - cada fantasma vai para seu canto
@@ -288,7 +288,7 @@ const moveEyesToHome = (ghost: Ghost, store: StoreType) => {
         ghost.y = respawnPosition.y;
         ghost.inHouse = true;
         ghost.respawnCounter = 1; // Tempo para respawnar
-        console.log(`Ghost ${ghost.name} at eyes entered ghost house for respawn, counter: ${ghost.respawnCounter}`);
+        // console.log(`Ghost ${ghost.name} at eyes entered ghost house for respawn, counter: ${ghost.respawnCounter}`);
         return;
     }
     
@@ -313,7 +313,7 @@ const moveEyesToHome = (ghost: Ghost, store: StoreType) => {
         ghost.x = nextMove.x;
         ghost.y = nextMove.y;
         
-        console.log(`Ghost eyes moved to (${ghost.x},${ghost.y}) direction ${ghost.direction}`);
+        // console.log(`Ghost eyes moved to (${ghost.x},${ghost.y}) direction ${ghost.direction}`);
     } else {
         // Se não conseguir encontrar um caminho, usar o BFSTargetLocation como fallback
         const alternativeMove = BFSTargetLocation(
@@ -330,7 +330,7 @@ const moveEyesToHome = (ghost: Ghost, store: StoreType) => {
                 ghost.direction = alternativeMove.direction;
             }
             
-            console.log(`Ghost eyes moved to (${ghost.x},${ghost.y}) using fallback method, direction ${ghost.direction}`);
+            // console.log(`Ghost eyes moved to (${ghost.x},${ghost.y}) using fallback method, direction ${ghost.direction}`);
         }
     }
 };

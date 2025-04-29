@@ -46,3 +46,6 @@ scripts/test-*.js
 package-lock.json
 # yarn.lock
 pnpm-lock.yaml
+
+/outputs/**/*.svg
+/outputs/**/*.json

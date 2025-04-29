@@ -4,11 +4,18 @@
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
-    "build": "webpack --config webpack.prod.js",
+    "clean:web": "rimraf dist",
+    "clean:action": "rimraf github-action/dist",
+    "build:web": "npm run clean:web && webpack --config webpack.prod.js",
+    "build:action": "npm run clean:action && tsc -p github-action/tsconfig.action.json && webpack --config webpack.action.js",
+    "build:all": "npm run build:web && npm run build:action",
+    "build": "tsc && webpack --config webpack.config.js",
     "dev": "webpack --progress --config webpack.dev.js",
-    "prepublishOnly": "npm run build",
+    "prepublishOnly": "npm run build && npm run build:action",
     "generate:svg": "pnpm exec tsc -p tsconfig.json && node dist/scripts/generate-svg.js",
-    "svg": "pnpm run generate:svg > logs/output.txt 2>&1"
+    "svg": "pnpm run generate:svg > logs/output.txt 2>&1",
+    "compare:styles": "pnpm exec tsc -p tsconfig.json && node dist/scripts/generate-svg-comparison.js",
+    "styles": "pnpm run compare:styles > logs/output1.txt 2>&1"
   },
   "dependencies": {
     "@actions/core": "^1.11.1",

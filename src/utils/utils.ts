@@ -115,13 +115,13 @@ export const buildGrid = (store: StoreType) => {
   });
 
   store.grid = grid;
-  const lastContributions = store.contributions;
-  console.log('\n📆 Datas das últimas contribuições:');
-  lastContributions.forEach(c => {
-    console.log(`${c.date.toISOString().split('T')[0]} → ${c.level}, ${c.color}, ${c.count} commits`);
-  });
-  const preenchidas = grid.flat().filter(cell => cell.level !== 'NONE').length;
-  console.log(`🟩 Células preenchidas: ${preenchidas}/${realWidth * GRID_HEIGHT}`);
+  // const lastContributions = store.contributions;
+  // console.log('\n📆 Datas das últimas contribuições:');
+  // lastContributions.forEach(c => {
+  //   console.log(`${c.date.toISOString().split('T')[0]} → ${c.level}, ${c.color}, ${c.count} commits`);
+  // });
+  // const preenchidas = grid.flat().filter(cell => cell.level !== 'NONE').length;
+  // console.log(`🟩 Células preenchidas: ${preenchidas}/${realWidth * GRID_HEIGHT}`);
 };
 
 export const buildMonthLabels = (store: StoreType) => {
@@ -160,7 +160,7 @@ export const createGridFromData = (store: StoreType) => {
 };
 
 export const printArena = (store: StoreType) => {
-  console.log('\n🧱 Arena (via level + color) :\n');
+  //console.log('\n🧱 Arena (via level + color) :\n');
   const levelSymbol = {
     NONE: '⬛',
     FIRST_QUARTILE: '🟩',
@@ -171,7 +171,7 @@ export const printArena = (store: StoreType) => {
 
   for (let y = 0; y < GRID_HEIGHT; y++) {
     const row = store.grid.map((col) => levelSymbol[col[y].level]).join('');
-    console.log(row);
+    //console.log(row);
   }
 };
 
