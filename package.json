@@ -7,7 +7,7 @@
     "clean:web": "rimraf dist",
     "clean:action": "rimraf github-action/dist",
     "build:web": "npm run clean:web && webpack --config webpack.prod.js",
-    "build:action": "npm run clean:action && tsc -p github-action/tsconfig.action.json && webpack --config webpack.action.js",
+    "build:action": "npm run clean:action && tsc -p github-action/tsconfig.action.json && webpack --config webpack.action.cjs",
     "build:all": "npm run build:web && npm run build:action",
     "build": "tsc && webpack --config webpack.config.js",
     "dev": "webpack --progress --config webpack.dev.js",
