@@ -1,46 +1,22 @@
-// webpack.prod.js
-import * as path from 'path';
-import { fileURLToPath } from 'node:url';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { merge } from 'webpack-merge';
+import common from './webpack.common.js';
 
-// Manualmente definir __dirname em ESM
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-export default {
+export default merge(common, {
   mode: 'production',
-
-  entry: './src/index.ts',
-  target: 'node20',
-
   output: {
     filename: 'pacman-contribution-graph.min.js',
     path: path.resolve(__dirname, 'dist'),
-    clean: true,
     library: {
-      name: 'PacmanRenderer',
-      type: 'commonjs2',
-    }
-  },
-
-  externalsPresets: { node: true },
-  externals: [],
-
-  resolve: {
-    extensionAlias: {
-      '.js': ['.ts', '.js']
+      type: 'module', // ← muda para ESM
     },
-    extensions: ['.ts', '.js']
+    clean: true,
   },
-
-  module: {
-    rules: [
-      {
-        test: /\.ts$/,
-        use: 'ts-loader',
-        exclude: /node_modules/
-      }
-    ]
-  },
-
-  stats: 'minimal'
-};
+  experiments: {
+    outputModule: true, // ← necessário para 'type: module'
+  }
+});

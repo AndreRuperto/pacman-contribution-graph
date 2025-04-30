@@ -48,16 +48,3 @@ export class PacmanRenderer {
     Game.stopGame(this.store);
   }
 }
-
-// Export default para compatibilidade com ES Modules
-export default PacmanRenderer;
-
-// Para compatibilidade com módulos CommonJS
-if (typeof module !== 'undefined' && module.exports) {
-  // Exportar como o valor padrão do módulo
-  module.exports = PacmanRenderer;
-  // Exportar como uma propriedade nomeada para desestruturação
-  module.exports.PacmanRenderer = PacmanRenderer;
-  // Exportar como propriedade default para interoperabilidade
-  module.exports.default = PacmanRenderer;
-}

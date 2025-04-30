@@ -51,3 +51,5 @@ pnpm-lock.yaml
 /outputs/**/*.json
 
 check_path.py
+
+.npmignore

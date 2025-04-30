@@ -1,11 +1,16 @@
 {
-  "name": "pacman-contribution-graph",
+  "name": "svg-pacman-contributions",
   "version": "1.0.0",
   "type": "module",
-  "main": "dist/pacman-contribution-graph.min.js",
+  "main": "github-action/dist/index.js",
+  "types": "github-action/dist/index.d.ts",
+  "description": "Transforme o gráfico de contribuições do GitHub em uma animação de Pac-Man!",
+  "keywords": ["github", "pacman", "svg", "contribution-graph", "animation", "game", "actions"],
+  "author": "Andre Ruperto",
   "scripts": {
     "build": "webpack --config webpack.prod.js",
     "dev": "webpack --progress --config webpack.dev.js",
+    "prepare": "npm run build",
     "prepublishOnly": "npm run build",
     "build-action": "pnpm run --prefix ./github-action build",
     "clean:web": "rimraf dist",
@@ -16,7 +21,8 @@
     "generate:svg": "pnpm exec tsc -p tsconfig.json && node dist/scripts/generate-svg.js",
     "svg": "pnpm run generate:svg > logs/output.txt 2>&1",
     "compare:styles": "pnpm exec tsc -p tsconfig.json && node dist/scripts/generate-svg-comparison.js",
-    "styles": "pnpm run compare:styles > logs/output1.txt 2>&1"
+    "styles": "pnpm run compare:styles > logs/output1.txt 2>&1",
+    "postbuild": "echo export * from 'pacman-contribution-graph.min.js'; > dist/index.js"
   },
   "dependencies": {
     "@actions/core": "^1.11.1",

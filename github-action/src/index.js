@@ -1,31 +1,53 @@
 const core = require('@actions/core');
-const PacmanRenderer = require('../../dist/pacman-contribution-graph.min.js');
+const fs = require('fs');
+const path = require('path');
+const { PacmanRenderer } = require('svg-pacman-contributions');
+
+async function generateSvg(username, token, theme) {
+  return new Promise((resolve) => {
+    const config = {
+      platform: 'github',
+      username,
+      gameTheme: theme,
+      outputFormat: 'svg',
+      gameSpeed: 1,
+      githubSettings: { accessToken: token },
+      svgCallback: (svg) => resolve(svg),
+      gameOverCallback: () => console.log(`🎮 Tema "${theme}" finalizado.`),
+    };
+
+    const renderer = new PacmanRenderer(config);
+    renderer.start();
+  });
+}
 
 async function run() {
   try {
     const username = core.getInput('github_user_name', { required: true });
-    const token = core.getInput('github_token') || undefined;
-    const theme = core.getInput('theme') || 'github-dark';
+    const token = core.getInput('github_token');
+    const selectedTheme = core.getInput('theme') || 'github-dark';
 
-    console.log(`Iniciando com: ${username}, tema: ${theme}`);
-    
-    const renderer = new PacmanRenderer({
-      platform: 'github',
-      username,
-      gameTheme: theme,
-      githubSettings: { accessToken: token },
-      outputFormat: 'svg',
-      svgCallback: (svg) => {
-        console.log('✅ SVG gerado com sucesso!');
+    const themes = ['github', 'github-dark'];
+    const distPath = path.join(process.cwd(), 'dist');
+    fs.mkdirSync(distPath, { recursive: true });
+
+    for (const theme of themes) {
+      const svg = await generateSvg(username, token, theme);
+      const fileName = `pacman-contribution-graph${theme === 'github-dark' ? '-dark' : ''}.svg`;
+      const fullPath = path.join(distPath, fileName);
+
+      fs.writeFileSync(fullPath, svg);
+      console.log(`💾 SVG salvo: ${fileName}`);
+
+      if (theme === selectedTheme) {
         core.setOutput('svg', svg);
-      },
-      gameOverCallback: () => console.log('🎮 Jogo concluído.')
-    });
+      }
+    }
 
-    await renderer.start();
-  } catch (err) {
-    console.error('❌ Erro completo:', err);
-    core.setFailed(err instanceof Error ? err.message : String(err));
+    console.log('✅ Processamento concluído.');
+  } catch (error) {
+    console.error('❌ Erro ao executar:', error);
+    core.setFailed(error instanceof Error ? error.message : String(error));
   }
 }
 
