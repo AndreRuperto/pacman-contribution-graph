@@ -1,10 +1,11 @@
 {
   "name": "github-action",
-  "type": "commonjs",
+  "type": "module",
   "dependencies": {
     "@actions/core": "^1.10.0",
     "@actions/github": "^5.1.1",
-    "svg-pacman-contributions": "^1.0.0"
+    "svg-pacman-contributions": "^1.0.3",
+    "pacman-contribution-graph": "^1.0.14"
   },
   "devDependencies": {
     "@vercel/ncc": "^0.38.3"
