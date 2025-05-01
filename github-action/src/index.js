@@ -1,7 +1,8 @@
 import * as core from '@actions/core';
 import * as fs from 'fs';
 import * as path from 'path';
-import { PacmanRenderer } from 'svg-pacman-contributions';
+// import { PacmanRenderer } from 'svg-pacman-contributions';
+import { PacmanRenderer } from '../../dist/pacman-contribution-graph.min.js';
 
 async function generateSvg(username, token, theme) {
   return new Promise((resolve) => {
