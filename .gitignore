@@ -9,9 +9,10 @@ pnpm-debug.log
 
 # TypeScript
 *.tsbuildinfo
-dist
 scripts
-!github-action/dist/
+dist/*
+!dist/pacman-contribution-graph.min.js
+
 
 # Logs e arquivos de saída
 logs/

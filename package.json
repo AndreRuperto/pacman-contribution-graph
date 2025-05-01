@@ -15,12 +15,20 @@
     "url": "https://github.com/AndreRuperto/svg-pacman-contributions.git"
   },
   "files": [
-  "dist/pacman-contribution-graph.min.js",
-  "dist/index.d.ts",
-  "action.yml"
+    "dist/pacman-contribution-graph.min.js",
+    "dist/index.d.ts",
+    "action.yml"
   ],
   "description": "Transforme o gráfico de contribuições do GitHub em uma animação de Pac-Man!",
-  "keywords": ["github", "pacman", "svg", "contribution-graph", "animation", "game", "actions"],
+  "keywords": [
+    "github",
+    "pacman",
+    "svg",
+    "contribution-graph",
+    "animation",
+    "game",
+    "actions"
+  ],
   "author": "Andre Ruperto",
   "scripts": {
     "build": "tsc && pnpm run svg",
@@ -52,6 +60,7 @@
     "tsx": "^4.6.2",
     "typescript": "^5.8.3",
     "webpack": "^5.99.7",
-    "webpack-cli": "^6.0.1"
+    "webpack-cli": "^6.0.1",
+    "webpack-merge": "^6.0.1"
   }
 }
