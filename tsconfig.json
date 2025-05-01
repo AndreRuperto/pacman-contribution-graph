@@ -11,7 +11,7 @@
     "forceConsistentCasingInFileNames": true,
     "outDir": "dist",
     "declaration": true,
-    "emitDeclarationOnly": true
+    "emitDeclarationOnly": false
   },
   "include": ["src", "scripts"],
   "exclude": [
