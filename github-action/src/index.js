@@ -13,13 +13,12 @@ async function generateSvg(username, token, theme, playerStyle) {
       gameTheme: theme,
       outputFormat: 'svg',
       gameSpeed: 1,
-      playerStyle, // 🟡 novo campo
+      playerStyle,
       githubSettings: { accessToken: token },
       svgCallback: (svg) => {
         generatedSvg = svg;
       },
       gameOverCallback: () => {
-        console.log(`[✔️] gameOverCallback disparado para o tema: ${theme}`);
         resolve(generatedSvg);
       }
     };
@@ -35,23 +34,18 @@ async function run() {
     const token = core.getInput('github_token');
     const selectedTheme = core.getInput('theme') || 'github-dark';
     const outputDir = core.getInput('output_directory') || 'dist';
-    const playerStyle = core.getInput('player_style') || 'oportunista'; // 🟢 adiciona leitura da flag
+    const playerStyle = core.getInput('player_style') || 'oportunista';
 
     fs.mkdirSync(outputDir, { recursive: true });
 
-    const themes = ['github-dark', 'github'];
-    for (const theme of themes) {
-      console.log(`🟡 Gerando SVG para o tema: ${theme}`);
-      const svg = await generateSvg(username, token, theme, playerStyle);
-      const fileName = `pacman-contribution-graph${theme === 'github-dark' ? '-dark' : ''}.svg`;
-      const fullPath = path.join(outputDir, fileName);
-      fs.writeFileSync(fullPath, svg);
-      console.log(`✅ SVG salvo em: ${fullPath}`);
+    console.log(`🟡 Gerando SVG para o tema: ${selectedTheme}`);
+    const svg = await generateSvg(username, token, selectedTheme, playerStyle);
+    const fileName = `pacman-contribution-graph${selectedTheme === 'github-dark' ? '-dark' : ''}.svg`;
+    const fullPath = path.join(outputDir, fileName);
+    fs.writeFileSync(fullPath, svg);
+    console.log(`✅ SVG salvo em: ${fullPath}`);
 
-      if (theme === selectedTheme) {
-        core.setOutput('svg', svg);
-      }
-    }
+    core.setOutput('svg', svg);
   } catch (error) {
     core.setFailed(error instanceof Error ? error.message : String(error));
   }
