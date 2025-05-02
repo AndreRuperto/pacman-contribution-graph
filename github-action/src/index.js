@@ -1,7 +1,7 @@
 const core = require('@actions/core');
 const fs = require('fs');
 const path = require('path');
-const { PacmanRenderer } = require('svg-pacman-contributions');
+const { PacmanRenderer } = require('../../dist/pacman-contribution-graph.min.js');
 
 async function generateSvg(username, token, theme) {
   return new Promise((resolve) => {
