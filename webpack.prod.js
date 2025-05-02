@@ -1,22 +1,16 @@
-import path from 'path';
-import { fileURLToPath } from 'url';
-import { merge } from 'webpack-merge';
-import common from './webpack.common.js';
+// webpack.prod.js
+const path = require('path');
+const { fileURLToPath } = require('url');
+const { merge } = require('webpack-merge');
+const common = require('./webpack.common.js');
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-export default merge(common, {
+module.exports = merge(common, {
   mode: 'production',
   output: {
     filename: 'pacman-contribution-graph.min.js',
     path: path.resolve(__dirname, 'dist'),
     library: {
-      type: 'module', // ← muda para ESM
+      type: 'commonjs',
     },
-    clean: true,
   },
-  experiments: {
-    outputModule: true, // ← necessário para 'type: module'
-  }
 });
