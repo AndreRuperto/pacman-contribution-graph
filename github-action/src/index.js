@@ -1,7 +1,7 @@
-import * as core from '@actions/core';
-import * as fs from 'fs';
-import * as path from 'path';
-import { PacmanRenderer } from 'svg-pacman-contributions';
+const core = require('@actions/core');
+const fs = require('fs');
+const path = require('path');
+const { PacmanRenderer } = require('svg-pacman-contributions');
 
 async function generateSvg(username, token, theme) {
   return new Promise((resolve) => {
