@@ -5,6 +5,8 @@ const { PacmanRenderer } = require('../../dist/pacman-contribution-graph.min.js'
 
 async function generateSvg(username, token, theme) {
   return new Promise((resolve) => {
+    let generatedSvg = '';
+
     const config = {
       platform: 'github',
       username,
@@ -12,7 +14,13 @@ async function generateSvg(username, token, theme) {
       outputFormat: 'svg',
       gameSpeed: 1,
       githubSettings: { accessToken: token },
-      svgCallback: (svg) => resolve(svg),
+      svgCallback: (svg) => {
+        generatedSvg = svg; // armazena o SVG gerado
+      },
+      gameOverCallback: () => {
+        console.log(`[✔️] gameOverCallback disparado para o tema: ${theme}`);
+        resolve(generatedSvg); // só resolve quando a animação termina
+      }
     };
 
     const renderer = new PacmanRenderer(config);
@@ -31,10 +39,12 @@ async function run() {
 
     const themes = ['github', 'github-dark'];
     for (const theme of themes) {
+      console.log(`🟡 Gerando SVG para o tema: ${theme}`);
       const svg = await generateSvg(username, token, theme);
       const fileName = `pacman-contribution-graph${theme === 'github-dark' ? '-dark' : ''}.svg`;
       const fullPath = path.join(outputDir, fileName);
       fs.writeFileSync(fullPath, svg);
+      console.log(`✅ SVG salvo em: ${fullPath}`);
 
       if (theme === selectedTheme) {
         core.setOutput('svg', svg);
