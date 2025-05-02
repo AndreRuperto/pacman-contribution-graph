@@ -1,7 +1,7 @@
 const core = require('@actions/core');
 const fs = require('fs');
 const path = require('path');
-const { PacmanRenderer } = require('../../dist/pacman-contribution-graph.min.js');
+const { PacmanRenderer } = require('../../src/index.ts');
 
 async function generateSvg(username, token, theme) {
   return new Promise((resolve) => {
@@ -37,7 +37,7 @@ async function run() {
 
     fs.mkdirSync(outputDir, { recursive: true });
 
-    const themes = ['github', 'github-dark'];
+    const themes = ['github-dark', 'github'];
     for (const theme of themes) {
       console.log(`🟡 Gerando SVG para o tema: ${theme}`);
       const svg = await generateSvg(username, token, theme);
