@@ -28153,7 +28153,6 @@ var init_src2 = __esm({
     init_github_contributions();
     PacmanRenderer = class {
       constructor(conf) {
-        this.store = JSON.parse(JSON.stringify(Store));
         this.conf = { ...conf };
       }
       async start() {
@@ -28171,12 +28170,9 @@ var init_src2 = __esm({
           enableSounds: false,
           pointsIncreasedCallback: (_) => {
           },
-          githubSettings: { accessToken: "" },
-          // Adicionar um valor máximo de frames para evitar problemas
-          maxFrames: 1e3,
-          // Adicionar um valor máximo de histórico para gerenciamento de memória
-          maxHistorySize: 2e3
+          githubSettings: { accessToken: "" }
         };
+        this.store = JSON.parse(JSON.stringify(Store));
         this.store.config = { ...defaultConfig, ...this.conf };
         switch (this.store.config.platform) {
           case "gitlab":
@@ -28187,11 +28183,7 @@ var init_src2 = __esm({
               try {
                 const username = this.store.config.username;
                 const token = this.store.config.githubSettings.accessToken;
-                this.store.contributions = await fetchGithubContributionsGraphQL(
-                  this.store,
-                  username,
-                  token
-                );
+                this.store.contributions = await fetchGithubContributionsGraphQL(this.store, username, token);
                 console.log(`Obtidas ${this.store.contributions.length} contribui\xE7\xF5es via GraphQL`);
               } catch (error) {
                 console.warn("Erro ao buscar via GraphQL, usando m\xE9todo alternativo:", error);
@@ -28224,7 +28216,7 @@ var core = require_core();
 var fs2 = require("fs");
 var path = require("path");
 var { PacmanRenderer: PacmanRenderer2 } = (init_src2(), __toCommonJS(src_exports));
-async function generateSvg(username, token, theme) {
+async function generateSvg(username, token, theme, playerStyle) {
   return new Promise((resolve) => {
     let generatedSvg = "";
     const config = {
@@ -28233,6 +28225,8 @@ async function generateSvg(username, token, theme) {
       gameTheme: theme,
       outputFormat: "svg",
       gameSpeed: 1,
+      playerStyle,
+      // 🟡 novo campo
       githubSettings: { accessToken: token },
       svgCallback: (svg) => {
         generatedSvg = svg;
@@ -28252,11 +28246,12 @@ async function run() {
     const token = core.getInput("github_token");
     const selectedTheme = core.getInput("theme") || "github-dark";
     const outputDir = core.getInput("output_directory") || "dist";
+    const playerStyle = core.getInput("player_style") || "oportunista";
     fs2.mkdirSync(outputDir, { recursive: true });
     const themes = ["github-dark", "github"];
     for (const theme of themes) {
       console.log(`\u{1F7E1} Gerando SVG para o tema: ${theme}`);
-      const svg = await generateSvg(username, token, theme);
+      const svg = await generateSvg(username, token, theme, playerStyle);
       const fileName = `pacman-contribution-graph${theme === "github-dark" ? "-dark" : ""}.svg`;
       const fullPath = path.join(outputDir, fileName);
       fs2.writeFileSync(fullPath, svg);
