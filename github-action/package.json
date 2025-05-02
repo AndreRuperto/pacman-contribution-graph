@@ -14,6 +14,7 @@
   },
   "devDependencies": {
     "@vercel/ncc": "^0.38.3",
+    "esbuild": "^0.25.3",
     "rimraf": "^6.0.1"
   }
 }
