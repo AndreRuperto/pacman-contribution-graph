@@ -28,27 +28,35 @@ Esta versão se concentra especificamente na geração de animações SVG otimiz
 
 ```yaml
 name: Atualizar Pac-Man Contribution
+
 on:
   schedule:
-    - cron: "0 0 * * *"  # Executa diariamente à meia-noite
-  workflow_dispatch:     # Permite execução manual
+    - cron: "0 0 * * *"         # Executa diariamente à meia-noite
+  workflow_dispatch:            # Permite execução manual
+
 jobs:
   build:
     permissions:
       contents: write
     runs-on: ubuntu-latest
     timeout-minutes: 5
+
     steps:
       - uses: actions/checkout@v3
-      
-      - name: Gerar Gráfico de Contribuição Pac-Man
-        uses: AndreRuperto/pacman-contribution-graph@main
+
+      - name: Criar diretório dist
+        run: mkdir -p dist
+
+      - name: Gerar gráfico de contribuições estilo Pac-Man
+        uses: AndreRuperto/svg-pacman-contributions@main
         with:
           github_user_name: ${{ github.repository_owner }}
-          github_token: ${{ secrets.PAT_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           theme: github-dark
-          
-      - name: Publicar pacman-contribution-graph.svg na branch output
+          output_directory: dist
+          player_style: oportunista
+
+      - name: Publicar SVG na branch output
         uses: crazy-max/ghaction-github-pages@v3.1.0
         with:
           target_branch: output
