@@ -57,51 +57,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-## ⚠️ Token do GitHub (PAT_TOKEN)
-
-O token de acesso pessoal do GitHub é necessário para o funcionamento correto da aplicação. Este token é usado para acessar a API GraphQL do GitHub, que fornece os dados detalhados das suas contribuições.
-
-### Por que é necessário?
-- A API GraphQL do GitHub exige autenticação
-- O token automático do GitHub Actions (`GITHUB_TOKEN`) tem limitações de taxa (apenas 1.000 pontos/hora vs. 5.000 pontos/hora para PATs)
-- Alguns tipos de tokens (como os de acesso refinado) não funcionam com a API GraphQL
-- Sem o token adequado, não é possível buscar o histórico de contribuições completo
-
-### Como configurar (passo a passo):
-
-#### 1. Criar o token no GitHub
-
-1. Acesse suas configurações no GitHub → Developer settings → Personal access tokens → Tokens (classic)
-   - Ou acesse diretamente: https://github.com/settings/tokens
-   
-2. Clique em "Generate new token (classic)"
-   
-3. Dê um nome descritivo ao token, como "pacman-contributions"
-   
-4. Defina uma data de expiração adequada (sugiro pelo menos 30 dias)
-   
-5. Para escopo, selecione apenas:
-   - `repo` (para acesso às contribuições em repositórios privados)
-   - `read:user` (para informações básicas do perfil)
-   
-6. Clique em "Generate token"
-   
-7. **IMPORTANTE**: Copie o token gerado imediatamente e salve-o em local seguro. Você não poderá vê-lo novamente!
-
-#### 2. Adicionar o token como Secret no repositório
-
-1. No repositório onde você usará a GitHub Action, vá para Settings → Secrets and variables → Actions
-   
-2. Clique em "New repository secret"
-   
-3. Configure o secret:
-   - **Name**: `PAT_TOKEN` (ou outro nome de sua preferência)
-   - **Value**: Cole o token que você gerou e copiou anteriormente
-   
-4. Clique em "Add secret"
-
-> **LEMBRE-SE**: Nunca compartilhe seu token pessoal ou o adicione diretamente no código. Sempre use o sistema de secrets do GitHub para manter seus tokens seguros.
-
 ## ⏳ Executar o Workflow Manualmente
 Depois de configurar tudo:
 
@@ -122,29 +77,6 @@ Essa implementação permitirá que seu gráfico de contribuições do Pac-Man s
   <img alt="Pac-Man contribution graph" src="https://raw.githubusercontent.com/AndreRuperto/AndreRuperto/output/pacman-contribution-graph.svg">
 </picture>
 ```
-
-### Desenvolvimento Local
-
-1. Clone o repositório:
-   ```bash
-   git clone https://github.com/AndreRuperto/svg-pacman-contributions.git
-   cd svg-pacman-contributions
-   ```
-
-2. Instale as dependências:
-   ```bash
-   npm install
-   # ou
-   pnpm install
-   ```
-
-3. Gere um SVG para um nome de usuário do GitHub:
-   ```bash
-   # Crie um arquivo .env com GITHUB_TOKEN=seu_token_aqui (OBRIGATÓRIO)
-   pnpm run svg
-   ```
-
-4. O SVG será gerado na pasta `dist`
 
 ## 🎯 Como Funciona
 
@@ -167,12 +99,13 @@ Esses níveis são relativos ao padrão de contribuições de cada usuário e ca
 
 ## 📋 Opções de Configuração
 
-| Opção | Descrição | Padrão |
-|--------|-------------|---------|
-| `username` | Nome de usuário do GitHub | (obrigatório) |
-| `theme` | Tema de cores | `github-dark` |
-| `outputDirectory` | Pasta de saída do SVG | `dist` |
-| `githubToken` | Token do GitHub para acesso à API | (obrigatório) |
+| Opção           | Descrição                               | Padrão         | Valores Possíveis                            |
+|----------------|------------------------------------------|----------------|-----------------------------------------------|
+| `username`     | Nome de usuário do GitHub                | (obrigatório)  | Qualquer nome de usuário válido do GitHub     |
+| `theme`        | Tema de cores                            | `github-dark`  | `github`, `github-dark`                       |
+| `outputDirectory` | Pasta de saída do SVG                 | `dist`         | Qualquer string válida para caminho local     |
+| `githubToken`  | Token do GitHub para acesso à API        | `GITHUB_TOKEN` | Token pessoal válido (com permissão de leitura pública) |
+| `playerStyle`  | Estilo do Pacman                         | `oportunista`  | `oportunista`, `agressivo`, `conservador`     |
 
 ## 🧩 Melhorias Implementadas
 

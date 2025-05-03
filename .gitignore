@@ -54,3 +54,5 @@ pnpm-lock.yaml
 check_path.py
 
 .npmignore
+
+TODO.txt
