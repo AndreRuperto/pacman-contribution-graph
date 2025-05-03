@@ -68,9 +68,9 @@ jobs:
 ## ⏳ Executar o Workflow Manualmente
 Depois de configurar tudo:
 
-Vá para a aba "Actions" no seu repositório
-Clique em "Atualizar Pac-Man Contribution"
-Clique em "Run workflow" > "Run workflow"
+- Vá para a aba "Actions" no seu repositório
+- Clique em "Atualizar Pac-Man Contribution"
+- Clique em "Run workflow" > "Run workflow"
 
 Isso iniciará o processo de geração do SVG e depois você poderá ver a animação funcionando no seu README!
 Essa implementação permitirá que seu gráfico de contribuições do Pac-Man seja atualizado automaticamente todos os dias, mantendo-o sempre atual com suas contribuições mais recentes.
