@@ -80,9 +80,8 @@ Essa implementação permitirá que seu gráfico de contribuições do Pac-Man s
 
 ```markdown
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/AndreRuperto/AndreRuperto/output/pacman-contribution-graph-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/AndreRuperto/AndreRuperto/output/pacman-contribution-graph.svg">
-  <img alt="Pac-Man contribution graph" src="https://raw.githubusercontent.com/AndreRuperto/AndreRuperto/output/pacman-contribution-graph.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/seuusuario/seuusuario/output/pacman-contribution-graph-dark.svg">
+  <img alt="Pac-Man contribution graph" src="https://raw.githubusercontent.com/seuusuario/seuusuario/output/pacman-contribution-graph.svg">
 </picture>
 ```
 
