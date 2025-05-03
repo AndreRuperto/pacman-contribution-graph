@@ -116,16 +116,20 @@ Esta versão inclui várias melhorias em relação à implementação original:
 - **Power-up Aperfeiçoado**: Melhor lógica e feedback visual durante o modo de power-up
 - **Casa dos Fantasmas**: Design melhorado para a área inicial dos fantasmas
 - **Otimização SVG**: Geração de SVG mais eficiente e com animações mais suaves
+- **Estilos de Jogabilidade do Pac-Man**: Três diferentes comportamentos configuráveis:
+  - **Oportunista** (padrão): Equilibra a busca por pontos e a segurança. O Pac-Man avalia tanto o perigo dos fantasmas quanto as recompensas das contribuições, tomando decisões balanceadas.
+  - **Agressivo**: Prioriza a coleta de pontos mesmo com fantasmas próximos. Ignora parcialmente o perigo e foca em maximizar a pontuação, criando uma animação mais dinâmica e arriscada.
+  - **Conservador**: Extremamente cauteloso, prioriza a sobrevivência acima de tudo. Evita ativamente áreas com fantasmas mesmo que contenha muitos pontos, resultando em um jogo mais longo e seguro.
 
 ## 👻 Fantasmas atualizados
-Cada fantasma ganhou novas imagens e personalidades fiéis aos do jogo.
+Cada fantasma ganhou novas imagens e personalidades fiéis aos do jogo original.
 
-| Fantasma | Pré-visualização |
-|:--------:|:----------------:|
-| **Blinky** (vermelho) | <p align="center"><img src="src/assets/gifs/red_flip.gif" height="40" alt="Blinky"></p> |
-| **Pinky** (rosa)      | <p align="center"><img src="src/assets/gifs/pink_flip.gif" height="40" alt="Pinky"></p> |
-| **Inky** (ciano)      | <p align="center"><img src="src/assets/gifs/cyan_flip.gif" height="40" alt="Inky"></p> |
-| **Clyde** (laranja)   | <p align="center"><img src="src/assets/gifs/orange_flip.gif" height="40" alt="Clyde"></p> |
+| Fantasma | Pré-visualização | Comportamento |
+|:--------:|:----------------:|:-------------|
+| **Blinky** (vermelho) | <p align="center"><img src="src/assets/gifs/red_flip.gif" height="40" alt="Blinky"></p> | Perseguidor agressivo que mira diretamente no Pac-Man. Fica mais rápido quando restam poucos pontos no mapa, o que os jogadores chamam de "modo Elroy". |
+| **Pinky** (rosa) | <p align="center"><img src="src/assets/gifs/pink_flip.gif" height="40" alt="Pinky"></p> | Estrategista que tenta emboscar o Pac-Man se posicionando 4 casas à frente da direção atual dele. É especialista em armadilhas e emboscadas. |
+| **Inky** (ciano) | <p align="center"><img src="src/assets/gifs/cyan_flip.gif" height="40" alt="Inky"></p> | Imprevisível e complexo. Usa a posição do Blinky como referência para seu movimento, calculando um vetor que passa pelo Pac-Man e depois dobrando essa distância. |
+| **Clyde** (laranja) | <p align="center"><img src="src/assets/gifs/orange_flip.gif" height="40" alt="Clyde"></p> | Tímido e errático. Persegue o Pac-Man quando está longe, mas quando se aproxima a menos de 8 casas de distância, foge para seu canto. Esse comportamento "tímido" o torna menos previsível. |
 
 ## 🔧 Desenvolvimento
 
